@@ -5,7 +5,7 @@ Scope for v1 is narrow and supervised only. It is not operational for unattended
 
 ## What Handover does
 
-You write a rough prompt. Handover proposes an interpreted intent and plan, marks its assumptions, and asks only the questions that would change that plan. You approve or reject the whole package. If you approve, Handover runs the work inside the approved envelope, with independent verification, and reports back with proof or with a clear dead end if it cannot finish inside the limits you approved.
+You write a rough prompt. Handover proposes an interpreted intent and plan, marks its assumptions, and asks only the early questions needed to set that plan. You approve or reject the whole package. If you approve, Handover runs the work inside the approved envelope, with independent verification, and reports back with proof or with a clear dead end if it cannot finish inside the limits you approved.
 
 Handover is not pstack's Babysit playbook. That playbook gets a pull request to merge ready. Handover gets a rough prompt to an approved, running job.
 
@@ -22,7 +22,7 @@ Cover five inputs as a checklist, not as five questions every time. Infer an ans
 1. Outcome. What decision or deliverable this should serve, and for whom.
 2. Proof on the real artifact. What observable result would make you accept it. Propose a concrete check for approval where possible.
 3. What must not change. Constraints and existing assets that are non negotiable.
-4. One way doors. Actions that pause for a human. Default gates are publish, send, pay, delete, deploy, and any other external commitment.
+4. One way doors. Outward actions that must be listed exactly in the Stage 2 manifest, with action, destination, payload or payload template, limit, and condition, to run without stopping. An unlisted or changed outward action pauses. Default one way doors are publish, send, pay, delete, deploy, and any other external commitment.
 5. Stop condition. Attempt, time, or cost limit, plus a dead end report if the finish predicate is still unmet. Exhaustion is a dead end, never a weaker success claim. A plateau is not completion, and the predicate is never relaxed to declare victory.
 
 A question is human only when it is about preference, authority, risk acceptance, a non negotiable constraint, or a tradeoff with no authorized rule. Everything else, settle by reading, inspecting, or experimenting, and record the result and where it came from. If investigation exposes a new consequential choice outside the approved envelope, pause instead of inventing consent.
@@ -50,7 +50,7 @@ Short by default, details on demand. A normal interaction is a headline first, t
 
 Progress reports use a short board style: Planned, In progress, Done recently, with short checklist lines, sent fresh when status changes, not a dense report.
 
-This rule applies to translator questions, the approval gate, one way door gates, stuck escalations, and kit proof reports. It does not apply to internal agent messages, the decision trail, or verifier evidence. A short user message never means a short evidence record.
+This rule applies to translator questions, the approval gate, manifest boundary cases, stuck escalations, and kit proof reports. It does not apply to internal agent messages, the decision trail, or verifier evidence. A short user message never means a short evidence record.
 
 ## Step 2. Approval package, two stages
 
