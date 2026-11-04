@@ -60,25 +60,25 @@ You will get a short Stage 1 package first, then a Stage 2 manifest. Approve bot
 
 ## See it in use
 
-These are illustrative mockups, not official app screenshots. They show the same flow in three places: a rough prompt, options, and an approval card, before any work runs.
+These are real screenshots of the three apps, showing the chat or input where you would paste the setup prompt from Quick start. They are not screenshots of Handover itself, because Handover is a skill you load into the agent, not a separate app window. The flow is the same in each place: paste a rough prompt, get options, then approve or reject the plan, before any work runs.
 
 ### Muse
 
-![Handover in Muse, illustrative mockup: a chat window with a rough prompt, three options, and an approval card with Deliverable, Check, Cost, Gates, Approve and Reject](docs/images/muse-handover.png)
+![Real Meta Muse app chat, with a Message input at the bottom](docs/images/muse-real.png)
 
-*Illustrative mockup. In Muse, the skill is a chat skill: you paste a rough prompt, Handover replies with options, then shows the approval card.*
+*Real Muse app chat, from the Meta-authored App Store listing. In Muse, you paste the setup prompt into the Message input, Handover replies with options, then shows the approval package.*
 
 ### Codex
 
-![Handover in Codex, illustrative mockup: a terminal window loading the Handover skill, a rough prompt, and an approval card with Approve and Reject](docs/images/codex-handover.png)
+![Real Codex CLI terminal, with a prompt input asking to explain a code base](docs/images/codex-real.png)
 
-*Illustrative mockup. In Codex, the same flow runs in the terminal: load the skill, give a rough prompt, approve or reject the card.*
+*Real Codex CLI terminal, from Wikimedia Commons. In Codex, you load the Handover skill, give a rough prompt at the terminal input, then approve or reject the package.*
 
 ### Claude Code
 
-![Handover in Claude Code, illustrative mockup: a terminal window loading the Handover skill, a rough prompt, and an approval card with Approve and Reject](docs/images/claude-code-handover.png)
+![Real Claude Code terminal, with a prompt and an input box at the bottom](docs/images/claude-code-real.png)
 
-*Illustrative mockup. In Claude Code, the same flow runs in the terminal: load the skill, give a rough prompt, approve or reject the card.*
+*Real Claude Code terminal, from a blog screenshot of Claude Code v2.0.1. In Claude Code, you load the Handover skill, give a rough prompt at the input, then approve or reject the package.*
 
 ## How it works
 
@@ -176,7 +176,7 @@ It tries the next route, changes the method, or makes an operational retry that 
 - `docs/architecture-draft-v0.6.md`: full v1 architecture, reviewed twice by Opus and Terra, with two stage approval, harness enforced gates, budget ledger, resume protocol, verification coverage, and options first user experience.
 - `docs/verification-gap.md`: what is still unproven, and the tests that close each gap.
 - `docs/browser-study-reconciliation.md`: what the Poteto, m4lkxx, and YouTube sources actually said, with corrections to earlier notes, including that the 50,000 figure was not verified in any of those three sources.
-- `docs/images/`: illustrative mockups for Muse, Codex, and Claude Code, used in [See it in use](#see-it-in-use).
+- `docs/images/`: real app screenshots for Muse, Codex, and Claude Code, used in [See it in use](#see-it-in-use). The earlier illustrative mockups (muse-handover.png, codex-handover.png, claude-code-handover.png) remain in the folder for reference, but are no longer used in the README.
 
 ## Status and limits, stated plainly
 
