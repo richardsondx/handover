@@ -17,7 +17,7 @@ For other fields, v1 may still translate a prompt and produce an approval packag
 
 ## Step 1. Translate intent
 
-Cover five inputs as a checklist, not as five questions every time. Infer an answer from the prompt and context, or propose one, and ask the human only where a missing answer would change the plan, the acceptance check, or the authority.
+Cover five inputs as a checklist, not as five questions every time. Infer an answer from the prompt and context, or propose one, and ask the human only where a missing answer is needed to set the plan, the acceptance check, or the authority, before approval. These are early, plan-setting questions: the plan does not exist yet, so they shape it, they do not change an existing plan. After approval, the run proceeds with full autonomy inside the envelope and questions stop, except for an action that is not in the approved manifest.
 
 1. Outcome. What decision or deliverable this should serve, and for whom.
 2. Proof on the real artifact. What observable result would make you accept it. Propose a concrete check for approval where possible.
@@ -40,9 +40,9 @@ Each question follows the same shape.
 - One escape option: Something else, in my words.
 - One guided option, only after an envelope exists: You decide within the limits I approved.
 
-Options must be real. Each option must change the plan, the cost, the scope, the proof, or the risk, and you must say which one it changes. A list of options that all lead to the same plan is decoration, not options.
+Options must be real. Each option must shape the plan, the cost, the scope, the proof, or the risk, and you must say which one it changes. A list of options that all lead to the same plan is decoration, not options.
 
-One decision per message, in the order that changes the plan most first. Bundle related questions only when a single tap answers them, for example by picking a preset package.
+One decision per message, in the order that shapes the plan most first. Bundle related questions only when a single tap answers them, for example by picking a preset package.
 
 You decide, restricted. This option is available only after an envelope exists, and only for a choice already inside that human approved envelope. It is never available for Stage 1 or Stage 2 approval itself, the predicate, the budget cap, the tool allowlist, a one way door, an amendment, or a new risk. Before any envelope exists, You decide is unavailable. Instead, present a proposed choice for explicit inclusion in the Stage 1 approval package, so the human approves it, not the agent by default. Who decides whether a choice is inside the envelope is the harness, by checking it against the approved manifest, never the model that proposes it. Every delegated choice made after approval is listed in the record as Handover chose X. Tapping You decide never counts as approval of a gated action.
 
@@ -74,7 +74,7 @@ The approval package contains, with assumptions marked:
 
 Show the package as a short summary first, followed by a compact approval card that is always visible, not only on demand. The card must contain the material terms: outcome, check that proves it, verification coverage and permissible claim, what will not change, cost and limit with hard versus advisory stated, verification reserve, Case B generation and proof budget where it applies, exclusions, gates, autonomous actions with their tools and destinations, prohibitions, relevant assumptions, and the applicable package and manifest version identifiers, plus the Stage 1 passing and failing predicate examples. Stage 2 needs a comprehensible description of what its manifest authorizes, not just a version number. Then approve or reject, then Show full package for the complete version.
 
-Approval authorizes execution inside that envelope only. It does not authorize routine research questions to come back to you, and it does not ask you to perform verification. It still pauses at a predeclared one way door, a missing permission, or an unavoidable conflict outside the envelope.
+Approval authorizes execution inside that envelope only, with full autonomy inside it. It does not authorize routine research questions to come back to you, and it does not ask you to perform verification. It pauses only for a missing permission, an unavoidable conflict outside the envelope, an action that is not listed exactly in the approved manifest, or a dead end. An outward action listed exactly in the manifest, with its action, destination, payload or payload template, limit, and condition, runs without stopping.
 
 Predicate amendment. You may amend a predicate, but the amendment creates a new predicate version, requires reapproval, and invalidates verdicts tied to the old version. Verdicts are never carried over across a predicate change.
 
@@ -132,4 +132,4 @@ Until those pass, do not claim unattended operation, live data operation, or cov
 
 ## What this skill deliberately does not do in v1
 
-It does not merge, publish, post, send, pay, delete, deploy, or contact anyone without a separate gate approval bound to the exact action and payload. It does not relax a predicate, convert a gap into a pass, or expand an envelope because a recommended option was tapped. It does not run overnight until a scheduler or parent re-invocation path, with duplicate run detection and failure reporting, has been demonstrated end to end, including resume after a process restart.
+It does not merge, publish, post, send, pay, delete, deploy, or contact anyone unless that exact action, destination, payload or payload template, limit, and condition is listed in the approved Stage 2 manifest. An unlisted or changed action needs a new approval. It does not relax a predicate, convert a gap into a pass, or expand an envelope because a recommended option was tapped. It does not run overnight until a scheduler or parent re-invocation path, with duplicate run detection and failure reporting, has been demonstrated end to end, including resume after a process restart.
