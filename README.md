@@ -59,9 +59,16 @@ Version 1, built from architecture draft v0.6, approved Nov 4, 2026.
 - Proof tests, before any claim of operational use: simulated gated action and injection tests pass in every case, every known bad artifact in the test set is rejected, one supervised real run completes with a clean decision trail and budget audit, a comprehension test passes, and a real generated skill loads through the actual Muse loader.
 - Handover does not merge, publish, post, send, pay, delete, deploy, or contact anyone without a separate gate approval bound to the exact action and payload.
 
-## Why not just use pstack
+## What makes it special
 
-Handover builds on pstack's discipline: verification first, a feature map as materialized memory, one owner per unit, judge by side effects, and a decision trail. It deliberately changes two things. First, pstack's Babysit playbook means babysit a pull request to merge ready; Handover means translate a rough prompt into an approved, running job. Second, pstack's default is never block on the human; Handover blocks once, at an approve or reject gate, so the human decides the intent, the check, and the limits before the run, and is not the verifier during it.
+Most agent workflows start with a codebase, a task already scoped, and a finish line someone else defined. Handover starts earlier, with a rough sentence, and it is built for work where the human cannot be the checker in the middle. That is the difference, in six parts:
+
+- **It translates before it runs.** A rough prompt becomes an interpreted intent, a concrete check on the real artifact, non negotiable constraints, one way doors, and a stop condition, before any work starts. If a missing answer would change the plan, it is asked up front, with options and tradeoffs, not discovered halfway through a run.
+- **It asks once, then stops asking.** The human approves or rejects one package, then the run proceeds inside that envelope. During the run, the human is not asked routine questions and is not asked to verify the output. The only returns to the human are predeclared one way doors, a missing permission, a conflict outside the envelope, or a dead end.
+- **Approval is an envelope, not a yes in chat.** Stage 2 produces a versioned manifest with tool and target allowlist, finish predicate, limits, budget ledger, and kit and playbook versions. A repair that changes any of those needs reapproval. A repair that changes none of them can proceed, and is logged with its diff.
+- **Verification is separate from production.** The author is never the verifier, the verifier gets only the specification and the artifact, and the judge resolves verdicts in a fresh context. A gap is recorded as a gap, never converted into a pass, and exhaustion is reported as a dead end, never as a weaker success.
+- **It reuses a proven kit before it builds one.** At Stage 1, Handover must declare Case A, an existing proven kit, named with its version digest, or Case B, a kit to be generated, with a separate budget for generation and proof and the first real task declared as the proof run. A generated kit that was never executed is a draft, not a deliverable, and a second real task proof needs separate approval and funding.
+- **It works in fields, not just in code.** Each field gets a field kit: a router, task playbooks, domain principles, role definitions, verification and cleanup routines, and a capability map. Every kit needs a lever, a tool or API the agent can actually drive, plus a map of the domain, not just prose. A field is not claimed as covered because a kit was generated; it is covered only after that kit passes a real task proof.
 
 ## Author
 
