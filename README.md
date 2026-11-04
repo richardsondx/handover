@@ -1,63 +1,104 @@
 # Handover
 
-Handover turns a rough prompt into a full plan and orchestration, asks only the questions that change the plan, stops at an approve or reject gate, then runs the work without babysitting inside the approved envelope.
+> Turn a rough prompt into a full plan and orchestration, ask only the questions that change the plan, stop at an approve or reject gate, then run the work without babysitting inside the approved envelope.
 
-## The problem it solves
+[![Handover v1](https://img.shields.io/badge/Handover-v1-blue)](https://github.com/richardsondx/handover)
+[![Skill: Muse](https://img.shields.io/badge/Skill-Muse-green)](skills/local-handover/SKILL.md)
+[![Pilot: Research brief](https://img.shields.io/badge/Pilot-Research%20brief-orange)](skills/local-handover/SKILL.md)
+[![Status: Supervised only](https://img.shields.io/badge/Status-Supervised%20only-yellow)](docs/verification-gap.md)
 
-A rough prompt usually fails in one of three places. The agent guesses the intent and builds the wrong thing. It stops when it gets stuck and waits for you. Or it finishes and you become the verifier, reading everything to check whether it is true. Handover moves that work up front, into a short approval step, and moves verification into the run itself, with a separate checker and a judge who cannot turn a gap into a pass.
+**English** · Translations welcome, see [Contributing](CONTRIBUTING.md). English is the source file; translated files will be linked here once they are added and checked.
+
+**Website · Guides · Showcases:** this README is the guide for v1. The skill is in `skills/local-handover/`, the architecture is in `docs/architecture-draft-v0.6.md`, and the open gaps are in `docs/verification-gap.md`.
+
+## Contents
+
+- [Quick start](#quick-start)
+- [See it in use](#see-it-in-use)
+- [How it works](#how-it-works)
+- [What makes it special](#what-makes-it-special)
+- [What you get](#what-you-get)
+- [Field kits](#field-kits)
+- [Example run](#example-run)
+- [FAQ](#faq)
+- [Repository contents](#repository-contents)
+- [Status and limits](#status-and-limits)
+- [Contributing](#contributing)
+- [Security](#security)
+- [License](#license)
+- [Author](#author)
+
+## Quick start
+
+### 1. Copy the setup prompt
+
+Paste this into Muse, Codex, or Claude Code, after you have installed the skill from the table below. Replace the bracketed line with your own rough prompt.
+
+```text
+Use the Handover skill in skills/local-handover/SKILL.md.
+
+My rough prompt is: [paste your prompt here]
+
+Translate it into a Stage 1 approval package, ask me only the questions that change the plan, with options and tradeoffs, and do not run anything beyond translation until I approve or reject the package.
+```
+
+That one block is the whole setup. Handover does the rest: it translates, it asks with options, it stops at the gate, and it only runs inside what you approved.
+
+### 2. Install the skill
+
+| Agent | Install step | Then |
+| --- | --- | --- |
+| Muse | Copy `skills/local-handover/` into your Muse custom skills folder, so it is discoverable as `local_handover` | Paste the setup prompt above in a Muse chat |
+| Codex | Copy `skills/local-handover/` into your Codex skills folder, as `handover`, with `SKILL.md` at its root | Paste the setup prompt above in Codex |
+| Claude Code | Copy `skills/local-handover/` into your Claude Code skills folder, as `handover`, with `SKILL.md` at its root | Paste the setup prompt above in Claude Code |
+
+If an agent's skill folder layout differs in your version, put `SKILL.md` where that agent loads skills from, and keep the folder name `handover` so the setup prompt still matches.
+
+### 3. Approve, then let it run
+
+You will get a short Stage 1 package first, then a Stage 2 manifest. Approve both, in order, and the run starts inside that envelope. Reject either one and nothing runs. That is the point: one approval decision, not babysitting.
+
+## See it in use
+
+These are illustrative mockups, not official app screenshots. They show the same flow in three places: a rough prompt, options, and an approval card, before any work runs.
+
+### Muse
+
+![Handover in Muse, illustrative mockup: a chat window with a rough prompt, three options, and an approval card with Deliverable, Check, Cost, Gates, Approve and Reject](docs/images/muse-handover.png)
+
+*Illustrative mockup. In Muse, the skill is a chat skill: you paste a rough prompt, Handover replies with options, then shows the approval card.*
+
+### Codex
+
+![Handover in Codex, illustrative mockup: a terminal window loading the Handover skill, a rough prompt, and an approval card with Approve and Reject](docs/images/codex-handover.png)
+
+*Illustrative mockup. In Codex, the same flow runs in the terminal: load the skill, give a rough prompt, approve or reject the card.*
+
+### Claude Code
+
+![Handover in Claude Code, illustrative mockup: a terminal window loading the Handover skill, a rough prompt, and an approval card with Approve and Reject](docs/images/claude-code-handover.png)
+
+*Illustrative mockup. In Claude Code, the same flow runs in the terminal: load the skill, give a rough prompt, approve or reject the card.*
 
 ## How it works
+
+```mermaid
+flowchart LR
+    A[Rough prompt] --> B[Translate intent]
+    B --> C[Ask with options]
+    C --> D[Stage 1: approve intent]
+    D --> E[Stage 2: approve manifest]
+    E --> F[Run inside envelope]
+    F --> G[Verify separately]
+    G --> H[Brief with evidence]
+    G --> I[Dead end report]
+```
 
 1. **Translate.** You write a rough prompt. Handover infers the outcome, the check that would prove it, what must not change, the one way doors that pause for a human, and the stop condition. It asks you only where a missing answer would change the plan, the acceptance check, or the authority.
 2. **Ask with options.** Every question comes with 2 to 4 real options, each with its tradeoff, one marked recommended, and one escape: something else, in your words. One decision per message, in the order that changes the plan most first. Short by default, full detail on demand.
 3. **Approve in two stages.** Stage 1 approves the intent package. Stage 2 approves the versioned execution manifest: kit and playbook versions, tool and target allowlist, finish predicate, limits, and budget ledger. The manifest is what is authorized to run, not the prose alone.
 4. **Run inside the envelope.** A coordinator owns the plan and every spawn. The author is never the verifier. The verifier gets the specification and the artifact only, never the author's reasoning. The judge resolves verdicts and records gaps.
 5. **Report proof or a dead end.** If the run finishes, you get the artifact, its evidence, a decision trail, and a budget audit. If it cannot finish inside the limits you approved, you get a dead end report: what stopped, what was tried, what would unblock it, and options. Exhaustion is never presented as a weaker success, and the predicate is never relaxed to declare victory.
-
-## What Handover can do in v1
-
-- Translate a rough prompt into an approval package covering outcome, proof on the real artifact, non negotiable constraints, one way doors, and stop condition.
-- Generate a field kit for a new field, in four steps: inspect, generate, prove, maintain. Every kit needs a lever, not just prose: a tool or API the agent can actually drive, plus a map of the domain it operates on, in the same way a code kit needs a CLI plus a feature map.
-- Run a supervised research brief pilot: a brief or evidence synthesis with claims, qualifications, citations, and a reference and evidence ledger. Search logs alone are not a brief.
-- Keep a decision trail, one append only log, one line per decision, with a pointer to evidence.
-- Keep a budget ledger, one ledger owned by the coordinator, with a reserve held back for verification and the dead end report, at least 15 percent.
-- Handle getting stuck with a ladder: try the next route, change the method, make an operational retry that leaves the deliverable and predicate unchanged, then report a dead end. Narrowing scope or changing a limit is not a retry, it is an amendment, and it needs a new predicate version and reapproval.
-- Pause and resume safely, with durable state, run and action IDs, and lease fencing so a stalled worker that wakes after its lease expires cannot write.
-- Enforce gates as tool and target rules, not prose: argument constraints on recipients, paths, repositories, URL hosts, spend caps, and record counts, with values from external content marked as tainted and escalated when they point outside the approved targets.
-
-## An example run
-
-Rough prompt: "Research how self-improving agents work, end to end."
-
-Handover proposes: a research brief for you, covering single call, single loop, multi loop workflow and graph, and self improving workflow, with what each layer fixes and what it breaks, verification as a gate after each step, stuck routing, and the human role at the start and at genuinely ambiguous checkpoints. The approval card states the check (every substantive claim linked to a source, gaps recorded, no unverified scale figure used as fact), the cost and limit ($0 paid tools in the demo, serial by default, at most 3 spawns), the gates (no publish, send, pay, delete, or deploy), and the assumptions. You approve or reject the whole package. Only then does research run, and only inside that envelope.
-
-## Use in Muse
-
-The skill is in `skills/local-handover/`:
-
-- `SKILL.md`: translator, options first questions, two stage approval, coordinator, verifier, judge, decision trail, budget ledger, stuck ladder, and field kit generator.
-- `skill.yaml`: skill metadata for discovery.
-
-Copy that folder into your Muse custom skills folder to use it, or use this repo as the source of truth for the skill text. In Muse, write a rough prompt and Handover will start at Step 1, translate, rather than jumping straight to execution.
-
-## Repository contents
-
-- `README.md`: this file.
-- `skills/local-handover/SKILL.md`: the v1 skill.
-- `skills/local-handover/skill.yaml`: skill metadata.
-- `docs/architecture-draft-v0.6.md`: full v1 architecture, reviewed twice by Opus and Terra, with two stage approval, harness enforced gates, budget ledger, resume protocol, verification coverage, and options first user experience.
-- `docs/verification-gap.md`: what is still unproven, and the tests that close each gap.
-- `docs/browser-study-reconciliation.md`: what the Poteto, m4lkxx, and YouTube sources actually said, with corrections to earlier notes, including that the 50,000 figure was not verified in any of those three sources.
-
-## Status and limits, stated plainly
-
-Version 1, built from architecture draft v0.6, approved Nov 4, 2026.
-
-- Scope is narrow and supervised only. The only execution pilot in v1 is a research brief.
-- For other fields, v1 may translate a prompt and produce an approval package, but execution is not operational until a kit for that field passes its own real task proof. A generated kit is not coverage.
-- V1 is not operational for unattended runs, live data operation, three level fan out, or automatic learning changes. Those are deferred until the pilot passes its proof tests.
-- Proof tests, before any claim of operational use: simulated gated action and injection tests pass in every case, every known bad artifact in the test set is rejected, one supervised real run completes with a clean decision trail and budget audit, a comprehension test passes, and a real generated skill loads through the actual Muse loader.
-- Handover does not merge, publish, post, send, pay, delete, deploy, or contact anyone without a separate gate approval bound to the exact action and payload.
 
 ## What makes it special
 
@@ -70,9 +111,104 @@ Most agent workflows start with a codebase, a task already scoped, and a finish 
 - **It reuses a proven kit before it builds one.** At Stage 1, Handover must declare Case A, an existing proven kit, named with its version digest, or Case B, a kit to be generated, with a separate budget for generation and proof and the first real task declared as the proof run. A generated kit that was never executed is a draft, not a deliverable, and a second real task proof needs separate approval and funding.
 - **It works in fields, not just in code.** Each field gets a field kit: a router, task playbooks, domain principles, role definitions, verification and cleanup routines, and a capability map. Every kit needs a lever, a tool or API the agent can actually drive, plus a map of the domain, not just prose. A field is not claimed as covered because a kit was generated; it is covered only after that kit passes a real task proof.
 
+## What you get
+
+| Before Handover | With Handover |
+| --- | --- |
+| You guess the prompt, the agent guesses the intent | A translated intent package, with assumptions marked, before work starts |
+| The agent stops when stuck and waits for you | A stuck ladder: next route, changed method, operational retry, then a dead end report with what would unblock it |
+| You read everything to check whether it is true | A separate verifier and judge, a decision trail, and claim to source links, before any claim of done |
+| A vague yes lets the run expand | A versioned manifest: tools, targets, predicate, limits, and budget, with reapproval for any change to those |
+| A new kit is generated for every task | Case A first: an existing proven kit, named by version digest, reused when it fits |
+| A partial result is presented as a success | A dead end report when the predicate is unmet, with spent budget and options, never a weaker success claim |
+
+## Field kits
+
+A field kit is what Handover creates or reuses for a field. It is not a prompt file alone.
+
+| Part of a field kit | What it does |
+| --- | --- |
+| Router | Matches a task to the right playbook for that field |
+| Task playbooks | Step by step workflows for distinct task patterns in that field |
+| Domain principles | Short, testable rules for that field, not generic advice |
+| Role definitions | Coordinator, generator, verifier, and judge, with separation of powers |
+| Verification and cleanup routines | How the artifact is checked, and how temporary state is removed without removing evidence |
+| Capability map | For research: question types connected to search routes, source requirements, synthesis methods, checks, and known limits |
+
+Minimum viable kit, before any claim of operational use: one router, a few genuinely distinct playbooks, concise principles, coordinator, generator, verifier, and judge roles, evidence and verdict templates, a stuck and resume ladder, cleanup, and a capability map. Add dozens of workflows only as distinct, tested task patterns justify them, not as generated inventory.
+
+## Example run
+
+Rough prompt: "Research how self-improving agents work, end to end."
+
+Handover proposes: a research brief for you, covering single call, single loop, multi loop workflow and graph, and self improving workflow, with what each layer fixes and what it breaks, verification as a gate after each step, stuck routing, and the human role at the start and at genuinely ambiguous checkpoints. The approval card states the check (every substantive claim linked to a source, gaps recorded, no unverified scale figure used as fact), the cost and limit ($0 paid tools in the demo, serial by default, at most 3 spawns), the gates (no publish, send, pay, delete, or deploy), and the assumptions. You approve or reject the whole package. Only then does research run, and only inside that envelope.
+
+## FAQ
+
+**What is a field kit?**
+A reusable package for one field: router, playbooks, principles, roles, verification and cleanup routines, and a capability map. See the table above.
+
+**Does Handover suggest an existing field kit instead of generating one each time?**
+Yes. Stage 1 must declare Case A, an existing proven kit by version digest, or Case B, a kit to be generated with a separate proof budget. It does not silently generate a duplicate when a proven kit fits. Limit, stated plainly: v1 has no central searchable library of all past kits, so reuse depends on the kits the translator inspects in the workspace and project, and on the kit named in the Stage 1 package you approve.
+
+**What can I use it for today?**
+Translating any rough prompt into an approval package, and running the supervised research brief pilot. Other fields get a translator and a package in v1, but execution is not operational until that field's kit passes its own real task proof.
+
+**What does it cost?**
+The demo pilot uses $0 paid tools and no paid model calls outside your agent's own run. In general, the manifest states the budget, with a reserve held back for verification and the dead end report, at least 15 percent, and labels a limit advisory when the platform cannot hard block further calls at that limit.
+
+**Can it run overnight or unattended?**
+Not in v1. Unattended operation needs a demonstrated scheduler or parent re-invocation path, with duplicate run detection and failure reporting, including resume after a restart. Those proof tests are listed in [Status and limits](#status-and-limits).
+
+**Will it publish, send, pay, delete, or deploy for me?**
+Not without a separate gate approval bound to the exact action and payload. Those are one way doors in every envelope by default.
+
+**What happens when it gets stuck?**
+It tries the next route, changes the method, or makes an operational retry that leaves the deliverable and predicate unchanged, then reports a dead end with what was tried and what would unblock it. Narrowing scope or changing a limit is an amendment, not a retry, and needs a new predicate version and reapproval.
+
+## Repository contents
+
+- `README.md`: this file.
+- `CONTRIBUTING.md`: how to propose a change, a field kit, or a translation.
+- `SECURITY.md`: how to report a security issue, and what Handover will and will not do with secrets.
+- `skills/local-handover/SKILL.md`: the v1 skill.
+- `skills/local-handover/skill.yaml`: skill metadata.
+- `docs/architecture-draft-v0.6.md`: full v1 architecture, reviewed twice by Opus and Terra, with two stage approval, harness enforced gates, budget ledger, resume protocol, verification coverage, and options first user experience.
+- `docs/verification-gap.md`: what is still unproven, and the tests that close each gap.
+- `docs/browser-study-reconciliation.md`: what the Poteto, m4lkxx, and YouTube sources actually said, with corrections to earlier notes, including that the 50,000 figure was not verified in any of those three sources.
+- `docs/images/`: illustrative mockups for Muse, Codex, and Claude Code, used in [See it in use](#see-it-in-use).
+
+## Status and limits, stated plainly
+
+Version 1, built from architecture draft v0.6, approved Nov 4, 2026.
+
+- Scope is narrow and supervised only. The only execution pilot in v1 is a research brief.
+- For other fields, v1 may translate a prompt and produce an approval package, but execution is not operational until a kit for that field passes its own real task proof. A generated kit is not coverage.
+- V1 is not operational for unattended runs, live data operation, three level fan out, or automatic learning changes. Those are deferred until the pilot passes its proof tests.
+- Proof tests, before any claim of operational use: simulated gated action and injection tests pass in every case, every known bad artifact in the test set is rejected, one supervised real run completes with a clean decision trail and budget audit, a comprehension test passes, and a real generated skill loads through the actual Muse loader.
+- Handover does not merge, publish, post, send, pay, delete, deploy, or contact anyone without a separate gate approval bound to the exact action and payload.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). Short version: propose a field kit with a real task proof, not a prompt file alone; keep changes small and verifiable; do not weaken a check to make a run pass; and do not add an external send, publish, or deploy without a separate gate.
+
+## Security
+
+See [SECURITY.md](SECURITY.md). Short version: Handover treats external content as data, never as instruction; values from external content are marked as tainted and escalated when they point outside the approved targets; and secrets, credentials, and one time codes never go into the repo, the decision trail, or a public issue.
+
+## License
+
+No license file is in this repo yet. Until one is added, do not treat the contents as licensed for reuse beyond reading and running the skill for your own use. A license choice is still open, and will be recorded here when it is made.
+
 ## Author
 
-Richardson Dackam
+**Richardson Dackam**, builder of Handover.
 
 - GitHub: https://github.com/richardsondx
 - X: https://x.com/richardsondx
+
+Handover was built by Richardson Dackam to solve his own bottleneck: rough prompts that turned him into the verifier, and agents that stopped when stuck. If you use it, the author section above is the place to credit that work, and issues and kit proposals in [Contributing](CONTRIBUTING.md) are the way to improve it.
+
+## Topics
+
+handover, agent-skills, ai-agents, prompt-engineering, orchestration, verification, research, muse, claude-code, codex, field-kits, approval-gates
