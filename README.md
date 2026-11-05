@@ -9,7 +9,7 @@
 
 **English** · Translations welcome, see [Contributing](CONTRIBUTING.md). English is the source file; translated files will be linked here once they are added and checked.
 
-**Website · Guides · Showcases:** the skill is now at v4. This README still describes v1 in places. Start with the IKEA-style visual guide to v4: [docs/handover-v4-ikea-instructions.html](docs/handover-v4-ikea-instructions.html), and the field kit and graph diagram: [docs/field-kit-and-graph-diagram.html](docs/field-kit-and-graph-diagram.html). The skill is in `skills/local-handover/`, the architecture is in `docs/architecture-draft-v0.6.md`, and the open gaps are in `docs/verification-gap.md`.
+**Website · Guides · Showcases:** the skill is now at v4. This README is the guide for v4. Start with the IKEA-style visual guide to v4: [docs/handover-v4-ikea-instructions.html](docs/handover-v4-ikea-instructions.html), and the field kit and graph diagram: [docs/field-kit-and-graph-diagram.html](docs/field-kit-and-graph-diagram.html). The skill is in `skills/local-handover/`, the architecture is in `docs/architecture-draft-v0.6.md`, and the open gaps are in `docs/verification-gap.md`.
 
 ## Contents
 
@@ -55,7 +55,7 @@ If an agent's skill folder layout differs in your version, put `SKILL.md` where 
 
 ### 3. Approve, then let it run
 
-You will get a short Stage 1 package first, then a Stage 2 manifest. Approve both, in order, and the run starts inside that envelope. Reject either one and nothing runs. That is the point: one approval decision, not babysitting.
+You will get a short Stage 1 package first, then a Stage 2 manifest. Approve both, in order, and the run starts inside that envelope. Reject either one and nothing runs. That is the point: one approval decision, not babysitting. Work that comes as a chain, such as re-baseline, draft, then apply, is scoped as one run with one Stage 1 package and one Stage 2 manifest, not one approval pair per link.
 
 
 ## How it works
@@ -74,20 +74,21 @@ flowchart LR
 
 1. **Translate.** You write a rough prompt. Handover infers the outcome, the check that would prove it, what must not change, the one way doors that pause for a human, and the stop condition. It asks you only where a missing answer is needed to set the plan, the acceptance check, or the authority, before approval. These are early, plan-setting questions: the plan does not exist yet, so they shape it, they do not change an existing plan.
 2. **Ask with options.** Every question comes with 2 to 4 real options, each with its tradeoff, one marked recommended, and one escape: something else, in your words. One decision per message, in the order that shapes the plan most first. Short by default, full detail on demand.
-3. **Approve in two stages.** Stage 1 approves the intent package. Stage 2 approves the versioned execution manifest: kit and playbook versions, tool and target allowlist, finish predicate, limits, and budget ledger. The manifest is what is authorized to run, not the prose alone.
-4. **Run inside the envelope.** A coordinator owns the plan and every spawn. The author is never the verifier. The verifier gets the specification and the artifact only, never the author's reasoning. The judge resolves verdicts and records gaps.
+3. **Approve in two stages.** Stage 1 approves the intent package. Stage 2 approves the versioned execution manifest: kit and playbook versions, tool and target allowlist with a risk rating per tool, the failure threshold, finish predicate, limits, and budget ledger. The manifest is what is authorized to run, not the prose alone.
+4. **Run inside the envelope.** A coordinator owns the plan and every spawn. The author is never the verifier. The verifier gets the specification and the artifact only, never the author's reasoning. The judge resolves verdicts and records gaps. Work the graph can split is split into units, each with one output, one owner, and one check, listed in a JSON file where every unit starts failing and only the passes field changes. Units with no dependency run apart, a join waits for all its inputs, and a fresh checker reopens every link at the join.
 5. **Report proof or a dead end.** If the run finishes, you get the artifact, its evidence, a decision trail, and a budget audit. If it cannot finish inside the limits you approved, you get a dead end report: what stopped, what was tried, what would unblock it, and options. Exhaustion is never presented as a weaker success, and the predicate is never relaxed to declare victory.
 
 ## What makes it special
 
-Most agent workflows start with a codebase, a task already scoped, and a finish line someone else defined. Handover starts earlier, with a rough sentence, and it is built for work where the human cannot be the checker in the middle. That is the difference, in six parts:
+Most agent workflows start with a codebase, a task already scoped, and a finish line someone else defined. Handover starts earlier, with a rough sentence, and it is built for work where the human cannot be the checker in the middle. That is the difference, in seven parts:
 
 - **It translates before it runs.** A rough prompt becomes an interpreted intent, a concrete check on the real artifact, non negotiable constraints, one way doors, and a stop condition, before any work starts. If a missing answer is needed to set the plan, it is asked up front, with options and tradeoffs, not discovered halfway through a run.
 - **It asks once, then stops asking.** The human approves or rejects one package, then the run proceeds inside that envelope. During the run, the human is not asked routine questions and is not asked to verify the output. The only returns to the human are a missing permission, a conflict outside the envelope, an action that is not listed exactly in the approved manifest, or a dead end. Outward actions listed exactly in the manifest run without stopping.
-- **Approval is an envelope, not a yes in chat.** Stage 2 produces a versioned manifest with tool and target allowlist, finish predicate, limits, budget ledger, and kit and playbook versions. A repair that changes any of those needs reapproval. A repair that changes none of them can proceed, and is logged with its diff.
+- **Approval is an envelope, not a yes in chat.** Stage 2 produces a versioned manifest with tool and target allowlist with a risk rating per tool, the failure threshold, finish predicate, limits, budget ledger, and kit and playbook versions. A repair that changes any of those needs reapproval. A repair that changes none of them can proceed, and is logged with its diff.
 - **Verification is separate from production.** The author is never the verifier, the verifier gets only the specification and the artifact, and the judge resolves verdicts in a fresh context. A gap is recorded as a gap, never converted into a pass, and exhaustion is reported as a dead end, never as a weaker success.
 - **It reuses a proven kit before it builds one.** At Stage 1, Handover must declare Case A, an existing proven kit, named with its version digest, or Case B, a kit to be generated, with a separate budget for generation and proof and the first real task declared as the proof run. A generated kit that was never executed is a draft, not a deliverable, and a second real task proof needs separate approval and funding.
-- **It works in fields, not just in code.** Each field gets a field kit: a router, task playbooks, domain principles, role definitions, verification and cleanup routines, and a capability map. Every kit needs a lever, a tool or API the agent can actually drive, plus a map of the domain, not just prose. A field is not claimed as covered because a kit was generated; it is covered only after that kit passes a real task proof.
+- **It works in fields, not just in code.** Each field gets a field kit: a router, task playbooks, domain principles, role definitions, verification and cleanup routines, and a capability map. Every kit needs a lever, a tool or API the agent can actually drive, plus a map of the domain, not just prose. A field is not claimed as covered because a kit was generated; it is covered only after that kit passes its own real task proof.
+- **It orders work as a graph you can see.** Units, links, splits, and joins are listed in the approval package before anything runs, and the per-unit list shows what is done and what is left.
 
 ## What you get
 
@@ -127,16 +128,16 @@ Handover proposes: a research brief for you, covering single call, single loop, 
 A reusable package for one field: router, playbooks, principles, roles, verification and cleanup routines, and a capability map. See the table above.
 
 **Does Handover suggest an existing field kit instead of generating one each time?**
-Yes. Stage 1 must declare Case A, an existing proven kit by version digest, or Case B, a kit to be generated with a separate proof budget. It does not silently generate a duplicate when a proven kit fits. Limit, stated plainly: v1 has no central searchable library of all past kits, so reuse depends on the kits the translator inspects in the workspace and project, and on the kit named in the Stage 1 package you approve.
+Yes. Stage 1 must declare Case A, an existing proven kit by version digest, or Case B, a kit to be generated with a separate proof budget. It does not silently generate a duplicate when a proven kit fits. Limit, stated plainly: v4 has no central searchable library of all past kits, so reuse depends on the kits the translator inspects in the workspace and project, and on the kit named in the Stage 1 package you approve.
 
 **What can I use it for today?**
-Translating any rough prompt into an approval package, and running the supervised research brief pilot. Other fields get a translator and a package in v1, but execution is not operational until that field's kit passes its own real task proof.
+Translating any rough prompt into an approval package, and running the supervised research brief pilot. Other fields get a translator and a package in v4, but execution is not operational until that field's kit passes its own real task proof.
 
 **What does it cost?**
 The demo pilot uses $0 paid tools and no paid model calls outside your agent's own run. In general, the manifest states the budget, with a reserve held back for verification and the dead end report, at least 15 percent, and labels a limit advisory when the platform cannot hard block further calls at that limit.
 
 **Can it run overnight or unattended?**
-Not in v1. Unattended operation needs a demonstrated scheduler or parent re-invocation path, with duplicate run detection and failure reporting, including resume after a restart. Those proof tests are listed in [Status and limits](#status-and-limits).
+Not in v4. Unattended operation needs a demonstrated scheduler or parent re-invocation path, with duplicate run detection and failure reporting, including resume after a restart. Those proof tests are listed in [Status and limits](#status-and-limits).
 
 **Will it publish, send, pay, delete, or deploy for me?**
 Only if that exact action, destination, payload or payload template, limit, and condition is listed in the approved Stage 2 manifest. An unlisted action, or a changed destination or payload, needs a new approval. That is how full autonomy after the early gate works: the decision is made up front, in the manifest, not during the run.
@@ -166,9 +167,9 @@ Version 4, approved Nov 5, 2026, adds the benchmark changes: per-unit list, sess
 
 Version 1, built from architecture draft v0.6, approved Nov 4, 2026.
 
-- Scope is narrow and supervised only. The only execution pilot in v1 is a research brief.
-- For other fields, v1 may translate a prompt and produce an approval package, but execution is not operational until a kit for that field passes its own real task proof. A generated kit is not coverage.
-- V1 is not operational for unattended runs, live data operation, three level fan out, or automatic learning changes. Those are deferred until the pilot passes its proof tests.
+- Scope is narrow and supervised only. The loop and the graph are the default for every run. The only execution pilot proven so far is a research brief.
+- For other fields, v4 may translate a prompt and produce an approval package, but execution is not operational until a kit for that field passes its own real task proof. A generated kit is not coverage.
+- V4 is not operational for unattended runs, live data operation, three level fan out, or automatic learning changes. Those are deferred until the pilot passes its proof tests.
 - Proof tests, before any claim of operational use: simulated gated action and injection tests pass in every case, every known bad artifact in the test set is rejected, one supervised real run completes with a clean decision trail and budget audit, a comprehension test passes, and a real generated skill loads through the actual Muse loader.
 - Handover does not merge, publish, post, send, pay, delete, deploy, or contact anyone unless that exact action, destination, payload or payload template, limit, and condition is listed in the approved Stage 2 manifest. An unlisted or changed action needs a new approval.
 
