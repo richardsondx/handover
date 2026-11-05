@@ -2,14 +2,14 @@
 
 > Turn a rough prompt into a full plan and orchestration, ask only the early questions needed to set the plan, approve once up front, then run with full autonomy inside the approved envelope.
 
-[![Handover v1](https://img.shields.io/badge/Handover-v1-blue)](https://github.com/richardsondx/handover)
+[![Handover v4](https://img.shields.io/badge/Handover-v4-blue)](https://github.com/richardsondx/handover)
 [![Skill: Muse](https://img.shields.io/badge/Skill-Muse-green)](skills/local-handover/SKILL.md)
 [![Pilot: Research brief](https://img.shields.io/badge/Pilot-Research%20brief-orange)](skills/local-handover/SKILL.md)
 [![Status: Supervised only](https://img.shields.io/badge/Status-Supervised%20only-yellow)](docs/verification-gap.md)
 
 **English** · Translations welcome, see [Contributing](CONTRIBUTING.md). English is the source file; translated files will be linked here once they are added and checked.
 
-**Website · Guides · Showcases:** this README is the guide for v1. The skill is in `skills/local-handover/`, the architecture is in `docs/architecture-draft-v0.6.md`, and the open gaps are in `docs/verification-gap.md`.
+**Website · Guides · Showcases:** the skill is now at v4. This README still describes v1 in places. Start with the IKEA-style visual guide to v4: [docs/handover-v4-ikea-instructions.html](docs/handover-v4-ikea-instructions.html). The skill is in `skills/local-handover/`, the architecture is in `docs/architecture-draft-v0.6.md`, and the open gaps are in `docs/verification-gap.md`.
 
 ## Contents
 
@@ -149,14 +149,18 @@ It tries the next route, changes the method, or makes an operational retry that 
 - `README.md`: this file.
 - `CONTRIBUTING.md`: how to propose a change, a field kit, or a translation.
 - `SECURITY.md`: how to report a security issue, and what Handover will and will not do with secrets.
-- `skills/local-handover/SKILL.md`: the v1 skill.
+- `skills/local-handover/SKILL.md`: the v4 skill.
 - `skills/local-handover/skill.yaml`: skill metadata.
+- `skills/local-handover/units-template.json`: the per-unit list template from v4, one entry per unit with the passes field starting as failing.
+- `docs/handover-v4-ikea-instructions.html`: IKEA-style visual guide to v4, parts list, assembly steps, loop and graph diagrams, and troubleshooting.
 - `docs/architecture-draft-v0.6.md`: full v1 architecture, reviewed twice by Opus and Terra, with two stage approval, harness enforced gates, budget ledger, resume protocol, verification coverage, and options first user experience.
 - `docs/verification-gap.md`: what is still unproven, and the tests that close each gap.
 - `docs/browser-study-reconciliation.md`: what the Poteto, m4lkxx, and YouTube sources actually said, with corrections to earlier notes, including that the 50,000 figure was not verified in any of those three sources.
 - `docs/images/`: app screenshots for Muse, Codex, and Claude Code, no longer used in the README. The earlier illustrative mockups (muse-handover.png, codex-handover.png, claude-code-handover.png) remain in the folder for reference.
 
 ## Status and limits, stated plainly
+
+Version 4, approved Nov 5, 2026, adds the benchmark changes: per-unit list, session start routine, end-to-end check, effort scaling, subagent contract, notes and compaction, risk ratings and failure threshold, rubric evaluator, resume and hook rules, and the handoff pattern. The IKEA-style guide explains it visually: [docs/handover-v4-ikea-instructions.html](docs/handover-v4-ikea-instructions.html).
 
 Version 1, built from architecture draft v0.6, approved Nov 4, 2026.
 

@@ -1,0 +1,11 @@
+{
+  "units": [
+    {
+      "name": "unit-name",
+      "output": "path/to/output-file-or-folder",
+      "owner": "agent-name",
+      "check": "how this unit is checked",
+      "passes": false
+    }
+  ]
+}
