@@ -1,0 +1,765 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:,">
+<title>Handover Field Kit and Graph Diagram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#ffffff; --paper2:#f2f2ee; --ink:#111111; --muted:#5b5b55; --line:#111111; --card:#ffffff; --soft:#eeeee8;
+  --blue:#0058a3; --blue-ink:#ffffff; --yellow:#ffdb00; --yellow-ink:#111111;
+  --good:#0a7a42; --bad:#b91c1c; --warn:#9a6206; --code-bg:#111111; --code-ink:#f5f5f0; --code-pass:#7ee787; --code-key:#9ecbff;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --paper:#131311; --paper2:#0e0e0d; --ink:#f5f5f0; --muted:#a9a9a0; --line:#e8e8e0; --card:#1b1b19; --soft:#242420; --code-bg:#000000; }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper2);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
+.mono{font-family:"IBM Plex Mono",monospace}
+.wrap{max-width:1060px;margin:0 auto;padding:16px 14px 44px}
+.sheet{background:var(--paper);border:2.5px solid var(--line);margin-bottom:18px}
+.sheet-head{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-bottom:2.5px solid var(--line);padding:10px 14px;font-size:11px;letter-spacing:.13em;text-transform:uppercase;font-weight:800}
+.sheet-head span:last-child{font-family:"IBM Plex Mono",monospace;letter-spacing:0;text-transform:none;font-weight:600}
+.section-pad{padding:18px}
+h1{font-family:Archivo,sans-serif;font-weight:900;font-size:52px;line-height:.92;letter-spacing:-.02em;margin:8px 0 10px;text-transform:uppercase}
+h2{font-family:Archivo,sans-serif;font-weight:900;font-size:27px;line-height:1.02;margin:0;text-transform:uppercase;letter-spacing:-.01em}
+h2 small{display:block;font-family:system-ui,sans-serif;font-weight:600;text-transform:none;font-size:14px;color:var(--muted);margin-top:7px;letter-spacing:0;line-height:1.45}
+.kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--blue)}
+.lede{font-size:18px;line-height:1.4;font-weight:650;max-width:560px;margin:0}
+.sub{color:var(--muted);font-size:14px;margin-top:10px;max-width:560px}
+.btn{appearance:none;border:2px solid var(--line);background:var(--ink);color:var(--paper);font-weight:800;padding:10px 14px;cursor:pointer;font-size:14px;font-family:inherit}
+.btn.secondary{background:var(--paper);color:var(--ink)}
+.btn.blue{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible,.tile:focus-visible,.node-g:focus-visible,.tab:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+
+/* COVER */
+.cover-bar{background:var(--blue);color:#fff;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 16px;flex-wrap:wrap}
+.cover-bar b{font-family:Archivo,sans-serif;letter-spacing:.07em;font-size:13px}
+.cover-bar i{background:var(--yellow);color:#111;font-style:normal;font-weight:900;padding:4px 8px;font-family:Archivo,sans-serif;font-size:12px}
+.cover-main{padding:22px 20px 20px;display:grid;grid-template-columns:1.05fr .95fr;gap:22px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.meta span{border:1.8px solid var(--line);padding:6px 9px;font-size:12px;font-weight:700}
+.meta span b{background:var(--ink);color:var(--paper);padding:1px 5px;margin-right:5px}
+.files{border:2px solid var(--line);background:var(--soft);padding:14px}
+.files h3{margin:0 0 10px;font-family:Archivo,sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:.04em}
+.file-row{border:2px solid var(--line);background:var(--paper);padding:10px 12px;margin-bottom:10px}
+.file-row:last-child{margin-bottom:0}
+.file-row .path{font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:600;word-break:break-all}
+.file-row p{margin:4px 0 0;font-size:12.5px;color:var(--muted)}
+.file-row .tag{display:inline-block;background:var(--blue);color:#fff;font-size:10px;font-weight:800;letter-spacing:.08em;padding:2px 6px;margin-bottom:6px}
+.file-row .tag.y{background:var(--yellow);color:#111;border:1.5px solid var(--line)}
+.cover-foot{display:grid;grid-template-columns:repeat(3,1fr);border-top:2.5px solid var(--line)}
+.cover-foot div{padding:12px 14px;border-right:1.5px solid var(--line)}
+.cover-foot div:last-child{border-right:none}
+.cover-foot strong{font-family:Archivo,sans-serif;font-size:24px;display:block;line-height:1}
+.cover-foot p{margin:4px 0 0;font-size:13px;color:var(--muted)}
+
+/* NAV + TABS */
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px;position:sticky;top:10px;z-index:6}
+.nav a,.tab{background:var(--paper);border:2px solid var(--line);color:var(--ink);text-decoration:none;font-weight:800;font-size:13px;padding:8px 11px;cursor:pointer;font-family:inherit}
+.nav a:hover{background:var(--yellow);color:#111}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.tab.active{background:var(--ink);color:var(--paper)}
+
+/* SCHEMA GLANCE */
+.glance{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2px solid var(--line);margin-top:16px}
+.glance div{padding:13px 14px;border-right:1.5px solid var(--line)}
+.glance div:last-child{border-right:none}
+.glance .k{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.05em}
+.glance .v{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;margin-top:4px;word-break:break-word}
+.glance p{margin:5px 0 0;font-size:12.5px;color:var(--muted)}
+.rule{margin-top:14px;border:2px dashed var(--line);padding:12px 14px;font-size:14px}
+.rule code{font-family:"IBM Plex Mono",monospace;font-weight:700;background:var(--soft);padding:1px 5px}
+
+/* KIT DIAGRAM */
+.kit-layout{display:grid;grid-template-columns:1.25fr .75fr;gap:16px;margin-top:16px;align-items:start}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tile{appearance:none;text-align:left;border:2px solid var(--line);background:var(--card);color:var(--ink);padding:11px;cursor:pointer;font-family:inherit;position:relative;min-height:104px}
+.tile:hover{border-color:var(--blue)}
+.tile.sel{background:var(--yellow);color:#111;border-color:#111}
+.tile .tname{font-weight:800;font-size:13.5px;line-height:1.2;display:block;padding-right:22px}
+.tile .ttype{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted);display:block;margin-top:4px}
+.tile.sel .ttype{color:#333}
+.tile .req{position:absolute;top:8px;right:8px;width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:10px;font-weight:900}
+.tile .req.opt{background:var(--paper);color:var(--muted);border:1.5px solid var(--muted)}
+.tile .tdesc{font-size:11.5px;color:var(--muted);display:block;margin-top:6px;line-height:1.35}
+.tile.sel .tdesc{color:#222}
+.detail{border:2.5px solid var(--line);padding:16px;background:var(--paper);position:sticky;top:64px}
+.detail h3{margin:4px 0 4px;font-family:Archivo,sans-serif;font-size:21px;line-height:1.05}
+.detail .path{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;background:var(--soft);padding:5px 8px;display:block;word-break:break-all}
+.detail p{font-size:13.5px;color:var(--muted);margin:10px 0 0}
+.detail dl{margin:12px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:13px}
+.detail dt{font-weight:800}
+.detail dd{margin:0;color:var(--muted)}
+.badge{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.07em;padding:2px 7px;border:1.5px solid var(--line)}
+.badge.req-b{background:var(--blue);color:#fff;border-color:var(--blue)}
+.badge.opt-b{background:var(--paper);color:var(--muted)}
+
+/* GRAPH DIAGRAM */
+.graph-layout{display:grid;grid-template-columns:1.25fr .75fr;gap:16px;margin-top:16px;align-items:start}
+.graph-box{border:2px solid var(--line);padding:12px;background:var(--paper)}
+.graph-box svg{width:100%;height:auto;display:block}
+.node-g{cursor:pointer}
+.node-g rect{transition:fill .15s}
+.decision{border:2px solid var(--line);background:var(--soft);padding:12px 14px;margin-top:14px;font-size:13.5px}
+.decision code{font-family:"IBM Plex Mono",monospace;font-weight:700}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.code{background:var(--code-bg);color:var(--code-ink);padding:14px;font-family:"IBM Plex Mono",monospace;font-size:12.5px;line-height:1.65;white-space:pre-wrap;word-break:break-word;margin-top:12px;max-height:520px;overflow:auto}
+.code .pass{color:var(--code-pass)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;font-weight:700;margin-top:10px;color:var(--muted)}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:16px;height:10px;border:2px solid var(--line);display:inline-block}
+.sw.solid{background:var(--blue)} .sw.dash{background:repeating-linear-gradient(90deg,var(--paper) 0 4px,var(--ink) 4px 6px)} .sw.join{background:var(--yellow)}
+
+/* UNIT LIST */
+.units-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13.5px}
+.units-table th,.units-table td{border:1.5px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
+.units-table th{background:var(--ink);color:var(--paper);font-family:Archivo,sans-serif;font-size:12.5px;letter-spacing:.03em}
+.pill{appearance:none;border:2px solid var(--line);font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:700;padding:5px 10px;cursor:pointer;background:var(--paper);color:var(--bad)}
+.pill.on{background:var(--good);border-color:var(--good);color:#fff}
+.progress{height:14px;border:2px solid var(--line);margin-top:14px;background:var(--paper)}
+.progress i{display:block;height:100%;background:var(--good);width:0%;transition:width .3s}
+.done-banner{margin-top:12px;padding:11px 13px;font-weight:800;font-size:14px;border:2px solid var(--line);background:var(--soft)}
+.done-banner.done{background:var(--yellow);color:#111}
+
+/* MAP TABLE */
+table.map{width:100%;border-collapse:collapse;margin-top:14px;font-size:13px}
+table.map th,table.map td{border:1.5px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+table.map th{background:var(--ink);color:var(--paper);font-family:Archivo,sans-serif;font-size:12.5px}
+table.map td:first-child{font-weight:700;white-space:nowrap}
+table.map code{font-family:"IBM Plex Mono",monospace;font-size:12px}
+
+/* KITS LIST */
+.kitlist{list-style:none;margin:14px 0 0;padding:0}
+.kitlist li{border:2px solid var(--line);padding:12px 14px;margin-bottom:10px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.kitlist b{font-size:14.5px}
+.kitlist p{margin:3px 0 0;font-size:13px;color:var(--muted);max-width:640px}
+.kitlist .mono{font-size:11.5px;color:var(--muted);word-break:break-all}
+.status{font-size:11px;font-weight:800;letter-spacing:.06em;padding:3px 8px;border:1.5px solid var(--line);white-space:nowrap}
+.status.proven{background:var(--good);color:#fff;border-color:var(--good)}
+.status.pilot{background:var(--yellow);color:#111}
+
+.footer{padding:15px 16px;font-size:12.5px;color:var(--muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.note{font-size:13px;color:var(--muted)}
+.search-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.search-row input{flex:1 1 220px;border:2px solid var(--line);padding:10px 12px;font-size:14px;font-family:inherit;background:var(--paper);color:var(--ink)}
+
+@media(max-width:860px){
+  h1{font-size:40px}
+  .cover-main,.kit-layout,.graph-layout{grid-template-columns:1fr}
+  .detail{position:static}
+  .glance{grid-template-columns:1fr}
+  .glance div{border-right:none;border-bottom:1.5px solid var(--line)}
+  .glance div:last-child{border-bottom:none}
+  .cover-foot{grid-template-columns:1fr}
+  .cover-foot div{border-right:none;border-bottom:1.5px solid var(--line)}
+  .cover-foot div:last-child{border-bottom:none}
+  .tiles{grid-template-columns:repeat(2,1fr)}
+  .units-table thead{display:none}
+  .units-table,.units-table tbody,.units-table tr,.units-table td{display:block;width:100%}
+  .units-table tr{border:2px solid var(--line);margin-bottom:10px}
+  .units-table td{border:none;border-bottom:1px dashed var(--muted)}
+  .units-table td:last-child{border-bottom:none}
+  .units-table td::before{content:attr(data-l);display:block;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+  table.map td:first-child{white-space:normal}
+}
+@media(max-width:430px){ .tiles{grid-template-columns:1fr} }
+@media (prefers-reduced-motion: reduce){ .progress i{transition:none} html{scroll-behavior:auto} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- COVER -->
+  <section class="sheet">
+    <div class="cover-bar"><b>TECHNICAL DRAWING · SCHEMA + DIAGRAM</b><i>HANDOVER® V4</i></div>
+    <div class="cover-main">
+      <div>
+        <div class="kicker">One schema file · Two diagrams drawn from it</div>
+        <h1>Field Kit<br>&amp; Graph</h1>
+        <p class="lede">The updated schema for Handover, with the diagram of the field kit and the diagram of the graph on one page. Tap any part of either diagram to see exactly where it lives in the schema.</p>
+        <p class="sub">A field kit is the reusable playbook for one field. A graph is how a run orders its work: units, links, splits, and joins. The schema describes both, and this page is drawn from data that validates against it.</p>
+        <div class="meta">
+          <span><b>SCHEMA</b> JSON Schema Draft 2020-12</span>
+          <span><b>MATCHES</b> SKILL.md v4 · Nov 5, 2026</span>
+          <span><b>ROOT</b> anyOf: fieldKit | graph</span>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
+          <button class="btn blue" id="copyTop">Copy schema JSON</button>
+          <button class="btn" id="downloadTop">Download handover-schema.json</button>
+          <a class="btn secondary" href="#full-schema" style="text-decoration:none;display:inline-block">Jump to full schema ↓</a>
+        </div>
+        <p class="note" id="copyMsg" role="status" style="margin-top:8px;min-height:20px"></p>
+      </div>
+      <div class="files" aria-label="Where the files live in the repo">
+        <h3>Where this lives in the repo</h3>
+        <div class="file-row">
+          <span class="tag">THE SCHEMA · UPDATED</span>
+          <div class="path">skills/local-handover/handover-schema.json</div>
+          <p>The machine-readable contract. One file, two definitions: <span class="mono">$defs/fieldKit</span> and <span class="mono">$defs/graph</span> (with <span class="mono">$defs/unit</span>).</p>
+        </div>
+        <div class="file-row">
+          <span class="tag y">THIS PAGE · THE DIAGRAM</span>
+          <div class="path">docs/field-kit-and-graph-diagram.html</div>
+          <p>The interactive diagram page. Same content as this artifact: tap the kit parts and the graph nodes, read the schema underneath each one.</p>
+        </div>
+        <div class="file-row">
+          <span class="tag">THE SOURCE OF TRUTH</span>
+          <div class="path">skills/local-handover/SKILL.md</div>
+          <p>Handover v4. Step 5 defines the field kit. The Graph section (items 1 to 8) defines the graph. The schema follows the skill, never the other way round.</p>
+        </div>
+      </div>
+    </div>
+    <div class="cover-foot">
+      <div><strong>12 + 4</strong><p>Kit fields in total: 12 required, 4 optional, in <span class="mono">$defs/fieldKit</span>.</p></div>
+      <div><strong>5</strong><p>Required fields per unit: name, output, owner, check, passes. No output file means not a unit.</p></div>
+      <div><strong>1</strong><p>Field that ever changes while a run works: <span class="mono">passes</span>, false to true, per unit.</p></div>
+    </div>
+  </section>
+
+  <nav class="nav" aria-label="Sections">
+    <a href="#glance">Schema at a glance</a><a href="#kit">① Field kit diagram</a><a href="#graph">② Graph diagram</a><a href="#units">Per-unit list</a><a href="#full-schema">Full schema</a><a href="#kits">Kits on record</a>
+  </nav>
+
+  <!-- GLANCE -->
+  <section class="sheet" id="glance">
+    <div class="sheet-head"><span>Schema at a glance</span><span>handover-schema.json</span></div>
+    <div class="section-pad">
+      <h2>The root shape <small>One JSON file can hold a field kit, a graph, or both together. That is the whole top level: everything else lives under $defs.</small></h2>
+      <div class="glance">
+        <div><div class="k">$id</div><div class="v">github.com/richardsondx/handover/…/handover-schema.json</div><p>Canonical location of the schema file in the repo.</p></div>
+        <div><div class="k">title</div><div class="v">"Handover field kit and graph"</div><p>Matches Handover v4, skills/local-handover/SKILL.md.</p></div>
+        <div><div class="k">$defs</div><div class="v">fieldKit · graph · unit</div><p>Three definitions. Graph units point back to unit with $ref.</p></div>
+      </div>
+      <div class="rule"><strong>The one root rule:</strong> <code>anyOf: [ { required: ["fieldKit"] }, { required: ["graph"] } ]</code>, a file with neither a kit nor a graph is not a Handover file. A file with both is the normal case: the kit that runs, and the graph it runs as.</div>
+    </div>
+  </section>
+
+  <!-- FIELD KIT DIAGRAM -->
+  <section class="sheet" id="kit">
+    <div class="sheet-head"><span>Diagram ①: The field kit</span><span>$defs/fieldKit · Step 5 of the skill</span></div>
+    <div class="section-pad">
+      <h2>Anatomy of a field kit <small>From Step 5: inspect, generate, prove, maintain. A minimum viable kit is one router, genuinely distinct playbooks, concise principles, four roles, verification and cleanup routines, and a capability map, plus a lever: a tool or API the agent can actually drive. Tap a part to inspect its schema entry.</small></h2>
+      <div class="tabs" role="tablist" aria-label="Kit filter">
+        <button class="tab active" data-filter="all">All 16 fields</button>
+        <button class="tab" data-filter="required">Required only (12)</button>
+        <button class="tab" data-filter="optional">Optional only (4)</button>
+      </div>
+      <div class="kit-layout">
+        <div class="tiles" id="kitTiles"></div>
+        <aside class="detail" id="kitDetail" aria-live="polite"></aside>
+      </div>
+      <p class="note" style="margin-top:14px"><strong>Proof status is part of the schema, not a boast:</strong> <span class="mono">proofStatus</span> is an enum, <span class="mono">"proven" | "draft" | "proof failed"</span>. One passing task does not establish coverage of a field, and a generated kit that was never executed is a draft.</p>
+    </div>
+  </section>
+
+  <!-- GRAPH DIAGRAM -->
+  <section class="sheet" id="graph">
+    <div class="sheet-head"><span>Diagram ②: The graph</span><span>$defs/graph + $defs/unit · Graph items 1–8</span></div>
+    <div class="section-pad">
+      <h2>How a run is ordered <small>Loop retries a fail. Graph orders the work. A link means the later unit needs the earlier unit's output: that is exactly what <span class="mono">dependsOn</span> says. No link means the units can run apart. Tap a node to inspect the unit.</small></h2>
+
+      <div class="decision">
+        <strong>Router decision for this example graph</strong> · <code>graph.decision = { mode: "graph", reason: "…" }</code><br>
+        Mode is <code>"graph"</code> because the job splits into parts with no dependency between them, some parts depend on others, and a later part needs both. Loop alone is the default for one straight line with one deliverable. The reason is always written in the graph file.
+      </div>
+
+      <div class="graph-layout">
+        <div>
+          <div class="graph-box">
+            <svg viewBox="0 0 460 262" role="img" aria-label="Graph diagram: Research and Draft run apart, Check needs Research, Join needs Check and Draft">
+              <defs><marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="currentColor"/></marker></defs>
+              <text x="230" y="18" text-anchor="middle" font-size="10" letter-spacing="0.5" fill="currentColor" font-weight="700">SOLID LINE = dependsOn · DASHED LINE = HANDOFF</text>
+              <!-- edges -->
+              <line x1="118" y1="82" x2="180" y2="82" stroke="currentColor" stroke-width="2.5" marker-end="url(#arr)"/>
+              <line x1="298" y1="82" x2="356" y2="82" stroke="currentColor" stroke-width="2.5" marker-end="url(#arr)"/>
+              <path d="M118 178 L 322 178 L 322 112" fill="none" stroke="currentColor" stroke-width="2.5" marker-end="url(#arr)"/>
+              <path d="M70 112 L 70 140" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arr)"/>
+              <!-- nodes -->
+              <g class="node-g" data-node="research" tabindex="0" role="button" aria-label="Unit: research">
+                <rect x="10" y="52" width="108" height="60" fill="#0058a3"/>
+                <text x="64" y="79" text-anchor="middle" fill="#ffffff" font-weight="800" font-size="13">RESEARCH</text>
+                <text x="64" y="96" text-anchor="middle" fill="#ffffff" font-size="10">dependsOn: []</text>
+              </g>
+              <g class="node-g" data-node="draft" tabindex="0" role="button" aria-label="Unit: draft">
+                <rect x="10" y="148" width="108" height="60" fill="var(--paper)" stroke="currentColor" stroke-width="2.5"/>
+                <text x="64" y="175" text-anchor="middle" font-weight="800" font-size="13" fill="currentColor">DRAFT</text>
+                <text x="64" y="192" text-anchor="middle" font-size="10" fill="currentColor">parallel branch</text>
+              </g>
+              <g class="node-g" data-node="check" tabindex="0" role="button" aria-label="Unit: check">
+                <rect x="190" y="52" width="108" height="60" fill="var(--paper)" stroke="currentColor" stroke-width="2.5"/>
+                <text x="244" y="79" text-anchor="middle" font-weight="800" font-size="13" fill="currentColor">CHECK</text>
+                <text x="244" y="96" text-anchor="middle" font-size="10" fill="currentColor">dependsOn: [research]</text>
+              </g>
+              <g class="node-g" data-node="join" tabindex="0" role="button" aria-label="Unit: join">
+                <rect x="352" y="52" width="100" height="60" fill="#ffdb00" stroke="#111" stroke-width="2.5"/>
+                <text x="402" y="79" text-anchor="middle" font-weight="900" font-size="13" fill="#111">◆ JOIN</text>
+                <text x="402" y="96" text-anchor="middle" font-size="10" fill="#111">needs all inputs</text>
+              </g>
+              <text x="230" y="234" text-anchor="middle" font-size="8.5" fill="currentColor">EACH UNIT HAS ITS OWN LOOP · UP TO 5 FIX CYCLES PER RUN, SHARED</text>
+              <text x="230" y="252" text-anchor="middle" font-size="8.5" fill="currentColor">DEAD END AFTER 3 DISTINCT APPROACHES FOR THE SAME FAILURE CLASS</text>
+            </svg>
+          </div>
+          <div class="legend">
+            <span><span class="sw solid"></span> Start unit, no dependency</span>
+            <span><span class="sw join"></span> Join: 2+ dependsOn entries</span>
+            <span><span class="sw dash"></span> Handoff edge (item 8)</span>
+          </div>
+          <div class="controls">
+            <button class="btn secondary" id="toggleHandoffs">Hide handoff edge</button>
+            <button class="btn secondary" id="showLimits">Show graph.limits</button>
+          </div>
+          <div class="code" id="graphCode" style="display:none"></div>
+        </div>
+        <aside class="detail" id="nodeDetail" aria-live="polite"></aside>
+      </div>
+
+      <div class="decision" style="margin-top:16px">
+        <strong>Join rule (item 3) and verification at the join (item 6):</strong> a join unit waits for <em>all</em> its inputs and never runs early. If an input is missing, the join waits or the run reports a dead end. At the join, a fresh checker reopens every link and every unit output: a link to a missing file is a fail, and the judge passes only if all links check out. In this environment serial execution stands in for parallel (item 7): independent units run one after the other, in order, with no dependency between them.
+      </div>
+    </div>
+  </section>
+
+  <!-- PER-UNIT LIST -->
+  <section class="sheet" id="units">
+    <div class="sheet-head"><span>The per-unit list</span><span>graph.units · one entry per unit</span></div>
+    <div class="section-pad">
+      <h2>Only <span class="mono" style="text-transform:none">passes</span> ever changes <small>The graph ships with a JSON list of every unit. Each entry starts with passes: false. Later agents change only that field, to true, when the unit's check passes. They never remove a unit, never edit a check, and never rename a unit to hide a failure. Try it: flip each unit below as if its check had passed.</small></h2>
+      <table class="units-table" aria-label="Example per-unit list">
+        <thead><tr><th>Unit (name)</th><th>Output</th><th>Owner</th><th>Check</th><th>dependsOn</th><th>passes</th></tr></thead>
+        <tbody id="unitRows"></tbody>
+      </table>
+      <div class="progress" aria-hidden="true"><i id="progBar"></i></div>
+      <div class="done-banner" id="doneBanner">0 of 4 units pass · Not done. Done means every unit passes.</div>
+      <div class="code" id="unitJson"></div>
+      <p class="note" style="margin-top:10px">This is the same shape as <span class="mono">skills/local-handover/units-template.json</span>, extended with <span class="mono">dependsOn</span> from the graph definition. The template in the repo is the minimal starting file; the schema above is the full contract.</p>
+    </div>
+  </section>
+
+  <!-- FULL SCHEMA -->
+  <section class="sheet" id="full-schema">
+    <div class="sheet-head"><span>The updated schema, in full</span><span>JSON Schema Draft 2020-12</span></div>
+    <div class="section-pad">
+      <h2>handover-schema.json <small>This is the complete schema: every definition, requirement, and description from the file held with the skill, pretty-printed for reading. Copy it into the repo at skills/local-handover/handover-schema.json, or download it as a file. The diagrams above are drawn from the definitions in this text.</small></h2>
+      <div class="search-row">
+        <input type="search" id="schemaSearch" placeholder="Filter the schema text, try: dependsOn, proofStatus, capabilityMap…" aria-label="Filter schema text">
+        <button class="btn blue" id="copyBtn">Copy schema JSON</button>
+        <button class="btn" id="downloadBtn">Download .json</button>
+      </div>
+      <p class="note" id="searchMsg" role="status" style="min-height:20px;margin-top:6px"></p>
+      <div class="code" id="schemaView" style="max-height:640px"></div>
+    </div>
+  </section>
+
+  <!-- MAP TABLE -->
+  <section class="sheet" id="map">
+    <div class="sheet-head"><span>Diagram to schema map</span><span>Every drawing has an address</span></div>
+    <div class="section-pad">
+      <h2>Where each drawing lives <small>If it is on a diagram above, its schema path is here. If it has no path, it does not belong on the diagram.</small></h2>
+      <table class="map" aria-label="Mapping from diagram elements to schema paths">
+        <tr><th>On the diagram</th><th>Schema path</th><th>Rule it carries</th></tr>
+        <tr><td>Kit tile: Router</td><td><code>$defs/fieldKit.properties.router</code></td><td>Required. Matches a task to the right playbook. Needs a description.</td></tr>
+        <tr><td>Kit tile: Playbooks</td><td><code>$defs/fieldKit.properties.playbooks</code></td><td>Required, minItems 1. Each playbook needs a name and steps.</td></tr>
+        <tr><td>Kit tile: Roles</td><td><code>$defs/fieldKit.properties.roles</code></td><td>Required, all four: coordinator, generator, verifier, judge. Author is never verifier.</td></tr>
+        <tr><td>Kit tile: Capability map</td><td><code>$defs/fieldKit.properties.capabilityMap</code></td><td>Required, minItems 1. Each area names its routes, requirements, checks, and known limits.</td></tr>
+        <tr><td>Kit tile: Lever</td><td><code>$defs/fieldKit.properties.lever</code></td><td>Required. A tool or API the agent can actually drive, not just prose.</td></tr>
+        <tr><td>Kit tile: End-to-end check</td><td><code>$defs/fieldKit.properties.endToEndCheck</code></td><td>Required. Steps a human would take on the real artifact, plus what passing looks like.</td></tr>
+        <tr><td>Graph decision box</td><td><code>$defs/graph.properties.decision</code></td><td>Required. mode is "loop" or "graph", and the reason is written in the file.</td></tr>
+        <tr><td>Graph node</td><td><code>$defs/unit</code></td><td>Required: name, output, owner, check, passes. No output file means not a unit.</td></tr>
+        <tr><td>Solid arrow</td><td><code>$defs/unit.properties.dependsOn</code></td><td>Empty means parallel. Two or more entries makes the unit a join.</td></tr>
+        <tr><td>Dashed arrow</td><td><code>$defs/graph.properties.handoffs</code></td><td>Optional. A transfer of control between agents, pattern "manager" or "handoff". Not a dependency.</td></tr>
+        <tr><td>Loop limits</td><td><code>$defs/graph.properties.limits</code></td><td>Optional. fixCyclesMax defaults to 5, distinctApproachesBeforeDeadEnd defaults to 3.</td></tr>
+        <tr><td>passes pill</td><td><code>$defs/unit.properties.passes</code></td><td>Boolean. Starts false for every unit. Done means every unit passes.</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- KITS ON RECORD -->
+  <section class="sheet" id="kits">
+    <div class="sheet-head"><span>Field kits on record</span><span>From FIELD-KITS.md, checked Nov 5, 2026</span></div>
+    <div class="section-pad">
+      <h2>The index the schema describes <small>These are the kits the "list field kits" command reads back. Proof status is stated plainly: a pilot is not field coverage.</small></h2>
+      <ul class="kitlist">
+        <li><div><b>Research brief kit</b><p>Research briefs and evidence synthesis. Pilot, single supervised run, not field coverage.</p><span class="mono">workspace/handover-v1/kits/research-brief/</span></div><span class="status pilot">PILOT</span></li>
+        <li><div><b>Handover persistent loop kit</b><p>Relentless fix loop for any Handover run: classify failure, distinct approach ladder, loop budget, fresh verifier each cycle. Proof passed Nov 5, 2026.</p><span class="mono">workspace/orchestrator/handover-2026-11-05-persistent/kit/</span></div><span class="status proven">PROVEN</span></li>
+        <li><div><b>Handover graph kit</b><p>Graph from a simple directive: router, units and links, split and join, loop per node. Proof passed Nov 5, 2026, judge PASS.</p><span class="mono">workspace/orchestrator/handover-2026-11-05-graph-v3/kit/</span></div><span class="status proven">PROVEN</span></li>
+      </ul>
+      <p class="note" style="margin-top:12px">In schema terms, each entry above is a <span class="mono">fieldKit</span> with a name, a field, a proofStatus, and a path. Older kits are added when they are next reused, not backfilled by guessing.</p>
+    </div>
+    <div class="footer"><span>Source: Handover SKILL.md v4 (approved Nov 5, 2026), FIELD-KITS.md, units-template.json, and handover-schema.json as held with the skill. Scope stays as printed in the skill: supervised only, research brief is the proven execution pilot.</span><span class="mono">HANDOVER® V4 · SCHEMA + DIAGRAM</span></div>
+  </section>
+
+</div>
+
+<!-- The schema itself, verbatim. The viewer, copy, and download all read this block. -->
+<script type="application/json" id="schemaData">
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/richardsondx/handover/blob/main/skills/local-handover/handover-schema.json",
+  "title": "Handover field kit and graph",
+  "description": "One file that describes a Handover field kit and the graph that runs with it. Matches Handover v4, skills/local-handover/SKILL.md. The diagram in docs/field-kit-and-graph-diagram.html is drawn from data that validates against this schema.",
+  "type": "object",
+  "anyOf": [
+    { "required": ["fieldKit"] },
+    { "required": ["graph"] }
+  ],
+  "properties": {
+    "fieldKit": { "$ref": "#/$defs/fieldKit" },
+    "graph": { "$ref": "#/$defs/graph" }
+  },
+  "$defs": {
+    "fieldKit": {
+      "type": "object",
+      "description": "A reusable playbook for one field. From Step 5 of the v4 skill: a router, task playbooks, domain principles, role definitions, verification and cleanup routines, and a capability map, plus a lever the agent can actually drive.",
+      "required": ["name", "field", "proofStatus", "router", "playbooks", "principles", "roles", "verification", "cleanup", "capabilityMap", "lever", "endToEndCheck"],
+      "properties": {
+        "name": { "type": "string" },
+        "field": { "type": "string", "description": "What the kit is for, in a few words." },
+        "proofStatus": { "type": "string", "enum": ["proven", "draft", "proof failed"] },
+        "versionDigest": { "type": "string", "description": "Digest of the kit version the run used." },
+        "path": { "type": "string", "description": "Kit folder path, or repo URL only if actually published there. Never invent a repo link." },
+        "router": {
+          "type": "object",
+          "description": "Matches a task to the right playbook for the field.",
+          "required": ["description"],
+          "properties": {
+            "description": { "type": "string" },
+            "matches": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "playbooks": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["name", "steps"],
+            "properties": {
+              "name": { "type": "string" },
+              "pattern": { "type": "string", "description": "The recurring task pattern this playbook handles." },
+              "steps": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+            }
+          }
+        },
+        "principles": { "type": "array", "minItems": 1, "items": { "type": "string" }, "description": "Short, testable rules for the field, not generic advice." },
+        "roles": {
+          "type": "object",
+          "required": ["coordinator", "generator", "verifier", "judge"],
+          "properties": {
+            "coordinator": { "type": "string" },
+            "generator": { "type": "string" },
+            "verifier": { "type": "string" },
+            "judge": { "type": "string" }
+          }
+        },
+        "verification": { "type": "array", "minItems": 1, "items": { "type": "string" }, "description": "How the artifact is checked." },
+        "cleanup": { "type": "array", "minItems": 1, "items": { "type": "string" }, "description": "How temporary state is removed without removing evidence." },
+        "capabilityMap": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["area"],
+            "properties": {
+              "area": { "type": "string", "description": "A question type or task area the kit covers." },
+              "routes": { "type": "array", "items": { "type": "string" } },
+              "requirements": { "type": "array", "items": { "type": "string" } },
+              "checks": { "type": "array", "items": { "type": "string" } },
+              "limits": { "type": "array", "items": { "type": "string" }, "description": "Known limits for this area." }
+            }
+          }
+        },
+        "lever": { "type": "string", "description": "The tool or API the agent can actually drive, not just prose." },
+        "endToEndCheck": {
+          "type": "object",
+          "description": "Each kit names its end to end check for the field.",
+          "required": ["steps", "passingLooksLike"],
+          "properties": {
+            "steps": { "type": "array", "minItems": 1, "items": { "type": "string" }, "description": "The exact steps a human user would take on the real artifact." },
+            "passingLooksLike": { "type": "string" }
+          }
+        },
+        "stuckAndResumeLadder": { "type": "array", "items": { "type": "string" } },
+        "templates": {
+          "type": "object",
+          "properties": {
+            "evidence": { "type": "string" },
+            "verdict": { "type": "string" }
+          }
+        }
+      }
+    },
+    "graph": {
+      "type": "object",
+      "description": "The graph that orders the work. From the Graph section of the v4 skill. Loop is how to retry a fail. Graph is how to order the work.",
+      "required": ["decision", "units"],
+      "properties": {
+        "decision": {
+          "type": "object",
+          "description": "Item 1, Router. The reason is written in the graph file.",
+          "required": ["mode", "reason"],
+          "properties": {
+            "mode": { "type": "string", "enum": ["loop", "graph"] },
+            "reason": { "type": "string" }
+          }
+        },
+        "units": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/unit" } },
+        "limits": {
+          "type": "object",
+          "description": "Item 4, Loop per node. Up to 5 fix cycles per run, shared across units. Dead end for a unit only after 3 distinct approaches for the same failure class.",
+          "properties": {
+            "fixCyclesMax": { "type": "integer", "default": 5 },
+            "distinctApproachesBeforeDeadEnd": { "type": "integer", "default": 3 }
+          }
+        },
+        "handoffs": {
+          "type": "array",
+          "description": "Item 8, Handoff pattern. Agents are nodes, and handoffs are edges alongside tool calls. A handoff is a transfer of control between agents, not a dependency between units.",
+          "items": {
+            "type": "object",
+            "required": ["from", "to", "pattern"],
+            "properties": {
+              "from": { "type": "string", "description": "Name of the unit the agent hands off from." },
+              "to": { "type": "string", "description": "Name of the unit the agent hands off to." },
+              "pattern": { "type": "string", "enum": ["manager", "handoff"] }
+            }
+          }
+        }
+      }
+    },
+    "unit": {
+      "type": "object",
+      "description": "Item 2, Units and links. Each unit has one output file or folder, one owner, one check. A unit with no output file is not a unit.",
+      "required": ["name", "output", "owner", "check", "passes"],
+      "properties": {
+        "name": { "type": "string" },
+        "output": { "type": "string", "description": "One output file or folder." },
+        "owner": { "type": "string" },
+        "check": { "type": "string" },
+        "dependsOn": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": [],
+          "description": "Names of units this unit needs. A link means the later unit needs the earlier unit output. No entries means parallel. Two or more entries makes this unit a join: it starts only after all of them exist, and never runs early."
+        },
+        "passes": { "type": "boolean", "description": "The unit's status. Starts as failing (false) for every unit. Only this field changes as the work runs. Done means every unit passes." }
+      }
+    }
+  }
+}
+</script>
+
+<script>
+var schemaText = document.getElementById('schemaData').textContent.trim();
+var schemaObj = JSON.parse(schemaText);
+var schemaPretty = JSON.stringify(schemaObj, null, 2);
+
+/* ---------- Field kit tiles ---------- */
+var kitFields = [
+  {key:'name', type:'string', req:true, short:'The kit\u2019s name, as listed in FIELD-KITS.md.', desc:'Top-level identity. The "list field kits" command reads kits back by this name, with proof status and link.'},
+  {key:'field', type:'string', req:true, short:'What the kit is for, in a few words.', desc:'Schema description, verbatim: "What the kit is for, in a few words." One field per kit. A kit for one field never claims coverage of another.'},
+  {key:'proofStatus', type:'enum', req:true, short:'"proven" | "draft" | "proof failed"', desc:'The honesty field. Enum of exactly three values: proven, draft, proof failed. A generated kit that was never executed is a draft. One passing task does not establish coverage of a field.'},
+  {key:'router', type:'object', req:true, short:'Matches a task to the right playbook.', desc:'Requires a description. Optional matches list names the task shapes it routes. Without a router, a kit is a pile of playbooks with no way in.'},
+  {key:'playbooks', type:'array · minItems 1', req:true, short:'Distinct playbooks for recurring patterns.', desc:'Each playbook requires a name and steps (minItems 1), with an optional pattern describing the recurring task it handles. Playbooks must be genuinely distinct, not generated inventory.'},
+  {key:'principles', type:'array · minItems 1', req:true, short:'Short, testable rules for the field.', desc:'Schema description, verbatim: "Short, testable rules for the field, not generic advice." Concise principles are part of the minimum viable kit in Step 5.'},
+  {key:'roles', type:'object · 4 required', req:true, short:'coordinator, generator, verifier, judge.', desc:'All four role fields are required strings. The separation is the point: the author is never the verifier, and the judge runs in a fresh context and cannot convert a gap into a pass.'},
+  {key:'verification', type:'array · minItems 1', req:true, short:'How the artifact is checked.', desc:'The kit\u2019s verification routines. In Step 4 terms: deterministic checks first where available, claim-to-source checks at the coverage stated in the predicate, known-bad artifacts must be rejected.'},
+  {key:'cleanup', type:'array · minItems 1', req:true, short:'Remove temporary state, keep evidence.', desc:'Schema description, verbatim: "How temporary state is removed without removing evidence." Skill rule: kill only what the run started, never the evidence.'},
+  {key:'capabilityMap', type:'array · minItems 1', req:true, short:'Areas, routes, requirements, checks, limits.', desc:'Each entry requires an area: a question type or task area the kit covers. Optional routes, requirements, and checks, plus limits for known limits. The v1 research map connects question types like comparison or fact check to search routes and source requirements.'},
+  {key:'lever', type:'string', req:true, short:'A tool or API the agent can drive.', desc:'Step 5, verbatim in spirit: every kit needs a lever, not just prose: a tool or API the agent can actually drive, plus a map of the domain it operates on, the way a code kit needs a CLI plus a feature map.'},
+  {key:'endToEndCheck', type:'object', req:true, short:'Steps on the real artifact + passing looks like.', desc:'Requires steps and passingLooksLike. Steps are the exact steps a human user would take on the real artifact. Proof is end to end on the real artifact, not only a unit check.'},
+  {key:'versionDigest', type:'string', req:false, short:'Digest of the kit version used.', desc:'Optional. The Stage 1 package names the kit and its version digest for a proven kit (Case A). A verdict is tied to a digest of the artifact checked.'},
+  {key:'path', type:'string', req:false, short:'Kit folder path, or repo URL if published.', desc:'Optional. Schema description, verbatim: "Kit folder path, or repo URL only if actually published there. Never invent a repo link." Publishing a kit is a separate gated action.'},
+  {key:'stuckAndResumeLadder', type:'array', req:false, short:'What to try when a unit gets stuck.', desc:'Optional. Mirrors the approach ladder: retry with corrected input, switch the source or evidence route, split the unit smaller, replace the method, then hold that unit while the rest continues.'},
+  {key:'templates', type:'object', req:false, short:'Evidence and verdict templates.', desc:'Optional. Two optional string fields, evidence and verdict. Part of the minimum viable kit in Step 5: evidence and verdict templates ship with the kit.'}
+];
+var tilesEl = document.getElementById('kitTiles');
+var kitDetail = document.getElementById('kitDetail');
+function renderTiles(filter){
+  tilesEl.innerHTML = '';
+  kitFields.forEach(function(f, i){
+    if(filter === 'required' && !f.req) return;
+    if(filter === 'optional' && f.req) return;
+    var b = document.createElement('button');
+    b.className = 'tile' + (i === tilesEl.dataset.sel ? ' sel' : '');
+    b.setAttribute('aria-label', 'Field kit field: ' + f.key);
+    b.innerHTML = '<span class="req' + (f.req ? '' : ' opt') + '">' + (f.req ? '!' : 'o') + '</span>' +
+      '<span class="tname">' + f.key + '</span>' +
+      '<span class="ttype">' + f.type + '</span>' +
+      '<span class="tdesc">' + f.short + '</span>';
+    b.addEventListener('click', function(){ selectKit(i); });
+    tilesEl.appendChild(b);
+  });
+}
+function selectKit(i){
+  var f = kitFields[i];
+  tilesEl.dataset.sel = i;
+  var tiles = tilesEl.querySelectorAll('.tile');
+  tiles.forEach(function(t){ t.classList.remove('sel'); });
+  // re-mark: find tile whose name matches
+  tiles.forEach(function(t){ if(t.querySelector('.tname').textContent === f.key) t.classList.add('sel'); });
+  kitDetail.innerHTML =
+    '<span class="badge ' + (f.req ? 'req-b' : 'opt-b') + '">' + (f.req ? 'REQUIRED' : 'OPTIONAL') + '</span>' +
+    '<h3>' + f.key + '</h3>' +
+    '<span class="path">$defs/fieldKit.properties.' + f.key + '</span>' +
+    '<p>' + f.desc + '</p>' +
+    '<dl><dt>Type</dt><dd class="mono">' + f.type + '</dd>' +
+    '<dt>In schema</dt><dd>' + (f.req ? 'Listed in fieldKit.required' : 'Not in fieldKit.required') + '</dd></dl>';
+}
+document.querySelectorAll('.tab').forEach(function(tab){
+  tab.addEventListener('click', function(){
+    document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+    tab.classList.add('active');
+    renderTiles(tab.dataset.filter);
+  });
+});
+renderTiles('all');
+selectKit(2);
+
+/* ---------- Graph nodes ---------- */
+var units = [
+  {name:'research', output:'brief.md', owner:'generator-1', check:'every claim linked to a source', dependsOn:[], passes:false, note:'Starts immediately: dependsOn is empty, so nothing has to exist first. Its own per-node loop handles its fails without stopping the other branches.'},
+  {name:'draft', output:'draft.md', owner:'generator-2', check:'covers the agreed outline', dependsOn:[], passes:false, note:'Also independent, so it is logically parallel with Research. In this environment parallel means serial in order with no dependency (item 7), not simultaneous spawns.'},
+  {name:'check', output:'verification.md', owner:'verifier-1', check:'each claim traced back to its source record', dependsOn:['research'], passes:false, note:'One link in, so it waits for brief.md to exist. Done by a fresh verifier, never by the generator who wrote the brief.'},
+  {name:'join', output:'final-report.md', owner:'judge', check:'all links resolve and all units pass', dependsOn:['check','draft'], passes:false, note:'Two entries in dependsOn makes this a join (item 3). It starts only after both inputs exist, never early. Verification at the join reopens every link: a missing file is a fail.'}
+];
+var nodeDetail = document.getElementById('nodeDetail');
+function unitJson(u){
+  return '{\n  "name": "' + u.name + '",\n  "output": "' + u.output + '",\n  "owner": "' + u.owner + '",\n  "check": "' + u.check + '",\n  "dependsOn": [' + u.dependsOn.map(function(d){ return '"' + d + '"'; }).join(', ') + '],\n  "passes": ' + u.passes + '\n}';
+}
+function selectNode(name){
+  var u = units.filter(function(x){ return x.name === name; })[0];
+  if(!u) return;
+  var isJoin = u.dependsOn.length >= 2;
+  nodeDetail.innerHTML =
+    '<span class="badge ' + (isJoin ? '' : 'opt-b') + '" ' + (isJoin ? 'style="background:var(--yellow);color:#111"' : '') + '>' + (isJoin ? '◆ JOIN UNIT' : (u.dependsOn.length === 0 ? 'START UNIT · PARALLEL' : 'DEPENDENT UNIT')) + '</span>' +
+    '<h3>' + u.name + '</h3>' +
+    '<span class="path">$defs/unit · graph.units[' + units.indexOf(u) + ']</span>' +
+    '<p>' + u.note + '</p>' +
+    '<div class="code">' + unitJson(u).replace('"passes": false', '"passes": <span class="pass">false</span>') + '</div>';
+}
+document.querySelectorAll('.node-g').forEach(function(g){
+  function go(){ selectNode(g.dataset.node); }
+  g.addEventListener('click', go);
+  g.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); go(); } });
+});
+selectNode('join');
+
+/* handoff toggle: the dashed path is the 4th path/line group in the SVG */
+var svgPaths = document.querySelectorAll('.graph-box svg path');
+var handoffPath = null;
+svgPaths.forEach(function(p){ if(p.getAttribute('stroke-dasharray')) handoffPath = p; });
+var handoffsOn = true;
+document.getElementById('toggleHandoffs').addEventListener('click', function(){
+  handoffsOn = !handoffsOn;
+  if(handoffPath) handoffPath.style.display = handoffsOn ? '' : 'none';
+  this.textContent = handoffsOn ? 'Hide handoff edge' : 'Show handoff edge';
+});
+
+/* limits viewer */
+var limitsShown = false;
+document.getElementById('showLimits').addEventListener('click', function(){
+  var box = document.getElementById('graphCode');
+  limitsShown = !limitsShown;
+  box.style.display = limitsShown ? 'block' : 'none';
+  this.textContent = limitsShown ? 'Hide graph.limits' : 'Show graph.limits';
+  if(limitsShown){
+    box.textContent =
+'"limits": {\n  "fixCyclesMax": 5,\n  "distinctApproachesBeforeDeadEnd": 3\n}\n\n"handoffs": [\n  { "from": "research", "to": "draft",\n    "pattern": "handoff" }\n]\n\nItem 4: up to 5 fix cycles per run, shared across\nunits. Item 8: a handoff moves control between\nagents. It is an edge alongside tool calls,\nnot a dependsOn link.';
+  }
+});
+
+/* ---------- Per-unit list demo ---------- */
+var rowsEl = document.getElementById('unitRows');
+function renderUnits(){
+  rowsEl.innerHTML = '';
+  units.forEach(function(u, i){
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td data-l="Unit"><strong>' + u.name + '</strong></td>' +
+      '<td data-l="Output"><span class="mono">' + u.output + '</span></td>' +
+      '<td data-l="Owner">' + u.owner + '</td>' +
+      '<td data-l="Check">' + u.check + '</td>' +
+      '<td data-l="dependsOn"><span class="mono">' + (u.dependsOn.length ? '[' + u.dependsOn.join(', ') + ']' : '[]') + '</span></td>';
+    var td = document.createElement('td');
+    td.setAttribute('data-l', 'passes');
+    var pill = document.createElement('button');
+    pill.className = 'pill' + (u.passes ? ' on' : '');
+    pill.textContent = 'passes: ' + u.passes;
+    pill.setAttribute('aria-label', 'Toggle passes for unit ' + u.name);
+    pill.addEventListener('click', function(){ u.passes = !u.passes; renderUnits(); selectNode(u.name); });
+    td.appendChild(pill);
+    tr.appendChild(td);
+    rowsEl.appendChild(tr);
+  });
+  var n = units.filter(function(u){ return u.passes; }).length;
+  document.getElementById('progBar').style.width = (n / units.length * 100) + '%';
+  var banner = document.getElementById('doneBanner');
+  if(n === units.length){
+    banner.className = 'done-banner done';
+    banner.textContent = '4 of 4 units pass · Done. Every unit passes, and only the passes fields changed to get here.';
+  } else {
+    banner.className = 'done-banner';
+    banner.textContent = n + ' of 4 units pass · Not done. Done means every unit passes.';
+  }
+  document.getElementById('unitJson').textContent = '{\n  "units": [\n' + units.map(function(u){
+    return '    { "name": "' + u.name + '", "output": "' + u.output + '", "owner": "' + u.owner + '",\n      "check": "' + u.check + '", "dependsOn": [' + u.dependsOn.map(function(d){ return '"' + d + '"'; }).join(', ') + '], "passes": ' + u.passes + ' }';
+  }).join(',\n') + '\n  ]\n}';
+}
+renderUnits();
+
+/* ---------- Full schema viewer, copy, download ---------- */
+var schemaView = document.getElementById('schemaView');
+function showSchema(text){ schemaView.textContent = text; }
+showSchema(schemaPretty);
+
+document.getElementById('schemaSearch').addEventListener('input', function(){
+  var q = this.value.trim().toLowerCase();
+  var msg = document.getElementById('searchMsg');
+  if(!q){ showSchema(schemaPretty); msg.textContent = ''; return; }
+  var lines = schemaPretty.split('\n');
+  var hits = lines.filter(function(l){ return l.toLowerCase().indexOf(q) !== -1; });
+  if(hits.length === 0){ schemaView.textContent = 'No lines in the schema contain "' + this.value.trim() + '".'; msg.textContent = '0 matching lines. Clear the filter to see the full schema.'; return; }
+  schemaView.textContent = hits.join('\n');
+  msg.textContent = hits.length + ' matching line' + (hits.length === 1 ? '' : 's') + ' shown. Clear the filter to see the full schema.';
+});
+
+function copySchema(msgEl){
+  function done(ok){
+    msgEl.textContent = ok ? 'Schema copied. Paste it at skills/local-handover/handover-schema.json.' : 'Copy did not work in this view. Use Download instead, or select the schema text below.';
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(schemaPretty).then(function(){ done(true); }, function(){ fallback(); });
+  } else { fallback(); }
+  function fallback(){
+    var ta = document.createElement('textarea');
+    ta.value = schemaPretty; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch(e) { ok = false; }
+    document.body.removeChild(ta); done(ok);
+  }
+}
+function downloadSchema(){
+  var blob = new Blob([schemaPretty], {type: 'application/json'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url; a.download = 'handover-schema.json';
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+}
+var coverMsg = document.getElementById('copyMsg');
+var schemaMsg = document.getElementById('searchMsg');
+document.getElementById('copyBtn').addEventListener('click', function(){ copySchema(schemaMsg); });
+document.getElementById('copyTop').addEventListener('click', function(){ copySchema(coverMsg); });
+document.getElementById('downloadBtn').addEventListener('click', downloadSchema);
+document.getElementById('downloadTop').addEventListener('click', downloadSchema);
+</script>
+</body>
+</html>

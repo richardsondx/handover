@@ -9,7 +9,7 @@
 
 **English** · Translations welcome, see [Contributing](CONTRIBUTING.md). English is the source file; translated files will be linked here once they are added and checked.
 
-**Website · Guides · Showcases:** the skill is now at v4. This README still describes v1 in places. Start with the IKEA-style visual guide to v4: [docs/handover-v4-ikea-instructions.html](docs/handover-v4-ikea-instructions.html). The skill is in `skills/local-handover/`, the architecture is in `docs/architecture-draft-v0.6.md`, and the open gaps are in `docs/verification-gap.md`.
+**Website · Guides · Showcases:** the skill is now at v4. This README still describes v1 in places. Start with the IKEA-style visual guide to v4: [docs/handover-v4-ikea-instructions.html](docs/handover-v4-ikea-instructions.html), and the field kit and graph diagram: [docs/field-kit-and-graph-diagram.html](docs/field-kit-and-graph-diagram.html). The skill is in `skills/local-handover/`, the architecture is in `docs/architecture-draft-v0.6.md`, and the open gaps are in `docs/verification-gap.md`.
 
 ## Contents
 
@@ -152,7 +152,9 @@ It tries the next route, changes the method, or makes an operational retry that 
 - `skills/local-handover/SKILL.md`: the v4 skill.
 - `skills/local-handover/skill.yaml`: skill metadata.
 - `skills/local-handover/units-template.json`: the per-unit list template from v4, one entry per unit with the passes field starting as failing.
+- `skills/local-handover/handover-schema.json`: JSON Schema for the field kit and the graph, Draft 2020-12. The diagram page is drawn from data that validates against it.
 - `docs/handover-v4-ikea-instructions.html`: IKEA-style visual guide to v4, parts list, assembly steps, loop and graph diagrams, and troubleshooting.
+- `docs/field-kit-and-graph-diagram.html`: interactive diagram of the field kit and the graph, with the full schema, a working per-unit list, and a diagram-to-schema-path map.
 - `docs/architecture-draft-v0.6.md`: full v1 architecture, reviewed twice by Opus and Terra, with two stage approval, harness enforced gates, budget ledger, resume protocol, verification coverage, and options first user experience.
 - `docs/verification-gap.md`: what is still unproven, and the tests that close each gap.
 - `docs/browser-study-reconciliation.md`: what the Poteto, m4lkxx, and YouTube sources actually said, with corrections to earlier notes, including that the 50,000 figure was not verified in any of those three sources.
