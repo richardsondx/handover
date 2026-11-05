@@ -14,7 +14,6 @@
 ## Contents
 
 - [Quick start](#quick-start)
-- [See it in use](#see-it-in-use)
 - [How it works](#how-it-works)
 - [What makes it special](#what-makes-it-special)
 - [What you get](#what-you-get)
@@ -58,27 +57,6 @@ If an agent's skill folder layout differs in your version, put `SKILL.md` where 
 
 You will get a short Stage 1 package first, then a Stage 2 manifest. Approve both, in order, and the run starts inside that envelope. Reject either one and nothing runs. That is the point: one approval decision, not babysitting.
 
-## See it in use
-
-These are real screenshots of the three apps, showing the chat or input where you would paste the setup prompt from Quick start. They are not screenshots of Handover itself, because Handover is a skill you load into the agent, not a separate app window. The flow is the same in each place: paste a rough prompt, get options, then approve or reject the plan, before any work runs.
-
-### Muse
-
-![Real Meta Muse app chat, with a Message input at the bottom](docs/images/muse-real.png)
-
-*Real Muse app chat, from the Meta-authored App Store listing. In Muse, you paste the setup prompt into the Message input, Handover replies with options, then shows the approval package.*
-
-### Codex
-
-![Real Codex CLI terminal, with a prompt input asking to explain a code base](docs/images/codex-real.png)
-
-*Real Codex CLI terminal, from Wikimedia Commons. In Codex, you load the Handover skill, give a rough prompt at the terminal input, then approve or reject the package.*
-
-### Claude Code
-
-![Real Claude Code terminal, with a prompt and an input box at the bottom](docs/images/claude-code-real.png)
-
-*Real Claude Code terminal, from a blog screenshot of Claude Code v2.0.1. In Claude Code, you load the Handover skill, give a rough prompt at the input, then approve or reject the package.*
 
 ## How it works
 
@@ -176,7 +154,7 @@ It tries the next route, changes the method, or makes an operational retry that 
 - `docs/architecture-draft-v0.6.md`: full v1 architecture, reviewed twice by Opus and Terra, with two stage approval, harness enforced gates, budget ledger, resume protocol, verification coverage, and options first user experience.
 - `docs/verification-gap.md`: what is still unproven, and the tests that close each gap.
 - `docs/browser-study-reconciliation.md`: what the Poteto, m4lkxx, and YouTube sources actually said, with corrections to earlier notes, including that the 50,000 figure was not verified in any of those three sources.
-- `docs/images/`: real app screenshots for Muse, Codex, and Claude Code, used in [See it in use](#see-it-in-use). The earlier illustrative mockups (muse-handover.png, codex-handover.png, claude-code-handover.png) remain in the folder for reference, but are no longer used in the README.
+- `docs/images/`: app screenshots for Muse, Codex, and Claude Code, no longer used in the README. The earlier illustrative mockups (muse-handover.png, codex-handover.png, claude-code-handover.png) remain in the folder for reference.
 
 ## Status and limits, stated plainly
 
