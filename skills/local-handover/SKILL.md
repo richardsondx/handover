@@ -1,6 +1,6 @@
 # Handover
 
-Version 4.2, Nov 7, 2026. Local only until pushed. $2 hard cap per run. Supervised only. Relentless by default: first fail never ends a run. Graph is the end shape, loop is the engine in each unit.
+Version 4.3, Nov 7, 2026. Local only until pushed. $2 hard cap per run. Supervised only. Relentless by default: first fail never ends a run. Graph is the end shape, loop is the engine in each unit.
 Scope: only the research brief pilot is proven. Other fields need a kit that passes its own real task proof. Do not claim a field is covered because a kit was generated.
 
 ## Hard rules
@@ -105,7 +105,7 @@ Approval package contains, assumptions marked:
 3. Finish predicate: independently observable checks on that artifact, fixed at approval, including verification coverage. For a research brief, state population, selection method, coverage result, permissible claim, what counts as inaccessible evidence, and pass, fail, and inconclusive rules.
 4. Constraints and assumptions: what must not change, domain boundaries, assumptions the agent may act on.
 5. Authority envelope: autonomous scope, methods, time and cost, explicit one-way door gates, prohibited actions, tool and target allowlist.
-6. Plan and routing: selected playbook and field kit, or kit to be generated, stages, ownership, dependencies, justified parallel work, v1 depth and spawn limits.
+6. Plan and routing: selected playbook and field kit, or kit to be generated, stages, ownership, dependencies, justified parallel work, depth and spawn limits.
 7. Verification: deterministic checks first where available. Generator and verifier separated. Verifier gets spec and artifact or evidence, never the generator's persuasive work history. Judge resolves verdicts and records gaps, cannot convert a gap into a pass.
 8. Iteration and stopping: stuck ladder, alternative routes, maximum attempts or budget, dead-end report.
 9. Operations: checkpoint and resume state, scheduler or parent re-invocation if needed, artifact and version tracking, decision trail, cleanup, budget ledger.
@@ -130,7 +130,7 @@ Approval authorizes execution inside that envelope only, with full autonomy insi
 - Session start routine: every session starts the same way, before any new work. Read the progress notes and the logs. Pick the next unfinished unit from the per-unit list. Run the setup script for the field. Run a basic end-to-end check on the real artifact. If the artifact is broken, fix that first, because new work on a broken base makes it worse. Only then start the unit.
 - Notes and compaction: decision trail and budget ledger only grow, so a long run needs a way to shrink them without losing what matters. At a set size, summarize trail and ledger, keeping decisions, open gaps, and numbers, dropping repeated tool output. Clear old tool results first, because that is the lightest form of shrinking. Write a short note at each checkpoint: what is done, what is open, what broke. Read the notes back after every reset, before new work. Notes live outside the working context, in a file the next session can read.
 - Hook events: harness runs hook code at four points. PreToolUse runs before a tool call and can block or change it. Stop runs before exit and saves session state. SubagentStop runs when a subagent finishes and gathers its result. PreCompact runs before the transcript is summarized and archives the full transcript first.
-- Learning loop: reflect and correct. A mistake class counts once it has happened twice. Fix it at the highest level that works, in order: architecture, types or structure, lint or script check, test, docs last. Nothing learned changes a kit until the human approves, except where a prior envelope explicitly authorizes it. Automatic learning loop changes are cut from v1.
+- Learning loop: reflect and correct. A mistake class counts once it has happened twice. Fix it at the highest level that works, in order: architecture, types or structure, lint or script check, test, docs last. Nothing learned changes a kit until the human approves, except where a prior envelope explicitly authorizes it. Automatic learning loop changes are cut.
 - Cleanup: kill only what the run started, never the evidence. A generated kit that was never executed is a draft, not a deliverable.
 
 ## Step 4. Verify, before any claim of done
@@ -148,11 +148,11 @@ Approval authorizes execution inside that envelope only, with full autonomy insi
 3. Prove: run the kit on one real, authorized task. Check the resulting artifact independently against the agreed predicate, using the check CLI. A failed check starts a fix cycle under the persistent loop, with a distinct approach and a fresh verifier each cycle, up to the loop budget. If work cannot pass within the loop budget, hand over a dead-end report with what was tried and what would unblock it, not a claim that the kit works. One passing task does not establish coverage of a field.
 4. Maintain: record decisions and failures, correct a recurring mistake class at the highest effective level, and revalidate after meaningful changes to kit, sources, tools, or artifact. When a kit is generated or reused, record it in the field kit index, one bullet per kit with name, field in a few words, version digest, proof status (proven, draft, or proof failed), and kit folder path or repo URL if published. Index is a simple list file named FIELD-KITS.md kept in the folder with this skill, not a claim that every field is covered. The list field kits command reads this index.
 - Minimum viable kit, before any claim of operational: one router, a few genuinely distinct playbooks for the field, concise principles, coordinator, generator, verifier, and judge roles, evidence and verdict templates, stuck and resume ladder, cleanup, capability map, and check CLI. Add dozens of workflows only as distinct, tested task patterns justify them, not as generated inventory.
-- Research capability map, v1 pilot: connect question types, such as comparison, landscape review, or fact check, to search routes, source requirements, synthesis methods, checks, and known limits. Evidence for a research brief is accessible source records or permitted snapshots, search queries and dates, inclusion and exclusion decisions, claim-to-source links, and checks for source quality, recency, contradictions, and retractions where relevant.
+- Research capability map, pilot: connect question types, such as comparison, landscape review, or fact check, to search routes, source requirements, synthesis methods, checks, and known limits. Evidence for a research brief is accessible source records or permitted snapshots, search queries and dates, inclusion and exclusion decisions, claim-to-source links, and checks for source quality, recency, contradictions, and retractions where relevant.
 
-## Proof and limits for v1
+## Proof and limits
 
-V1 is proven, not just written, when all of these pass on the research brief pilot:
+This skill is proven, not just written, when all of these pass on the research brief pilot:
 - Simulated gated action test and injection test, both pass in every case, tested before live data is used.
 - Every known bad artifact in the test set is rejected.
 - One supervised real run completes with a clean audit of its decision trail and budget ledger.
@@ -160,6 +160,6 @@ V1 is proven, not just written, when all of these pass on the research brief pil
 - A real generated skill loads through the actual Muse loader, including invalid frontmatter, name collisions, precedence against user skills, reload behavior, and a restart.
 Until those pass, do not claim unattended operation, live data operation, or coverage of any field beyond the research brief pilot. Do not copy Cursor commands, paths, model slugs, or loop assumptions. Do not present a todo list as demonstrated execution. Do not present agent agreement as human verification.
 
-## What this skill deliberately does not do in v1
+## What this skill deliberately does not do
 
 It does not merge, publish, post, send, pay, delete, deploy, or contact anyone unless that exact action, destination, payload or template, limit, and condition is listed in the approved Stage 2 manifest. An unlisted or changed action needs a new approval. It does not relax a predicate, convert a gap into a pass, or expand an envelope because a recommended option was tapped. It does not run overnight until a scheduler or parent re-invocation path, with duplicate run detection and failure reporting, has been demonstrated end to end, including resume after a process restart.
