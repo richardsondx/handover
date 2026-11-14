@@ -2,14 +2,14 @@
 
 > Turn a rough prompt into a full plan and orchestration, ask only the early questions needed to set the plan, approve once up front, then run with full autonomy inside the approved envelope.
 
-[![Handover v4](https://img.shields.io/badge/Handover-v4-blue)](https://github.com/richardsondx/handover)
+[![Handover v5](https://img.shields.io/badge/Handover-v5-blue)](https://github.com/richardsondx/handover)
 [![Skill: Muse](https://img.shields.io/badge/Skill-Muse-green)](skills/local-handover/SKILL.md)
-[![Pilot: Research brief](https://img.shields.io/badge/Pilot-Research%20brief-orange)](skills/local-handover/SKILL.md)
+[![Discovery: 17 skills proven](https://img.shields.io/badge/Discovery-17%20skills%20proven-orange)](#discovery-skills)
 [![Status: Supervised only](https://img.shields.io/badge/Status-Supervised%20only-yellow)](docs/verification-gap.md)
 
 **English** · Translations welcome, see [Contributing](CONTRIBUTING.md). English is the source file; translated files will be linked here once they are added and checked.
 
-**Website · Guides · Showcases:** the skill is now at v4. This README is the guide for v4. Start with the IKEA-style visual guide to v4: [docs/handover-v4-ikea-instructions.html](docs/handover-v4-ikea-instructions.html), and the field kit and graph diagram: [docs/field-kit-and-graph-diagram.html](docs/field-kit-and-graph-diagram.html). The skill is in `skills/local-handover/`, the architecture is in `docs/architecture-draft-v0.6.md`, and the open gaps are in `docs/verification-gap.md`.
+**Website · Guides · Showcases:** the skill is now at v5. This README is the guide for v5. Start with the IKEA-style visual guide to v4: [docs/handover-v4-ikea-instructions.html](docs/handover-v4-ikea-instructions.html), and the field kit and graph diagram: [docs/field-kit-and-graph-diagram.html](docs/field-kit-and-graph-diagram.html). The skill is in `skills/local-handover/`, the Discovery skills are in [Discovery skills](#discovery-skills), the architecture is in `docs/architecture-draft-v0.6.md`, and the open gaps are in `docs/verification-gap.md`.
 
 ## Contents
 
@@ -18,6 +18,7 @@
 - [What makes it special](#what-makes-it-special)
 - [What you get](#what-you-get)
 - [Field kits](#field-kits)
+- [Discovery skills](#discovery-skills)
 - [Example run](#example-run)
 - [FAQ](#faq)
 - [Repository contents](#repository-contents)
@@ -51,7 +52,7 @@ That one block is the whole setup. Handover does the rest: it translates, it ask
 | Codex | Copy `skills/local-handover/` into your Codex skills folder, as `handover`, with `SKILL.md` at its root | Paste the setup prompt above in Codex |
 | Claude Code | Copy `skills/local-handover/` into your Claude Code skills folder, as `handover`, with `SKILL.md` at its root | Paste the setup prompt above in Claude Code |
 
-If an agent's skill folder layout differs in your version, put `SKILL.md` where that agent loads skills from, and keep the folder name `handover` so the setup prompt still matches.
+If an agent's skill folder layout differs in your version, put `SKILL.md` where that agent loads skills from, and keep the folder name `handover` so the setup prompt still matches. The Discovery skills install the same way, one folder per skill under `skills/`.
 
 ### 3. Approve, then let it run
 
@@ -80,7 +81,7 @@ flowchart LR
 
 ## What makes it special
 
-Most agent workflows start with a codebase, a task already scoped, and a finish line someone else defined. Handover starts earlier, with a rough sentence, and it is built for work where the human cannot be the checker in the middle. That is the difference, in seven parts:
+Most agent workflows start with a codebase, a task already scoped, and a finish line someone else defined. Handover starts earlier, with a rough sentence, and it is built for work where the human cannot be the checker in the middle. That is the difference, in eight parts:
 
 - **It translates before it runs.** A rough prompt becomes an interpreted intent, a concrete check on the real artifact, non negotiable constraints, one way doors, and a stop condition, before any work starts. If a missing answer is needed to set the plan, it is asked up front, with options and tradeoffs, not discovered halfway through a run.
 - **It asks once, then stops asking.** The human approves or rejects one package, then the run proceeds inside that envelope. During the run, the human is not asked routine questions and is not asked to verify the output. The only returns to the human are a missing permission, a conflict outside the envelope, an action that is not listed exactly in the approved manifest, or a dead end. Outward actions listed exactly in the manifest run without stopping.
@@ -89,6 +90,7 @@ Most agent workflows start with a codebase, a task already scoped, and a finish 
 - **It reuses a proven kit before it builds one.** At Stage 1, Handover must declare Case A, an existing proven kit, named with its version digest, or Case B, a kit to be generated, with a separate budget for generation and proof and the first real task declared as the proof run. A generated kit that was never executed is a draft, not a deliverable, and a second real task proof needs separate approval and funding.
 - **It works in fields, not just in code.** Each field gets a field kit: a router, task playbooks, domain principles, role definitions, verification and cleanup routines, and a capability map. Every kit needs a lever, a tool or API the agent can actually drive, plus a map of the domain, not just prose. A field is not claimed as covered because a kit was generated; it is covered only after that kit passes its own real task proof.
 - **It orders work as a graph you can see.** Units, links, splits, and joins are listed in the approval package before anything runs, and the per-unit list shows what is done and what is left.
+- **It routes discovery work to the right engine.** The Discovery router reads a registry of 17 skills, picks the skill whose trigger matches what the coordinator sees, and writes one call line before each skill call: what it saw, which trigger fired, and why this skill. Each skill returns a handoff in its own format. The router passed its proof in run 3. See Discovery skills below for the numbers.
 
 ## What you get
 
@@ -116,6 +118,50 @@ A field kit is what Handover creates or reuses for a field. It is not a prompt f
 
 Minimum viable kit, before any claim of operational use: one router, a few genuinely distinct playbooks, concise principles, coordinator, generator, verifier, and judge roles, evidence and verdict templates, a stuck and resume ladder, cleanup, and a capability map. Add dozens of workflows only as distinct, tested task patterns justify them, not as generated inventory.
 
+The harness proof kit v3 is proven. See Discovery skills below for the run 3 numbers. The Batch A, Batch B, Batch C, and umbrella proof harness kits stay draft, because their field level proof checks never ran.
+
+## Discovery skills
+
+Handover ships a library of 17 Discovery skills: 16 engines of discovery plus one umbrella skill that routes a problem to the right engines in order. Each skill passed its own proof in supervised runs from Nov 12 to Nov 14, 2026, on sealed tests with 2 fresh blind trials and a fresh judge. The router passed run 3 on Nov 14, 2026: both fresh blind trials passed both test situations, 5 of 5 repeats each, at $0 of the $4 cap, with 12 of 14 spawns and 2 of 3 fix cycles used.
+
+The Core 4 loop runs Anomaly Hunting, then Abduction, then Falsification, with First Principles underneath. Anomaly Hunting finds what breaks the model. Abduction names the best cause. Falsification tests it. Invention is the outcome of the loop, not a 17th skill.
+
+```mermaid
+flowchart LR
+    A[Case] --> B[Read the registry]
+    B --> C[Write one call line]
+    C --> D[Run the skill]
+    D --> E[Handoff in the skill format]
+    E --> F[Verify separately]
+    F --> G[Judge rules]
+```
+
+The registry holds one row per skill, with trigger, inputs, outputs, when not to use, and phase. Phases hold 1 skill at Entry, 6 in Research, 3 in Proof, 3 when Stuck, and 4 in Search.
+
+| Skill | Phase | Trigger |
+| --- | --- | --- |
+| Discovery | Entry | You need to route a discovery problem to the right engines in order |
+| Anomaly Hunting | Research | What you see breaks what you expected |
+| Abduction | Research | You need the best cause for a surprise |
+| First Principles Questions | Research | You need to rebuild from what must be true |
+| Induction | Research | A pattern across cases points to a wider rule |
+| Analogy and Cross-Domain Transfer | Research | A fix from another field may fit this problem |
+| Analysis and Synthesis | Research | You need to split a thing apart, then rebuild it |
+| Falsification | Proof | You need a check that can prove a claim wrong |
+| Deduction | Proof | A rule should predict one clear result |
+| Consilience | Proof | Separate lines of proof point to the same answer |
+| Inversion | Stuck | Forward work has failed, so work back from failure |
+| Counterfactual Thinking | Stuck | You need to ask what would change if one fact differed |
+| Thought Experiments | Stuck | You need to test an idea in your head first |
+| Constraint-Based Discovery | Search | A hard limit shapes what can work |
+| Search the Possibility Space | Search | You need to map the options before you pick one |
+| Evolutionary Search | Search | Small changes, kept or dropped by test, can find a better form |
+| Serendipity + Prepared Mind | Search | A chance find meets a mind ready to see its use |
+
+The router files are `skills/local-handover/router/router-registry.md` and `skills/local-handover/router/router-rules-v02.md`. The registry defines the four traps and the 1 to 5 score scale in the rules file. The v5 skill text does not call the router yet; wiring it in is open work.
+
+Two limits stay open: the router proof covers two test situations, not live use of all 17 skills, and the loader check, stated in Status and limits below.
+
 ## Example run
 
 Rough prompt: "Research how self-improving agents work, end to end."
@@ -128,16 +174,16 @@ Handover proposes: a research brief for you, covering single call, single loop, 
 A reusable package for one field: router, playbooks, principles, roles, verification and cleanup routines, and a capability map. See the table above.
 
 **Does Handover suggest an existing field kit instead of generating one each time?**
-Yes. Stage 1 must declare Case A, an existing proven kit by version digest, or Case B, a kit to be generated with a separate proof budget. It does not silently generate a duplicate when a proven kit fits. Limit, stated plainly: v4 has no central searchable library of all past kits, so reuse depends on the kits the translator inspects in the workspace and project, and on the kit named in the Stage 1 package you approve.
+Yes. Stage 1 must declare Case A, an existing proven kit by version digest, or Case B, a kit to be generated with a separate proof budget. It does not silently generate a duplicate when a proven kit fits. Limit, stated plainly: v5 has no central searchable library of all past kits, so reuse depends on the kits the translator inspects in the workspace and project, and on the kit named in the Stage 1 package you approve. The index file `skills/local-handover/FIELD-KITS.md` lists one bullet per kit, with proof status and path.
 
 **What can I use it for today?**
-Translating any rough prompt into an approval package, and running the supervised research brief pilot. Other fields get a translator and a package in v4, but execution is not operational until that field's kit passes its own real task proof.
+Translating any rough prompt into an approval package, running supervised runs in fields with proven kits, and routing discovery work through the 17 Discovery skills. The research brief was the first pilot. Other fields get a translator and a package in v5, but execution is not operational until that field's kit passes its own real task proof.
 
 **What does it cost?**
-The demo pilot uses $0 paid tools and no paid model calls outside your agent's own run. In general, the manifest states the budget, with a reserve held back for verification and the dead end report, at least 15 percent, and labels a limit advisory when the platform cannot hard block further calls at that limit.
+The demo pilot uses $0 paid tools and no paid model calls outside your agent's own run. In general, the manifest states the budget, with a reserve held back for verification and the dead end report, at least 15 percent, and labels a limit advisory when the platform cannot hard block further calls at that limit. The v5 skill states a $2 hard cap per run, with larger envelopes approved case by case.
 
 **Can it run overnight or unattended?**
-Not in v4. Unattended operation needs a demonstrated scheduler or parent re-invocation path, with duplicate run detection and failure reporting, including resume after a restart. Those proof tests are listed in [Status and limits](#status-and-limits).
+Not in v5. Unattended operation needs a demonstrated scheduler or parent re-invocation path, with duplicate run detection and failure reporting, including resume after a restart. Those proof tests are listed in [Status and limits](#status-and-limits).
 
 **Will it publish, send, pay, delete, or deploy for me?**
 Only if that exact action, destination, payload or payload template, limit, and condition is listed in the approved Stage 2 manifest. An unlisted action, or a changed destination or payload, needs a new approval. That is how full autonomy after the early gate works: the decision is made up front, in the manifest, not during the run.
@@ -150,10 +196,14 @@ It tries the next route, changes the method, or makes an operational retry that 
 - `README.md`: this file.
 - `CONTRIBUTING.md`: how to propose a change, a field kit, or a translation.
 - `SECURITY.md`: how to report a security issue, and what Handover will and will not do with secrets.
-- `skills/local-handover/SKILL.md`: the v4 skill.
+- `skills/local-handover/SKILL.md`: the v5 skill.
 - `skills/local-handover/skill.yaml`: skill metadata.
 - `skills/local-handover/units-template.json`: the per-unit list template from v4, one entry per unit with the passes field starting as failing.
 - `skills/local-handover/handover-schema.json`: JSON Schema for the field kit and the graph, Draft 2020-12. The diagram page is drawn from data that validates against it.
+- `skills/local-handover/FIELD-KITS.md`: the field kit index, one bullet per kit with proof status and path.
+- `skills/local-handover/router/router-registry.md`: the Discovery router registry, one row per skill with trigger, inputs, outputs, when not to use, and phase.
+- `skills/local-handover/router/router-rules-v02.md`: the Discovery router rules, call line rule, handoff contract, phase map, four traps, and 1 to 5 score scale.
+- `skills/local-*/SKILL.md`: the 17 Discovery skills, one folder per skill, listed in the table in [Discovery skills](#discovery-skills).
 - `docs/handover-v4-ikea-instructions.html`: IKEA-style visual guide to v4, parts list, assembly steps, loop and graph diagrams, and troubleshooting.
 - `docs/field-kit-and-graph-diagram.html`: interactive diagram of the field kit and the graph, with the full schema, a working per-unit list, and a diagram-to-schema-path map.
 - `docs/architecture-draft-v0.6.md`: full v1 architecture, reviewed twice by Opus and Terra, with two stage approval, harness enforced gates, budget ledger, resume protocol, verification coverage, and options first user experience.
@@ -163,14 +213,17 @@ It tries the next route, changes the method, or makes an operational retry that 
 
 ## Status and limits, stated plainly
 
+Version 5, Nov 10, 2026, is the live skill. It states a $2 hard cap per run, supervised only, and up to 5 fix cycles per run as standard. It keeps the v4 graph, kit, and approval rules.
+
 Version 4, approved Nov 5, 2026, adds the benchmark changes: per-unit list, session start routine, end-to-end check, effort scaling, subagent contract, notes and compaction, risk ratings and failure threshold, rubric evaluator, resume and hook rules, and the handoff pattern. The IKEA-style guide explains it visually: [docs/handover-v4-ikea-instructions.html](docs/handover-v4-ikea-instructions.html).
 
 Version 1, built from architecture draft v0.6, approved Nov 4, 2026.
 
-- Scope is narrow and supervised only. The loop and the graph are the default for every run. The only execution pilot proven so far is a research brief.
-- For other fields, v4 may translate a prompt and produce an approval package, but execution is not operational until a kit for that field passes its own real task proof. A generated kit is not coverage.
-- V4 is not operational for unattended runs, live data operation, three level fan out, or automatic learning changes. Those are deferred until the pilot passes its proof tests.
+- Scope is supervised only. The loop and the graph are the default for every run. The research brief was the first execution pilot. Since then, supervised runs have proven 17 Discovery skills plus the umbrella and the harness router, and have run real work in other fields.
+- For other fields, v5 may translate a prompt and produce an approval package, but execution is not operational until a kit for that field passes its own real task proof. A generated kit is not coverage.
+- V5 is not operational for unattended runs, live data operation, three level fan out, or automatic learning changes. Those are deferred until the pilot passes its proof tests.
 - Proof tests, before any claim of operational use: simulated gated action and injection tests pass in every case, every known bad artifact in the test set is rejected, one supervised real run completes with a clean decision trail and budget audit, a comprehension test passes, and a real generated skill loads through the actual Muse loader.
+- The loader test has not run. No Muse skill loader command exists in the environment where the proofs ran, so no skill has passed a load through the actual loader yet.
 - Handover does not merge, publish, post, send, pay, delete, deploy, or contact anyone unless that exact action, destination, payload or payload template, limit, and condition is listed in the approved Stage 2 manifest. An unlisted or changed action needs a new approval.
 
 ## Contributing
