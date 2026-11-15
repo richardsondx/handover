@@ -1,6 +1,8 @@
 # Handover
 
-Version 5, Nov 10, 2026.
+Version 6, Nov 15, 2026.
+Installed as the live shared skill file, Nov 15, 2026, from the adopted CEO operating copy (run stage2-router-wire-2026-11-15-01); base is the merged v5 plus First Principles ladder.
+Base: merged Handover v5 plus First Principles ladder, Nov 15, 2026, run stage1-rebaseline-v5-2026-11-15-01.
 $2 hard cap per run.
 Supervised only.
 A first fail starts a fix cycle.
@@ -24,6 +26,141 @@ The turn continues after the denial.
 The harness logs the denial with tool name and reason.
 The run pauses for a human only when the manifest names that tool as human-only.
 This rule applies in terminal sessions, subagents, and teammates.
+
+## Discovery router (required step)
+
+Read the registry before routing. The registry lists every Discovery skill with its trigger, inputs, outputs, and phase.
+Registry: workspace/custom-skills/local-handover/router/router-registry.md
+Rules: workspace/custom-skills/local-handover/router/router-rules-v02.md
+The coordinator must read the registry before it routes a case.
+The coordinator must pick a skill only when that skill's registry trigger fires.
+The coordinator must write one call line before each Discovery skill call.
+The line says what it saw, which trigger fired, and why this skill.
+A call without a line does not happen.
+The coordinator must record each handoff after the call, in that skill's own format.
+A handoff with a missing field is not complete.
+The coordinator must record each phase move and its reason.
+The router step is required, not optional. A run that skips it breaks this rule.
+
+## First Principles Questions ladder (required step)
+
+Run this ladder before a unit acts, whenever the unit's plan may rest on a wrong claim. It is a required step, not an optional style. The ladder questions the plan itself: it tests each claim, then rebuilds the answer from what survived. Use field-neutral words in the ladder record (check, threshold, ranking method), never field-specific terms.
+
+### Guard: pick one outcome first
+
+Pick one of three outcomes before the ladder starts.
+
+- Outcome 1, answer directly. Use this for a one-off fact question. No decision follows from it.
+- Outcome 2, light check. Use this for a routine step with low impact and easy reversal. Ask the Step 1 questions and the Step 4 questions only. Do not run the full ladder.
+- Outcome 3, full ladder. Use this for a new plan, a costly move, or a claim that shapes the next step. Use it for any step with high impact. Use it for any step that is hard to reverse.
+
+Judge risk by impact plus reversibility. Do not judge by reversibility alone. A step can be easy to reverse and still cause harm. It can expose data. It can lose trust. It can cost money. If impact is high, use the full ladder even if reversal is easy.
+
+Ask these three questions to pick the outcome.
+
+- Is there a decision to make, with an action that follows it?
+- Could the plan be wrong in a way that costs time, money, or trust?
+- Is the answer more than a fact you can look up?
+
+If there is no decision, answer directly. If the step is low impact and easy to reverse, use the light check. If the step is high impact or hard to reverse, use the full ladder.
+
+### Step 1: Name the decision
+
+- What decision am I about to make?
+- What action follows from this decision?
+- What happens if I am wrong?
+
+Write the decision in one sentence. Write the action in one sentence.
+
+### Step 2: List what must be true
+
+- What must be true for this action to be sound?
+- Which of these claims is load bearing, so the plan fails if it is false?
+- Which claims am I taking from others without checking?
+
+List each claim. Mark each one as load bearing or not load bearing. Mark the source of each claim, or mark it as assumed. Each load bearing claim must name the exact page, maker, product, or place that would settle it. If you cannot name one, mark the claim untestable. Drop an untestable claim from the rebuild. Then change the plan or stop.
+
+Domain conditions: for each claim, list the domain conditions it depends on. A domain condition is a fact about the context that could change the result: speed, background motion, object type, image size, hardware, data type. Write the conditions down. You will check them in Step 3.
+
+### Step 3: Test each claim
+
+For each claim, ask: how can I check this claim? What source, number, or test would prove it or break it? Did I check it, or did I only restate it?
+
+Test each claim with a source, a number, or a concrete test run on the real artifact. Mark each claim as verified, cited, assumed, or failed. Verified means you checked it against a source or a test. Cited means you found a source but did not check it yourself. Assumed means you have no source. Failed means the check went against it.
+
+Reasoning alone is not a check. Reasoning generates a claim. It does not verify it. You cannot mark a claim verified, or partly verified, because the reasoning sounds right. A claim passes only on a source, a number, or a concrete test. If you have no source or test, the claim stays assumed, even if the reasoning is sound.
+
+Do not invent numbers. Never put a number, price, rate, or rule in a claim unless it came from a page or from the user. A number given in the problem is a claim to check, not a fact.
+
+A wrong page is a failed claim. A fetched page that is the wrong place, the wrong maker, or has no numbers does not leave the claim assumed. It marks the claim failed.
+
+A source is not good evidence by itself. Check each source for four things. Is it reliable? Is it relevant to this claim? Is it current? Does it support the claim? If it fails any of these four checks, do not count it as support.
+
+Domain match: a cited source only verifies a claim if the source's domain matches the claim's domain conditions from Step 2. If any domain condition mismatches, mark the claim "cited, domain mismatch". It is not verified. It needs a direct test on your own content before it can be load bearing.
+
+Direct test for performance claims: if a load bearing claim is about how something performs on your content (speed, accuracy, deviation, retention), a source from another domain does not settle it. Run a direct test on your own content, change the plan so the claim is no longer load bearing, or stop and say what is missing.
+
+If you have no tool to check a claim, one of these counts as a check. Show a calculation in the record. Or quote a passage from the material the user gave you. State which one you used. Do not count your own words alone as a check.
+
+Fetch list: write one line per load bearing claim at the end of Step 3. Each line gives the query or address, and what it would settle. Without that list, Step 3 is not done. No fetch attempt means the claim stays assumed. An assumed load bearing claim blocks the decision.
+
+A failed load bearing claim stops the plan. First, change the plan. Then re-run Step 2 for the new plan. List what must be true for the new plan. Test the new claims. Do not explain the failure away. Do not keep the old plan. If a claim passes most checks but one load bearing claim fails, the plan still fails. A high score across claims does not save it.
+
+Re-test an earlier claim when new facts arrive. If it fails on re-test, drop its status and revisit the plan.
+
+### Step 4: Ask what would break it
+
+- What would make this plan fail?
+- What fact, if false, breaks the whole plan?
+- What is the strongest case against this plan?
+- Who would disagree with this plan, and why would they be right?
+
+Write at most two counter cases. Each counter case must name one observable fact that would prove it. Then run that check. Record the result. If the counter case holds, change the plan.
+
+### Step 5: Rebuild from true facts
+
+- Which facts survived the tests?
+- What did I have to drop because it failed or could not be checked?
+- What answer follows from the true facts alone?
+
+List the true facts first. List only claims with adequate support. A claim counts in the rebuild only if it is verified, or cited with a source that passed the four checks in Step 3. Assumed claims do not enter the rebuild, even if they sound right. Cited does not mean true. Do not list assumed facts as true. Keep uncertainty where the evidence is incomplete. Say what is still unknown.
+
+Then build a new answer from that list only. If the new answer is weaker than the old plan, say so. If the true facts support a different action, take the different action. If the true facts support no action, stop.
+
+### Step 6: Decide and record
+
+- What must be true?
+- What did I test?
+- What would change my mind?
+
+Then decide. Act, change the plan, or stop. Write the record with this template. Use one line per claim.
+
+- Decision: one sentence.
+- Claim: status, source, and one line of evidence.
+- True facts used: one line each.
+- Biggest open risk: one sentence.
+- What would change my mind: one sentence.
+- Open questions: one line each.
+
+The user-facing answer leads with the decision and the biggest open risk. Keep it short. Show the full record only on request or on "save state". After "just tell me", list any load bearing claims left unchecked. Put that list in the user answer. Do not hide it in the record alone.
+
+### Stop rule, light check, and high-impact rule
+
+- Stop rule: at most 8 claims tested per ladder. Count claims tested, not questions asked. Pick a smaller number for a small decision. Stop asking when you reach the limit. Then act on the best tested claim, or stop if a load bearing claim failed. Do not keep splitting claims into smaller claims. Do not spend more time checking than the decision is worth.
+- Light check: for cheap units (small, low risk, reversible, checkable with one command), run Step 1 plus Step 4 only. Do not run the full ladder.
+- Full ladder: required for high-impact units. A unit is high-impact when a wrong result costs time, money, trust, or a scored verdict. Judge by impact plus reversibility, not by reversibility alone: a step can be easy to reverse and still cause harm.
+- Explicit-assumption exception: an assumed fact cannot be load bearing without a test, unless it is an explicit assumption used only when waiting costs more than deciding. Then state the uncertainty in the record and in the user answer, state the consequences if the assumption is wrong, and state the safeguards. If you cannot state all three, do not use the exception.
+
+### Timing and filing
+
+- The ladder runs before the unit acts.
+- The claim record is filed in the unit output before any score or claim is reported. No score or claim is reported before the claim record exists in the output.
+
+### Verifier test for claim status
+
+- The verifier re-checks every claim status in the claim record against its stated source or test.
+- A unit fails verification if it has an assumed load bearing claim, a missing fetch list, or no counter case. The verifier marks the unit as failed on any of these three, and the unit goes back through the loop with a fresh verifier.
+- The verifier also checks that the claim count is at most 8, that every load bearing claim names its source or test, and that the Step 6 record is present.
 
 ## Kit disclosure
 
