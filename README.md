@@ -2,14 +2,14 @@
 
 > Turn a rough prompt into a full plan and orchestration, ask only the early questions needed to set the plan, approve once up front, then run with full autonomy inside the approved envelope.
 
-[![Handover v6](https://img.shields.io/badge/Handover-v6-blue)](https://github.com/richardsondx/handover)
+[![Handover v7](https://img.shields.io/badge/Handover-v7-blue)](https://github.com/richardsondx/handover)
 [![Skill: Muse](https://img.shields.io/badge/Skill-Muse-green)](skills/local-handover/SKILL.md)
 [![Discovery: 17 skills proven](https://img.shields.io/badge/Discovery-17%20skills%20proven-orange)](#discovery-skills)
 [![Status: Supervised only](https://img.shields.io/badge/Status-Supervised%20only-yellow)](docs/verification-gap.md)
 
 **English** · Translations welcome, see [Contributing](CONTRIBUTING.md). English is the source file; translated files will be linked here once they are added and checked.
 
-**Website · Guides:** the skill is now at v6. This README is the guide for v6. Read the guides on the Handover site: [Visual guide](https://handover.nshipyard.com/guide) and [Field kit and graph](https://handover.nshipyard.com/field-kit). The skill is in `skills/local-handover/`, the Discovery skills are in [Discovery skills](#discovery-skills), the architecture is in `docs/architecture-draft-v0.6.md`, and the open gaps are in `docs/verification-gap.md`.
+**Website · Guides:** the skill is now at v7. This README is the guide for v7. Read the guides on the Handover site: [Visual guide](https://handover.nshipyard.com/guide) and [Field kit and graph](https://handover.nshipyard.com/field-kit). The skill is in `skills/local-handover/`, the Discovery skills are in [Discovery skills](#discovery-skills), the architecture is in `docs/architecture-draft-v0.6.md`, and the open gaps are in `docs/verification-gap.md`.
 
 ## Contents
 
@@ -56,7 +56,7 @@ If an agent's skill folder layout differs in your version, put `SKILL.md` where 
 
 ### 3. Approve, then let it run
 
-You will get a short Stage 1 package first, then a Stage 2 manifest. Approve both, in order, and the run starts inside that envelope. Reject either one and nothing runs. That is the point: one approval decision, not babysitting. Work that comes as a chain, such as re-baseline, draft, then apply, is scoped as one run with one Stage 1 package and one Stage 2 manifest, not one approval pair per link.
+You will get a short card first, not a long dump. Stage 1 asks Approve this plan? and shows the card: goal, proof of done, cost, kit, what it will not touch, what it needs from you, pass and fail examples, plan versions, and next check. Stage 2 asks Stage 2, ready to run. Approve? and shows only what changed since Stage 1. Approve both, in order, and the run starts inside that envelope. Reject either one and nothing runs. That is the point: one approval decision, not babysitting. Work that comes as a chain, such as re-baseline, draft, then apply, is scoped as one run with one Stage 1 package and one Stage 2 manifest, not one approval pair per link. Approve, Reject, and See full spec live in chat only. The doc itself holds an Approval section only, which says approve or reject the whole package, with the version.
 
 
 ## How it works
@@ -75,22 +75,23 @@ flowchart LR
 
 1. **Translate.** You write a rough prompt. Handover infers the outcome, the check that would prove it, what must not change, the one way doors that pause for a human, and the stop condition. It asks you only where a missing answer is needed to set the plan, the acceptance check, or the authority, before approval. These are early, plan-setting questions: the plan does not exist yet, so they shape it, they do not change an existing plan.
 2. **Ask with options.** Every question comes with 2 to 4 real options, each with its tradeoff, one marked recommended, and one escape: something else, in your words. One decision per message, in the order that shapes the plan most first. Short by default, full detail on demand.
-3. **Approve in two stages.** Stage 1 approves the intent package. Stage 2 approves the versioned execution manifest: kit and playbook versions, tool and target allowlist with a risk rating per tool, the failure threshold, finish predicate, limits, and budget ledger. The manifest is what is authorized to run, not the prose alone.
+3. **Approve in two stages.** Stage 1 approves the intent package. Stage 2 approves the versioned execution manifest: kit and playbook versions, tool and target allowlist with a risk rating per tool, the failure threshold, finish predicate, limits, and budget ledger. The manifest is what is authorized to run, not the prose alone. In chat, the card comes first. Stage 1 fits near 120 words on the first screen, with a second short screen allowed when a material term needs room. Stage 2 shows the diff only. No material term hides behind See full spec. Chat uses plain words, such as proof of done, run plan, limits, proven kit, and new kit to build first. The file keeps the full terms and the full checks.
 4. **Run inside the envelope.** A coordinator owns the plan and every spawn. The author is never the verifier. The verifier gets the specification and the artifact only, never the author's reasoning. The judge resolves verdicts and records gaps. Work the graph can split is split into units, each with one output, one owner, and one check, listed in a JSON file where every unit starts failing and only the passes field changes. Units with no dependency run apart, a join waits for all its inputs, and a fresh checker reopens every link at the join.
 5. **Report proof or a dead end.** If the run finishes, you get the artifact, its evidence, a decision trail, and a budget audit. If it cannot finish inside the limits you approved, you get a dead end report: what stopped, what was tried, what would unblock it, and options. Exhaustion is never presented as a weaker success, and the predicate is never relaxed to declare victory.
 
 ## What makes it special
 
-Most agent workflows start with a codebase, a task already scoped, and a finish line someone else defined. Handover starts earlier, with a rough sentence, and it is built for work where the human cannot be the checker in the middle. That is the difference, in eight parts:
+Most agent workflows start with a codebase, a task already scoped, and a finish line someone else defined. Handover starts earlier, with a rough sentence, and it is built for work where the human cannot be the checker in the middle. That is the difference, in nine parts:
 
 - **It translates before it runs.** A rough prompt becomes an interpreted intent, a concrete check on the real artifact, non negotiable constraints, one way doors, and a stop condition, before any work starts. If a missing answer is needed to set the plan, it is asked up front, with options and tradeoffs, not discovered halfway through a run.
 - **It asks once, then stops asking.** The human approves or rejects one package, then the run proceeds inside that envelope. During the run, the human is not asked routine questions and is not asked to verify the output. The only returns to the human are a missing permission, a conflict outside the envelope, an action that is not listed exactly in the approved manifest, or a dead end. Outward actions listed exactly in the manifest run without stopping.
+- **Approval fits on one screen.** Stage 1 shows the decision first, then the card in short bullets. Stage 2 shows only what changed since Stage 1. The full package stays in a file, one tap away, and no material term hides behind that tap.
 - **Approval is an envelope, not a yes in chat.** Stage 2 produces a versioned manifest with tool and target allowlist with a risk rating per tool, the failure threshold, finish predicate, limits, budget ledger, and kit and playbook versions. A repair that changes any of those needs reapproval. A repair that changes none of them can proceed, and is logged with its diff.
 - **Verification is separate from production.** The author is never the verifier, the verifier gets only the specification and the artifact, and the judge resolves verdicts in a fresh context. A gap is recorded as a gap, never converted into a pass, and exhaustion is reported as a dead end, never as a weaker success.
 - **It reuses a proven kit before it builds one.** At Stage 1, Handover must declare Case A, an existing proven kit, named with its version digest, or Case B, a kit to be generated, with a separate budget for generation and proof and the first real task declared as the proof run. A generated kit that was never executed is a draft, not a deliverable, and a second real task proof needs separate approval and funding.
 - **It works in fields, not just in code.** Each field gets a field kit: a router, task playbooks, domain principles, role definitions, verification and cleanup routines, and a capability map. Every kit needs a lever, a tool or API the agent can actually drive, plus a map of the domain, not just prose. A field is not claimed as covered because a kit was generated; it is covered only after that kit passes its own real task proof.
 - **It orders work as a graph you can see.** Units, links, splits, and joins are listed in the approval package before anything runs, and the per-unit list shows what is done and what is left.
-- **It routes discovery work to the right engine.** The Discovery router reads a registry of 17 skills, picks the skill whose trigger matches what the coordinator sees, and writes one call line before each skill call: what it saw, which trigger fired, and why this skill. Each skill returns a handoff in its own format. The router passed its proof in run 3. The v6 skill text calls the router as a required step. The coordinator must read the registry before routing. It must pick a skill only when that skill's trigger fires. It must write one call line before each Discovery skill call. It must record each handoff in that skill's own format. See Discovery skills below for the numbers.
+- **It routes discovery work to the right engine.** The Discovery router reads a registry of 17 skills, picks the skill whose trigger matches what the coordinator sees, and writes one call line before each skill call: what it saw, which trigger fired, and why this skill. Each skill returns a handoff in its own format. The router passed its proof in run 3. The v7 skill text calls the router as a required step. The coordinator must read the registry before routing. It must pick a skill only when that skill's trigger fires. It must write one call line before each Discovery skill call. It must record each handoff in that skill's own format. See Discovery skills below for the numbers.
 
 ## What you get
 
@@ -160,7 +161,7 @@ The registry holds one row per skill, with trigger, inputs, outputs, when not to
 
 The router files are `skills/local-handover/router/router-registry.md` and `skills/local-handover/router/router-rules-v02.md`. The registry defines the four traps and the 1 to 5 score scale in the rules file.
 
-The v6 skill text calls the router as a required step. The coordinator must read the registry before it routes a case. It must pick a skill only when that skill's registry trigger fires. It must write one call line before each Discovery skill call. It must record each handoff in that skill's own format. The wiring run passed on Nov 15, 2026. Judge verdict PASS. Run stage2-router-wire-2026-11-15-01. All 5 predicate items pass. The proof task routed Anomaly Hunting and Abduction with 2 call lines and 7 of 7 handoff fields each.
+The v7 skill text calls the router as a required step. The coordinator must read the registry before it routes a case. It must pick a skill only when that skill's registry trigger fires. It must write one call line before each Discovery skill call. It must record each handoff in that skill's own format. The wiring run passed on Nov 15, 2026. Judge verdict PASS. Run stage2-router-wire-2026-11-15-01. All 5 predicate items pass. The proof task routed Anomaly Hunting and Abduction with 2 call lines and 7 of 7 handoff fields each.
 
 Two limits stay open. First, the router proof covers two test situations, not live use of all 17 skills. Second, the loader check stated in Status and limits below. The wiring proof routed 2 of the 17 skills through the live skill text. The wire is proven for the Research phase engines, not for the Proof, Search, or Stuck phases.
 
@@ -168,7 +169,7 @@ Two limits stay open. First, the router proof covers two test situations, not li
 
 Rough prompt: "Research how self-improving agents work, end to end."
 
-Handover proposes: a research brief for you, covering single call, single loop, multi loop workflow and graph, and self improving workflow, with what each layer fixes and what it breaks, verification as a gate after each step, stuck routing, and the human role at the start and at genuinely ambiguous checkpoints. The approval card states the check (every substantive claim linked to a source, gaps recorded, no unverified scale figure used as fact), the cost and limit ($0 paid tools in the demo, serial by default, at most 3 spawns), the gates (no publish, send, pay, delete, or deploy), and the assumptions. You approve or reject the whole package. Only then does research run, and only inside that envelope.
+Handover proposes: a research brief for you, covering single call, single loop, multi loop workflow and graph, and self improving workflow, with what each layer fixes and what it breaks, verification as a gate after each step, stuck routing, and the human role at the start and at genuinely ambiguous checkpoints. The approval card comes first, in short bullets. It states the proof of done (every substantive claim linked to a source, gaps recorded, no unverified scale figure used as fact), the cost and limit ($0 paid tools in the demo, serial by default, at most 3 spawns), the gates (no publish, send, pay, delete, or deploy), and the assumptions. You approve or reject the whole package. Only then does research run, and only inside that envelope.
 
 ## FAQ
 
@@ -176,16 +177,19 @@ Handover proposes: a research brief for you, covering single call, single loop, 
 A reusable package for one field: router, playbooks, principles, roles, verification and cleanup routines, and a capability map. See the table above.
 
 **Does Handover suggest an existing field kit instead of generating one each time?**
-Yes. Stage 1 must declare Case A, an existing proven kit by version digest, or Case B, a kit to be generated with a separate proof budget. It does not silently generate a duplicate when a proven kit fits. Limit, stated plainly: v6 has no central searchable library of all past kits, so reuse depends on the kits the translator inspects in the workspace and project, and on the kit named in the Stage 1 package you approve. The index file `skills/local-handover/FIELD-KITS.md` lists one bullet per kit, with proof status and path.
+Yes. Stage 1 must declare Case A, an existing proven kit by version digest, or Case B, a kit to be generated with a separate proof budget. It does not silently generate a duplicate when a proven kit fits. Limit, stated plainly: v7 has no central searchable library of all past kits, so reuse depends on the kits the translator inspects in the workspace and project, and on the kit named in the Stage 1 package you approve. The index file `skills/local-handover/FIELD-KITS.md` lists one bullet per kit, with proof status and path.
+
+**Do Approve, Reject, and See full spec appear in the doc itself?**
+No. They live in chat only, on the same screen as the card. The doc holds an Approval section only. That section says approve or reject the whole package, with the version. See full spec opens the doc, so it would point to itself inside the doc.
 
 **What can I use it for today?**
-Translating any rough prompt into an approval package, running supervised runs in fields with proven kits, and routing discovery work through the 17 Discovery skills. The research brief was the first pilot. Other fields get a translator and a package in v6, but execution is not operational until that field's kit passes its own real task proof.
+Translating any rough prompt into an approval package, running supervised runs in fields with proven kits, and routing discovery work through the 17 Discovery skills. The research brief was the first pilot. Other fields get a translator and a package in v7, but execution is not operational until that field's kit passes its own real task proof.
 
 **What does it cost?**
-The demo pilot uses $0 paid tools and no paid model calls outside your agent's own run. In general, the manifest states the budget, with a reserve held back for verification and the dead end report, at least 15 percent, and labels a limit advisory when the platform cannot hard block further calls at that limit. The v6 skill states a $2 hard cap per run, with larger envelopes approved case by case.
+The demo pilot uses $0 paid tools and no paid model calls outside your agent's own run. In general, the manifest states the budget, with a reserve held back for verification and the dead end report, at least 15 percent, and labels a limit advisory when the platform cannot hard block further calls at that limit. The v7 skill states a $2 hard cap per run, with larger envelopes approved case by case.
 
 **Can it run overnight or unattended?**
-Not in v6. Unattended operation needs a demonstrated scheduler or parent re-invocation path, with duplicate run detection and failure reporting, including resume after a restart. Those proof tests are listed in [Status and limits](#status-and-limits).
+Not in v7. Unattended operation needs a demonstrated scheduler or parent re-invocation path, with duplicate run detection and failure reporting, including resume after a restart. Those proof tests are listed in [Status and limits](#status-and-limits).
 
 **Will it publish, send, pay, delete, or deploy for me?**
 Only if that exact action, destination, payload or payload template, limit, and condition is listed in the approved Stage 2 manifest. An unlisted action, or a changed destination or payload, needs a new approval. That is how full autonomy after the early gate works: the decision is made up front, in the manifest, not during the run.
@@ -198,7 +202,7 @@ It tries the next route, changes the method, or makes an operational retry that 
 - `README.md`: this file.
 - `CONTRIBUTING.md`: how to propose a change, a field kit, or a translation.
 - `SECURITY.md`: how to report a security issue, and what Handover will and will not do with secrets.
-- `skills/local-handover/SKILL.md`: the v6 skill.
+- `skills/local-handover/SKILL.md`: the v7 skill.
 - `skills/local-handover/skill.yaml`: skill metadata.
 - `skills/local-handover/units-template.json`: the per-unit list template from v4, one entry per unit with the passes field starting as failing.
 - `skills/local-handover/handover-schema.json`: JSON Schema for the field kit and the graph, Draft 2020-12. The diagram page is drawn from data that validates against it.
@@ -215,7 +219,9 @@ It tries the next route, changes the method, or makes an operational retry that 
 
 ## Status and limits, stated plainly
 
-Version 6, Nov 15, 2026, is the live skill. It wires the Discovery router into the skill text as a required step, on top of v5. The coordinator must read the registry before routing. It must pick a skill only when its trigger fires. It must write one call line before each Discovery skill call. It must record each handoff in that skill's own format. Judge verdict PASS. Run stage2-router-wire-2026-11-15-01. All 5 predicate items pass. The proof task routed Anomaly Hunting and Abduction with 2 call lines and complete handoffs. V6 keeps the First Principles ladder from v5. It keeps the $2 hard cap per run. It runs supervised only. It allows up to 5 fix cycles per run as standard.
+Version 7, Nov 16, 2026, is the live skill. It changes only how Stage 1 and Stage 2 appear in chat. Stage 1 shows the card first, in short bullets, near 120 words on the first screen, with a second short screen allowed when a material term needs room. Stage 2 shows only what changed since Stage 1. Chat uses plain words, and the file keeps the full terms and the full checks. Approve, Reject, and See full spec live in chat only. No safety rule changed. The change came from an Opus UX review on Nov 16, 2026: Opus 5.5 returned no text on the long prompt, Opus 4.5 gave the full review, cost about $0.10. Proof is presentation only so far: the Verbatim cards rewritten in v7 run 80 words on Stage 1 screen 1, 115 words on screen 2, and 91 words on Stage 2. Full proof needs the next real Handover run under v7.
+
+Version 6, Nov 15, 2026, was the live skill until Nov 16, 2026. It wires the Discovery router into the skill text as a required step, on top of v5. The coordinator must read the registry before routing. It must pick a skill only when its trigger fires. It must write one call line before each Discovery skill call. It must record each handoff in that skill's own format. Judge verdict PASS. Run stage2-router-wire-2026-11-15-01. All 5 predicate items pass. The proof task routed Anomaly Hunting and Abduction with 2 call lines and complete handoffs. V6 keeps the First Principles ladder from v5. It keeps the $2 hard cap per run. It runs supervised only. It allows up to 5 fix cycles per run as standard.
 
 Version 5, Nov 10, 2026, was the live skill until Nov 15, 2026. It states a $2 hard cap per run, supervised only, and up to 5 fix cycles per run as standard. It keeps the v4 graph, kit, and approval rules.
 
@@ -224,8 +230,8 @@ Version 4, approved Nov 5, 2026, adds the benchmark changes: per-unit list, sess
 Version 1, built from architecture draft v0.6, approved Nov 4, 2026.
 
 - Scope is supervised only. The loop and the graph are the default for every run. The research brief was the first execution pilot. Since then, supervised runs have proven 17 Discovery skills plus the umbrella and the harness router, and have run real work in other fields.
-- For other fields, v6 may translate a prompt and produce an approval package, but execution is not operational until a kit for that field passes its own real task proof. A generated kit is not coverage.
-- V6 is not operational for unattended runs, live data operation, three level fan out, or automatic learning changes. Those are deferred until the pilot passes its proof tests.
+- For other fields, v7 may translate a prompt and produce an approval package, but execution is not operational until a kit for that field passes its own real task proof. A generated kit is not coverage.
+- V7 is not operational for unattended runs, live data operation, three level fan out, or automatic learning changes. Those are deferred until the pilot passes its proof tests.
 - Proof tests, before any claim of operational use: simulated gated action and injection tests pass in every case, every known bad artifact in the test set is rejected, one supervised real run completes with a clean decision trail and budget audit, a comprehension test passes, and a real generated skill loads through the actual Muse loader.
 - The loader test has not run. No Muse skill loader command exists in the environment where the proofs ran, so no skill has passed a load through the actual loader yet.
 - The wiring proof routed 2 of the 17 Discovery skills through the live skill text. The wire is proven for the Research phase engines, not for the Proof, Search, or Stuck phases.
