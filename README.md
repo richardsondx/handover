@@ -1,5 +1,9 @@
 # Handover
 
+<p align="center">
+  <img src="docs/images/handover-hero.png" alt="Handover: Rough prompt in. Done, with proof." width="800">
+</p>
+
 > Turn a rough prompt into a full plan and orchestration, ask only the early questions needed to set the plan, approve once up front, then run with full autonomy inside the approved envelope.
 
 [![Handover v7](https://img.shields.io/badge/Handover-v7-blue)](https://github.com/richardsondx/handover)
@@ -73,6 +77,35 @@ flowchart LR
     G --> I[Dead end report]
 ```
 
+### Graph across units, loop inside each unit
+
+Handover is both a graph and a loop. The graph runs across units. The loop runs inside each unit.
+
+```mermaid
+flowchart TB
+    A[Rough prompt] --> B[Stage 1: approve intent]
+    B --> C[Stage 2: approve manifest]
+    C --> D[Unit 1: single call]
+    C --> E[Unit 2: single loop]
+    C --> F[Unit 3: multi loop workflow and graph]
+    C --> G[Unit 4: self improving workflow]
+    D --> H[Join: all units pass]
+    E --> H
+    F --> H
+    G --> H
+    H --> I[Verify separately]
+    I --> J[Brief with evidence, or dead end report]
+    subgraph LOOP[Loop inside Unit 1]
+        D1[Generate] --> D2[Fresh verifier checks]
+        D2 --> D3[Pass? yes, unit done]
+        D2 --> D4[Fail: classify failure]
+        D4 --> D5[Fix with a distinct approach]
+        D5 --> D1
+    end
+```
+
+Split: units with no dependency run apart. Join: the join waits for all inputs. Loop: each unit has its own fix loop, up to 5 fix cycles per run, dead end only after 3 distinct approaches for the same failure class. A fail in one unit does not stop the others.
+
 1. **Translate.** You write a rough prompt. Handover infers the outcome, the check that would prove it, what must not change, the one way doors that pause for a human, and the stop condition. It asks you only where a missing answer is needed to set the plan, the acceptance check, or the authority, before approval. These are early, plan-setting questions: the plan does not exist yet, so they shape it, they do not change an existing plan.
 2. **Ask with options.** Every question comes with 2 to 4 real options, each with its tradeoff, one marked recommended, and one escape: something else, in your words. One decision per message, in the order that shapes the plan most first. Short by default, full detail on demand.
 3. **Approve in two stages.** Stage 1 approves the intent package. Stage 2 approves the versioned execution manifest: kit and playbook versions, tool and target allowlist with a risk rating per tool, the failure threshold, finish predicate, limits, and budget ledger. The manifest is what is authorized to run, not the prose alone. In chat, the card comes first. Stage 1 fits near 120 words on the first screen, with a second short screen allowed when a material term needs room. Stage 2 shows the diff only. No material term hides behind See full spec. Chat uses plain words, such as proof of done, run plan, limits, proven kit, and new kit to build first. The file keeps the full terms and the full checks.
@@ -116,6 +149,21 @@ A field kit is what Handover creates or reuses for a field. It is not a prompt f
 | Role definitions | Coordinator, generator, verifier, and judge, with separation of powers |
 | Verification and cleanup routines | How the artifact is checked, and how temporary state is removed without removing evidence |
 | Capability map | For research: question types connected to search routes, source requirements, synthesis methods, checks, and known limits |
+
+### Worked example: the Research brief kit
+
+```mermaid
+flowchart LR
+    A[Rough prompt: Research how self-improving agents work, end to end] --> B[Stage 1: Case A or Case B? Existing proven kit, or kit to be generated]
+    B -->|no proven kit fits, so Case B| C[Case B: generate the Research brief kit: router, playbooks, principles, roles, verification, capability map]
+    C --> D[Proof run: one real task, the research brief itself]
+    D --> E[Fresh verifier checks the brief against the predicate]
+    E -->|pass| F[Judge: proof passed, kit is proven, not just generated]
+    E -->|fail: fix cycle, fresh verifier, distinct approach| C
+    F -->|Case A next time: reuse by version digest| G[Reuse: Nov 12, 2026, run stage2-video4-dollar-2026-11-12-01, same kit, no new generation]
+```
+
+A generated kit is a draft, not coverage. It becomes proven only after one real task proof, checked by a fresh verifier and ruled on by the judge. After that, the next task reuses it under Case A instead of generating a new one.
 
 Minimum viable kit, before any claim of operational use: one router, a few genuinely distinct playbooks, concise principles, coordinator, generator, verifier, and judge roles, evidence and verdict templates, a stuck and resume ladder, cleanup, and a capability map. Add dozens of workflows only as distinct, tested task patterns justify them, not as generated inventory.
 
@@ -186,7 +234,10 @@ No. They live in chat only, on the same screen as the card. The doc holds an App
 Translating any rough prompt into an approval package, running supervised runs in fields with proven kits, and routing discovery work through the 17 Discovery skills. The research brief was the first pilot. Other fields get a translator and a package in v7, but execution is not operational until that field's kit passes its own real task proof.
 
 **What does it cost?**
-The demo pilot uses $0 paid tools and no paid model calls outside your agent's own run. In general, the manifest states the budget, with a reserve held back for verification and the dead end report, at least 15 percent, and labels a limit advisory when the platform cannot hard block further calls at that limit. The v7 skill states a $2 hard cap per run, with larger envelopes approved case by case.
+Handover itself charges nothing. There is no fee per run and no subscription.
+The $2 is a cap, not a price. Each run states its budget in the manifest before work starts. The cap covers the whole run: the plan, the work, and the checks.
+A separate verifier checks the work. A separate judge rules in a fresh context. Both are paid from the same $2. At least 15 percent is held back for checking before work starts, so checking is never cut to save money.
+A run that needs no paid calls costs $0. The demo pilot uses $0 paid tools and no paid model calls outside your agent's own run. The router proof run cost $0 of its cap. Larger envelopes need approval case by case. A limit is labelled advisory when the platform cannot hard block further calls at that limit.
 
 **Can it run overnight or unattended?**
 Not in v7. Unattended operation needs a demonstrated scheduler or parent re-invocation path, with duplicate run detection and failure reporting, including resume after a restart. Those proof tests are listed in [Status and limits](#status-and-limits).
@@ -215,6 +266,9 @@ It tries the next route, changes the method, or makes an operational retry that 
 - `docs/architecture-draft-v0.6.md`: full v1 architecture, reviewed twice by Opus and Terra, with two stage approval, harness enforced gates, budget ledger, resume protocol, verification coverage, and options first user experience.
 - `docs/verification-gap.md`: what is still unproven, and the tests that close each gap.
 - `docs/browser-study-reconciliation.md`: what the Poteto, m4lkxx, and YouTube sources actually said, with corrections to earlier notes, including that the 50,000 figure was not verified in any of those three sources.
+- `docs/images/handover-logo.png`: the Split Arrow Loop logo lockup, violet on white.
+- `docs/images/handover-icon.png`: the Split Arrow Loop icon only, for favicon and avatar use.
+- `docs/images/handover-hero.png`: the README hero banner, dark charcoal ground with the tagline "Rough prompt in. Done, with proof."
 - `docs/images/`: app screenshots for Muse, Codex, and Claude Code, no longer used in the README. The earlier illustrative mockups (muse-handover.png, codex-handover.png, claude-code-handover.png) remain in the folder for reference.
 
 ## Status and limits, stated plainly
