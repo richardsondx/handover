@@ -1,5 +1,5 @@
-name: "local_handover"
+name: "local-handover"
 title: "Handover"
-description: "Turn a rough prompt into a full plan and orchestration, ask only the questions that change the plan with suggested options and tradeoffs, stop at an approve or reject gate, then run the work without babysitting inside the approved envelope. Use when Richardson gives a rough prompt and wants a rewritten plan, a field kit for that kind of work, or a supervised run with independent verification, a decision trail, and a dead end report instead of a weaker success claim."
+description: "Turn a rough prompt into a full plan and orchestration, ask only the questions that change the plan with suggested options and tradeoffs, stop at an approve or reject gate, then run the work without babysitting inside the approved envelope. Use when the user gives a rough prompt and wants a rewritten plan, a field kit for that kind of work, or a supervised run with independent verification, a decision trail, and a dead end report instead of a weaker success claim."
 category: "Work and knowledge"
 include_in_prompt: true

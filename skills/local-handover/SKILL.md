@@ -1,7 +1,12 @@
+---
+name: local-handover
+description: Turn a rough prompt into a full plan and orchestration, ask only the questions that change the plan with suggested options and tradeoffs, stop at an approve or reject gate, then run the work without babysitting inside the approved envelope. Use when the user gives a rough prompt and wants a rewritten plan, a field kit for that kind of work, or a supervised run with independent verification, a decision trail, and a dead end report instead of a weaker success claim.
+---
+
 # Handover
 
 Version 7, Nov 16, 2026.
-Installed as the live shared skill file, Nov 16, 2026. Change in v7 only: card-first chat presentation for Stage 1 and Stage 2, from the Opus UX review 2026-11-16, approved by Richardson Nov 16, 2026. No safety rule changed. Base is v6, Nov 15, 2026, from the adopted CEO operating copy (run stage2-router-wire-2026-11-15-01); base is the merged v5 plus First Principles ladder.
+Installed as the live shared skill file, Nov 16, 2026. Change in v7 only: card-first chat presentation for Stage 1 and Stage 2, from the Opus UX review 2026-11-16, approved by the user Nov 16, 2026. No safety rule changed. Base is v6, Nov 15, 2026, from the adopted CEO operating copy (run stage2-router-wire-2026-11-15-01); base is the merged v5 plus First Principles ladder.
 Base: merged Handover v5 plus First Principles ladder, Nov 15, 2026, run stage1-rebaseline-v5-2026-11-15-01.
 $2 hard cap per run.
 Supervised only.
@@ -30,8 +35,8 @@ This rule applies in terminal sessions, subagents, and teammates.
 ## Discovery router (required step)
 
 Read the registry before routing. The registry lists every Discovery skill with its trigger, inputs, outputs, and phase.
-Registry: workspace/custom-skills/local-handover/router/router-registry.md
-Rules: workspace/custom-skills/local-handover/router/router-rules-v02.md
+Registry: router/router-registry.md
+Rules: router/router-rules-v02.md
 The coordinator must read the registry before it routes a case.
 The coordinator must pick a skill only when that skill's registry trigger fires.
 The coordinator must write one call line before each Discovery skill call.
@@ -42,130 +47,20 @@ A handoff with a missing field is not complete.
 The coordinator must record each phase move and its reason.
 The router step is required, not optional. A run that skips it breaks this rule.
 
-## First Principles Questions ladder (required step)
+## First Principles Questions (required step)
 
-Run this ladder before a unit acts, whenever the unit's plan may rest on a wrong claim. It is a required step, not an optional style. The ladder questions the plan itself: it tests each claim, then rebuilds the answer from what survived. Use field-neutral words in the ladder record (check, threshold, ranking method), never field-specific terms.
+Run the First Principles ladder before a unit acts, whenever the unit's plan may rest on a wrong claim. The ladder lives in its own skill, not here.
 
-### Guard: pick one outcome first
-
-Pick one of three outcomes before the ladder starts.
-
-- Outcome 1, answer directly. Use this for a one-off fact question. No decision follows from it.
-- Outcome 2, light check. Use this for a routine step with low impact and easy reversal. Ask the Step 1 questions and the Step 4 questions only. Do not run the full ladder.
-- Outcome 3, full ladder. Use this for a new plan, a costly move, or a claim that shapes the next step. Use it for any step with high impact. Use it for any step that is hard to reverse.
-
-Judge risk by impact plus reversibility. Do not judge by reversibility alone. A step can be easy to reverse and still cause harm. It can expose data. It can lose trust. It can cost money. If impact is high, use the full ladder even if reversal is easy.
-
-Ask these three questions to pick the outcome.
-
-- Is there a decision to make, with an action that follows it?
-- Could the plan be wrong in a way that costs time, money, or trust?
-- Is the answer more than a fact you can look up?
-
-If there is no decision, answer directly. If the step is low impact and easy to reverse, use the light check. If the step is high impact or hard to reverse, use the full ladder.
-
-### Step 1: Name the decision
-
-- What decision am I about to make?
-- What action follows from this decision?
-- What happens if I am wrong?
-
-Write the decision in one sentence. Write the action in one sentence.
-
-### Step 2: List what must be true
-
-- What must be true for this action to be sound?
-- Which of these claims is load bearing, so the plan fails if it is false?
-- Which claims am I taking from others without checking?
-
-List each claim. Mark each one as load bearing or not load bearing. Mark the source of each claim, or mark it as assumed. Each load bearing claim must name the exact page, maker, product, or place that would settle it. If you cannot name one, mark the claim untestable. Drop an untestable claim from the rebuild. Then change the plan or stop.
-
-Domain conditions: for each claim, list the domain conditions it depends on. A domain condition is a fact about the context that could change the result: speed, background motion, object type, image size, hardware, data type. Write the conditions down. You will check them in Step 3.
-
-### Step 3: Test each claim
-
-For each claim, ask: how can I check this claim? What source, number, or test would prove it or break it? Did I check it, or did I only restate it?
-
-Test each claim with a source, a number, or a concrete test run on the real artifact. Mark each claim as verified, cited, assumed, or failed. Verified means you checked it against a source or a test. Cited means you found a source but did not check it yourself. Assumed means you have no source. Failed means the check went against it.
-
-Reasoning alone is not a check. Reasoning generates a claim. It does not verify it. You cannot mark a claim verified, or partly verified, because the reasoning sounds right. A claim passes only on a source, a number, or a concrete test. If you have no source or test, the claim stays assumed, even if the reasoning is sound.
-
-Do not invent numbers. Never put a number, price, rate, or rule in a claim unless it came from a page or from the user. A number given in the problem is a claim to check, not a fact.
-
-A wrong page is a failed claim. A fetched page that is the wrong place, the wrong maker, or has no numbers does not leave the claim assumed. It marks the claim failed.
-
-A source is not good evidence by itself. Check each source for four things. Is it reliable? Is it relevant to this claim? Is it current? Does it support the claim? If it fails any of these four checks, do not count it as support.
-
-Domain match: a cited source only verifies a claim if the source's domain matches the claim's domain conditions from Step 2. If any domain condition mismatches, mark the claim "cited, domain mismatch". It is not verified. It needs a direct test on your own content before it can be load bearing.
-
-Direct test for performance claims: if a load bearing claim is about how something performs on your content (speed, accuracy, deviation, retention), a source from another domain does not settle it. Run a direct test on your own content, change the plan so the claim is no longer load bearing, or stop and say what is missing.
-
-If you have no tool to check a claim, one of these counts as a check. Show a calculation in the record. Or quote a passage from the material the user gave you. State which one you used. Do not count your own words alone as a check.
-
-Fetch list: write one line per load bearing claim at the end of Step 3. Each line gives the query or address, and what it would settle. Without that list, Step 3 is not done. No fetch attempt means the claim stays assumed. An assumed load bearing claim blocks the decision.
-
-A failed load bearing claim stops the plan. First, change the plan. Then re-run Step 2 for the new plan. List what must be true for the new plan. Test the new claims. Do not explain the failure away. Do not keep the old plan. If a claim passes most checks but one load bearing claim fails, the plan still fails. A high score across claims does not save it.
-
-Re-test an earlier claim when new facts arrive. If it fails on re-test, drop its status and revisit the plan.
-
-### Step 4: Ask what would break it
-
-- What would make this plan fail?
-- What fact, if false, breaks the whole plan?
-- What is the strongest case against this plan?
-- Who would disagree with this plan, and why would they be right?
-
-Write at most two counter cases. Each counter case must name one observable fact that would prove it. Then run that check. Record the result. If the counter case holds, change the plan.
-
-### Step 5: Rebuild from true facts
-
-- Which facts survived the tests?
-- What did I have to drop because it failed or could not be checked?
-- What answer follows from the true facts alone?
-
-List the true facts first. List only claims with adequate support. A claim counts in the rebuild only if it is verified, or cited with a source that passed the four checks in Step 3. Assumed claims do not enter the rebuild, even if they sound right. Cited does not mean true. Do not list assumed facts as true. Keep uncertainty where the evidence is incomplete. Say what is still unknown.
-
-Then build a new answer from that list only. If the new answer is weaker than the old plan, say so. If the true facts support a different action, take the different action. If the true facts support no action, stop.
-
-### Step 6: Decide and record
-
-- What must be true?
-- What did I test?
-- What would change my mind?
-
-Then decide. Act, change the plan, or stop. Write the record with this template. Use one line per claim.
-
-- Decision: one sentence.
-- Claim: status, source, and one line of evidence.
-- True facts used: one line each.
-- Biggest open risk: one sentence.
-- What would change my mind: one sentence.
-- Open questions: one line each.
-
-The user-facing answer leads with the decision and the biggest open risk. Keep it short. Show the full record only on request or on "save state". After "just tell me", list any load bearing claims left unchecked. Put that list in the user answer. Do not hide it in the record alone.
-
-### Stop rule, light check, and high-impact rule
-
-- Stop rule: at most 8 claims tested per ladder. Count claims tested, not questions asked. Pick a smaller number for a small decision. Stop asking when you reach the limit. Then act on the best tested claim, or stop if a load bearing claim failed. Do not keep splitting claims into smaller claims. Do not spend more time checking than the decision is worth.
-- Light check: for cheap units (small, low risk, reversible, checkable with one command), run Step 1 plus Step 4 only. Do not run the full ladder.
-- Full ladder: required for high-impact units. A unit is high-impact when a wrong result costs time, money, trust, or a scored verdict. Judge by impact plus reversibility, not by reversibility alone: a step can be easy to reverse and still cause harm.
-- Explicit-assumption exception: an assumed fact cannot be load bearing without a test, unless it is an explicit assumption used only when waiting costs more than deciding. Then state the uncertainty in the record and in the user answer, state the consequences if the assumption is wrong, and state the safeguards. If you cannot state all three, do not use the exception.
-
-### Timing and filing
-
-- The ladder runs before the unit acts.
-- The claim record is filed in the unit output before any score or claim is reported. No score or claim is reported before the claim record exists in the output.
-
-### Verifier test for claim status
-
-- The verifier re-checks every claim status in the claim record against its stated source or test.
-- A unit fails verification if it has an assumed load bearing claim, a missing fetch list, or no counter case. The verifier marks the unit as failed on any of these three, and the unit goes back through the loop with a fresh verifier.
-- The verifier also checks that the claim count is at most 8, that every load bearing claim names its source or test, and that the Step 6 record is present.
+- Skill: skills/local-first-principles-questions/SKILL.md
+- Trigger: a new plan, a costly move, or a claim that shapes the next step.
+- Light check: low impact and easy reversal, Step 1 plus Step 4 only.
+- Full ladder: high impact or hard to reverse, all steps, at most 8 claims tested.
+- Record: file the claim record in the unit output before any score or claim is reported.
 
 ## Kit disclosure
 
 - Name the kit at three points, every run, no exceptions: in the Stage 1 package, at the start of execution, and in the final report. If no kit was created or reused, say so in one line at each point. Never run silently on a kit.
-- Each mention gives: kit name, created or reused, proof status (proven, draft, or proof failed), and workspace path. Example: "Reusing Research brief kit, proven, workspace/handover-v1/kits/research-brief/". A kit with no path is not a kit, it is a claim.
+- Each mention gives: kit name, created or reused, proof status (proven, draft, or proof failed), and workspace path. Example: "Reusing Research brief kit, proven, kits/research-brief/". A kit with no path is not a kit, it is a claim.
 - Kits live in the project workspace, not in the skill folder. The skill folder holds only this skill and the index. The index is FIELD-KITS.md in the skill folder. It lists one bullet per kit, with name, field, proof status, and workspace path. Record a kit in the index the moment it is created or reused, before the run moves on.
 - Stage 1 must state Case A (existing proven kit, name it with version digest and path) or Case B (kit to be generated, name it, with a separate budget line for generation and proof). There is no third case, and no run starts without naming one.
 - Final report must name the kits it used or created, before the gaps section, one bullet per kit, as defined in Step 4. A report with no kit line is incomplete, and the judge must flag it.
@@ -229,9 +124,9 @@ Judge check:
 
 Examples, blur and grain meter, Nov 9, 2026, words only, no plan change:
 
-- Verdict: workspace/handover-blur-grain/verdict-readable-2026-11-09.md
-- Stage 1: workspace/handover-blur-grain/stage1-package-v02-readable-2026-11-09.md
-- Stage 2: workspace/handover-blur-grain/stage2-manifest-v02-readable-2026-11-09.md
+- Verdict: run folder/verdict-readable.md
+- Stage 1: run folder/stage1-package-readable.md
+- Stage 2: run folder/stage2-manifest-readable.md
 
 ## Loop
 
@@ -241,10 +136,7 @@ Examples, blur and grain meter, Nov 9, 2026, words only, no plan change:
 - Log each cycle: failure class, rung, what changed, why the last failure should not repeat, verifier result.
 - Fix in a new versioned file, never by editing the checked file in place. Fresh verifier each cycle. Judge only at the end, in a fresh context.
 - Budget: up to 5 fix cycles per run, shared across units, set in Stage 1 and Stage 2. Dead end only after 3 distinct approaches for the same failure class, or loop budget or cost cap spent.
-- Time: tracked like cost, on every run, no exceptions. Every unit report carries a timing table: step, frames, wall seconds, seconds per frame, source. The budget ledger carries a time section with per-unit totals and a run total. A unit with no recorded time is a gap, listed by name in the ledger. No total is ever filled in by guessing. (Added 2026-11-09: Run 4 proved the gap. Four units recorded no time at all, so no total build time existed. The reconstructed record is `~/workspace/handover-motion-short-clone/performance-ledger.md`.)
-The coordinator lists each unit with no recorded time by name in the ledger.
-The ledger carries a time section with per-unit totals and a run total.
-No one fills a total by guessing.
+- Time: tracked like cost, on every run, no exceptions. Every unit report carries a timing table: step, unit_count (optional), wall_seconds, cost_usd, source. The budget ledger carries a time section with per-unit totals and a run total. A unit with no recorded time is a gap, listed by name in the ledger. No total is ever filled in by guessing.
 Never re-score the same held-out test cases to get a better score.
 Predicate, bars, baselines, and files stay unchanged.
 - Report in plain words, under Report readability above: done or not done first, what works, what is left. No verdict label as the headline.
@@ -273,7 +165,7 @@ Predicate, bars, baselines, and files stay unchanged.
 - Record the commit SHA in the per-unit list when made. Passes flips to passing only after check plus commit.
 - Fixes after a unit is committed batch into one push wave per unit, in the lowest unit that owns the code, not a drip that restarts checks each time.
 - A commit is local only, not push, merge, publish, or deploy. Those still need exact listing in the Stage 2 manifest. A commit never authorizes them.
-- A push must keep every per-unit commit. Never push with a tool that makes one squashed commit from the files, such as gh_bulk_push.py or gh_commit.py. Git push over HTTPS is not available in this sandbox, so push with bin/gh_replay.py, which replays each local commit in order, with the same message, author date, and tree. Run it with --dry-run first. A history rewrite, such as a first replay that replaces a squashed remote history, needs the user's explicit approval for that repo, a backup branch at the old remote HEAD first, and a tree check after.
+- A push must keep every per-unit commit. Never push with a tool that makes one squashed commit from the files, such as gh_bulk_push.py or gh_commit.py. Push with the method named in the host profile for that repo, after a dry run first. A history rewrite, such as a first replay that replaces a squashed remote history, needs the user's explicit approval for that repo, a backup branch at the old remote HEAD first, and a tree check after.
 - If the work is not in git, the finish line is a new versioned file for that unit, never an edit in place, version recorded in the per-unit list like a SHA.
 
 ### Check CLI per field
@@ -286,7 +178,7 @@ Predicate, bars, baselines, and files stay unchanged.
 - If no CLI exists yet, the kit is draft. Verification falls back to the predicate plus the exact manual commands listed in the manifest. Record that fallback in the manifest and the final report. Do not present a draft kit as proven.
 Handover field CLI.
 The Handover field ships its own CLI.
-Its path is workspace/handover/handover-optimize-v5-fix2-2026-11-10/kit/check.sh.
+Its path is named in the run manifest for the field.
 Its commands are launch, doctor, drive, evidence, and cleanup.
 The verifier runs the CLI for the unit.
 It does not invent its own test steps from the predicate.
