@@ -17,10 +17,10 @@ This skill receives a choice to make, stated in one or two sentences. It also re
 
 ## Guard: light check or full use
 
-Pick one before you start. Judge by impact plus reversibility. Do not judge by reversibility alone. A step can be easy to reverse and still cost time, money, or trust.
+Pick one before you start. Judge by impact plus reversibility, never by reversibility alone. Full framework: skills/local-handover/router/router-rules.md.
 
-- Light check. Use this for a routine step with low impact and easy reversal. Do Steps 1 to 3 only, then state the pruned list and stop.
-- Full use. Use this for a new plan, a costly move, or a claim that shapes the next step. Use it for any step with high impact or that is hard to reverse. Run all steps.
+- Light check. Routine step, low impact, easy reversal. Do Steps 1 to 3 only, then state the pruned list and stop.
+- Full use. New plan, costly move, claim that shapes the next step, or high impact or hard to reverse. Run all steps.
 
 Ask these three questions to pick.
 
@@ -28,7 +28,7 @@ Ask these three questions to pick.
 - Could a wrong pick cost time, money, or trust?
 - Would a different option change what I do next?
 
-If no decision follows, answer directly. If the step is low impact and easy to reverse, use the light check. If the step is high impact or hard to reverse, use the full use.
+If no decision follows, answer directly.
 
 ## Steps in order
 
@@ -109,7 +109,7 @@ The next step receives this record and nothing else as its starting point. Do no
 
 Set the limit before the work starts. The maximum is 12 options listed per run. The maximum is 3 rounds of re-ranking per run. Do not list more than 12 options. Do not re-rank more than 3 times.
 
-Stop when you reach either limit. Then hand on the best pick you found, or stop if the space is empty. Do not keep splitting one option into smaller options to get around the limit. Do not spend more time listing than the decision is worth.
+Stop when you reach either limit. Then hand on the best pick you found, or stop if the space is empty. See skills/local-handover/router/router-rules.md for the no-splitting and time rules.
 
 If the budget runs out in the middle of Step 3, mark the unranked options as unranked. Reduce the scope to what you did rank. Do not hand on a pick with no rank.
 

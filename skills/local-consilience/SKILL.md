@@ -17,10 +17,10 @@ This skill receives a question to answer, stated in one or two sentences. It als
 
 ## Guard: light check or full use
 
-Pick one before you start. Judge by impact plus reversibility. Do not judge by reversibility alone. A step can be easy to reverse and still cost time, money, or trust.
+Pick one before you start. Judge by impact plus reversibility, never by reversibility alone. Full framework: skills/local-handover/router/router-rules.md.
 
-- Light check. Use this for a routine step with low impact and easy reversal. Do Steps 1 to 3 only, then state the convergence and stop.
-- Full use. Use this for a new plan, a costly move, or a claim that shapes the next step. Use it for any step with high impact or that is hard to reverse. Run all steps.
+- Light check. Routine step, low impact, easy reversal. Do Steps 1 to 3 only, then state the convergence and stop.
+- Full use. New plan, costly move, claim that shapes the next step, or high impact or hard to reverse. Run all steps.
 
 Ask these three questions to pick.
 
@@ -28,7 +28,7 @@ Ask these three questions to pick.
 - Could a wrong answer cost time, money, or trust?
 - Would a different answer change what I do next?
 
-If no decision follows, answer directly. If the step is low impact and easy to reverse, use the light check. If the step is high impact or hard to reverse, use the full use.
+If no decision follows, answer directly.
 
 ## Steps in order
 
@@ -83,7 +83,7 @@ Set a weak contrary line aside only with a stated reason. Never drop a contrary 
 
 Name a new concrete case you did not use in Steps 1 to 4. State what the converged answer predicts in that case. Then check the prediction against what happens.
 
-A concrete case counts only if it names a real place, a real time, and a real action. The action needs a number that can be checked. A case with no place, no time, and no checkable number does not count. Do not score an answer on a case that does not count.
+A concrete case counts only if it names a real place, a real time, and a real action. The action needs a number that can be checked. A case with no place, no time, and no checkable number does not count. Do not score an answer on a case that does not count. Canonical definition: skills/local-handover/router/router-rules.md.
 
 - New case: the case, in plain words, with its place, time, and action.
 - Prediction: what the converged answer predicts, with a number where one exists.
@@ -111,7 +111,7 @@ The next step receives this record and nothing else as its starting point. Do no
 
 Set the limit before the work starts. The maximum is 6 lines of evidence per run. The maximum is 4 new cases checked per run. Do not gather more than 6 lines. Do not check more than 4 new cases.
 
-Stop when you reach either limit. Then hand on the best answer you found, or stop if none survived Step 5. Do not keep splitting one line into smaller lines to get around the limit. Do not spend more time gathering lines than the decision is worth.
+Stop when you reach either limit. Then hand on the best answer you found, or stop if none survived Step 5. See skills/local-handover/router/router-rules.md for the no-splitting and time rules.
 
 If the budget runs out in the middle of Step 5, mark the unchecked cases as unchecked. Reduce the scope to what you did check. Do not hand on an answer with no score.
 

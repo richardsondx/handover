@@ -17,10 +17,10 @@ This skill receives stated premises. Each premise needs a source, a number, or a
 
 ## Guard: light check or full use
 
-Pick one before you start. Judge by impact plus reversibility. Do not judge by reversibility alone. A step can be easy to reverse and still cost time, money, or trust.
+Pick one before you start. Judge by impact plus reversibility, never by reversibility alone. Full framework: skills/local-handover/router/router-rules.md.
 
-- Light check. Use this for a routine step with low impact and easy reversal. Do Steps 1 to 3 only, then state the conclusion with its limits and stop.
-- Full use. Use this for a new plan, a costly move, or a claim that shapes the next step. Use it for any step with high impact or that is hard to reverse. Run all steps.
+- Light check. Routine step, low impact, easy reversal. Do Steps 1 to 3 only, then state the conclusion with its limits and stop.
+- Full use. New plan, costly move, claim that shapes the next step, or high impact or hard to reverse. Run all steps.
 
 Ask these three questions to pick.
 
@@ -28,7 +28,7 @@ Ask these three questions to pick.
 - Could a wrong conclusion cost time, money, or trust?
 - Would a different conclusion change what I do next?
 
-If no decision follows, answer directly. If the step is low impact and easy to reverse, use the light check. If the step is high impact or hard to reverse, use the full use.
+If no decision follows, answer directly.
 
 ## Steps in order
 
@@ -104,7 +104,7 @@ The next step receives this record and nothing else as its starting point. Do no
 
 Set the limit before the work starts. The maximum is 6 steps in one chain. Do not build a chain with more than 6 steps.
 
-Stop when you reach the limit. Then hand on what you proved, or stop if a step broke. Do not keep splitting one step into smaller steps to get around the limit. Do not spend more time deriving than the decision is worth.
+Stop when you reach the limit. Then hand on what you proved, or stop if a step broke. See skills/local-handover/router/router-rules.md for the no-splitting and time rules.
 
 If the budget runs out in the middle of Step 3, mark the unfinished steps as unfinished. Reduce the scope to what you did prove. Do not hand on a conclusion from an unfinished chain.
 

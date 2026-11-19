@@ -19,10 +19,10 @@ This skill receives the anomaly handoff record from the step before it: the mode
 
 ## Guard: light check or full generation
 
-Pick one before you start. Judge by impact plus reversibility. Do not judge by reversibility alone. A step can be easy to reverse and still cost time, money, or trust.
+Pick one before you start. Judge by impact plus reversibility, never by reversibility alone. Full framework: skills/local-handover/router/router-rules.md.
 
-- Light check. Use this for a routine step with low impact and easy reversal. Do Steps 1 and 2 only, then pick the single best explanation that already carries a prediction and hand it on, or stop if none carries one.
-- Full generation. Use this for a new plan, a costly move, a claim that shapes the next step, or any step with high impact or that is hard to reverse. Run all steps.
+- Light check. Routine step, low impact, easy reversal. Do Steps 1 and 2 only, then pick the single best explanation that already carries a prediction and hand it on, or stop if none carries one.
+- Full generation. New plan, costly move, claim that shapes the next step, or high impact or hard to reverse. Run all steps.
 
 Ask these three questions to pick.
 
@@ -30,7 +30,7 @@ Ask these three questions to pick.
 - Could the wrong explanation cost time, money, or trust?
 - Would a different explanation change what I do next?
 
-If no decision follows, answer directly. If the step is low impact and easy to reverse, use the light check. If the step is high impact or hard to reverse, use the full generation.
+If no decision follows, answer directly.
 
 ## Steps in order
 
@@ -121,7 +121,7 @@ The next step receives this record and nothing else as its starting point. Do no
 
 Set the limit before generation starts. The maximum is 6 explanations generated per anomaly. Generate means: write it down, list its claims, and derive its predictions. Do not generate more than 6.
 
-Stop when you reach the limit. Then rank what you generated, or stop if none survived Steps 3 and 4. Do not keep splitting one explanation into smaller ones to get around the limit. Do not spend more time generating than the decision is worth.
+Stop when you reach the limit. Then rank what you generated, or stop if none survived Steps 3 and 4. See skills/local-handover/router/router-rules.md for the no-splitting and time rules.
 
 If the budget runs out in the middle of Step 4, mark the explanations without predictions as stories. Reduce the scope to what you did finish. Do not hand on an explanation with no prediction.
 

@@ -21,13 +21,13 @@ This skill builds on Jane Street socratic-tutor, MIT license. Repo: https://gith
 
 ## Guard: is this a problem to figure out
 
-Ask this first. Do not start the ladder until you pick one of three outcomes.
+Ask this first. Do not start the ladder until you pick one of three outcomes. Full framework: skills/local-handover/router/router-rules.md.
 
-- Outcome 1, answer directly. Use this for a one-off fact question. No decision follows from it.
-- Outcome 2, light check. Use this for a routine step with low impact and easy reversal. Ask the Step 1 questions and the Step 4 questions only. Do not run the full ladder.
-- Outcome 3, full ladder. Use this for a new plan, a costly move, or a claim that shapes the next step. Use it for any step with high impact. Use it for any step that is hard to reverse.
+- Outcome 1, answer directly. One-off fact question. No decision follows from it.
+- Outcome 2, light check. Routine step, low impact, easy reversal. Ask the Step 1 questions and the Step 4 questions only. Do not run the full ladder.
+- Outcome 3, full ladder. New plan, costly move, claim that shapes the next step, or high impact or hard to reverse.
 
-Judge risk by impact plus reversibility. Do not judge by reversibility alone. A step can be easy to reverse and still cause harm. It can expose data. It can lose trust. It can cost money. If impact is high, use the full ladder even if reversal is easy.
+Judge risk by impact plus reversibility, never by reversibility alone. If impact is high, use the full ladder even if reversal is easy.
 
 Ask these three questions to pick the outcome.
 
@@ -35,7 +35,7 @@ Ask these three questions to pick the outcome.
 - Could the plan be wrong in a way that costs time, money, or trust?
 - Is the answer more than a fact you can look up?
 
-If there is no decision, answer directly. If the step is low impact and easy to reverse, use the light check. If the step is high impact or hard to reverse, use the full ladder.
+If there is no decision, answer directly.
 
 ## How to use the ladder
 
@@ -184,7 +184,7 @@ A handoff missing any field is not complete.
 
 Set a budget before the ladder starts. The budget is a maximum of 8 claims tested. Count claims tested, not questions asked. Pick a smaller number for a small decision. Do not test more than 8 claims.
 
-Stop asking when you reach the limit. Then act on the best tested claim, or stop if a load bearing claim failed. Do not keep splitting claims into smaller claims. Do not spend more time checking than the decision is worth.
+Stop asking when you reach the limit. Then act on the best tested claim, or stop if a load bearing claim failed. See skills/local-handover/router/router-rules.md for the no-splitting and time rules.
 
 If the budget runs out in the middle of Step 3, mark the untested claims as assumed. Reduce the scope of the plan to fit what you did test. Do not act on untested load bearing claims except under the one exception below.
 

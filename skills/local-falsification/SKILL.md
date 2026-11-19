@@ -19,10 +19,10 @@ This skill receives the ranked explanations from the step before it: each explan
 
 ## Guard: light check or full falsification
 
-Pick one before you start. Judge by impact plus reversibility. Do not judge by reversibility alone. A step can be easy to reverse and still cost time, money, or trust.
+Pick one before you start. Judge by impact plus reversibility, never by reversibility alone. Full framework: skills/local-handover/router/router-rules.md.
 
-- Light check. Use this for a routine step with low impact and easy reversal. Do Steps 1 to 3 only, for the top-ranked explanation only, then mark it killed, surviving, or untested and stop. Do not rank survivors.
-- Full falsification. Use this for a new plan, a costly move, a claim that shapes the next step, or any step with high impact or that is hard to reverse. Run all steps, for every ranked explanation handed in.
+- Light check. Routine step, low impact, easy reversal. Do Steps 1 to 3 only, for the top-ranked explanation only, then mark it killed, surviving, or untested and stop. Do not rank survivors.
+- Full falsification. New plan, costly move, claim that shapes the next step, or high impact or hard to reverse. Run all steps, for every ranked explanation handed in.
 
 Ask these three questions to pick.
 
@@ -30,7 +30,7 @@ Ask these three questions to pick.
 - Could keeping a wrong explanation cost time, money, or trust?
 - Would killing the top explanation change what I do next?
 
-If no decision follows, answer directly. If the step is low impact and easy to reverse, use the light check. If the step is high impact or hard to reverse, use the full falsification.
+If no decision follows, answer directly.
 
 ## Steps in order
 
@@ -136,7 +136,7 @@ A handoff missing any field is not complete.
 
 Set the limit before the tests start. The maximum is 3 tests per explanation. Count tests run, not tests named. Do not run more than 3 tests on one explanation.
 
-Stop when you reach the limit for an explanation. Then mark it by the best test you ran, or mark it untested if none of the tests settled the separating observation. Do not keep splitting one test into smaller tests to get around the limit. Do not spend more time testing than the decision is worth.
+Stop when you reach the limit for an explanation. Then mark it by the best test you ran, or mark it untested if none of the tests settled the separating observation. See skills/local-handover/router/router-rules.md for the no-splitting and time rules.
 
 If the budget runs out in the middle of Step 4, mark the untested explanations as untested. Reduce the scope to what you did test. Do not hand on an untested explanation as a survivor.
 

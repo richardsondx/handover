@@ -17,10 +17,10 @@ This skill receives a target problem, stated in one or two sentences. It also re
 
 ## Guard: light check or full use
 
-Pick one before you start. Judge by impact plus reversibility. Do not judge by reversibility alone. A step can be easy to reverse and still cost time, money, or trust.
+Pick one before you start. Judge by impact plus reversibility, never by reversibility alone. Full framework: skills/local-handover/router/router-rules.md.
 
-- Light check. Use this for a routine step with low impact and easy reversal. Do Steps 1 to 3 only, then state the shared structure and stop.
-- Full use. Use this for a new plan, a costly move, or a claim that shapes the next step. Use it for any step with high impact or that is hard to reverse. Run all steps.
+- Light check. Routine step, low impact, easy reversal. Do Steps 1 to 3 only, then state the shared structure and stop.
+- Full use. New plan, costly move, claim that shapes the next step, or high impact or hard to reverse. Run all steps.
 
 Ask these three questions to pick.
 
@@ -28,7 +28,7 @@ Ask these three questions to pick.
 - Could a wrong transfer cost time, money, or trust?
 - Would a different source case change what I do next?
 
-If no decision follows, answer directly. If the step is low impact and easy to reverse, use the light check. If the step is high impact or hard to reverse, use the full use.
+If no decision follows, answer directly.
 
 ## Steps in order
 
@@ -87,7 +87,7 @@ Do not carry over a part whose link failed in Step 3. A failed link means the pa
 
 Name a new concrete case you did not use in Steps 1 to 4. Predict what the carried-over fix will do in that case. Then check the prediction against what happens.
 
-A concrete case counts as a case only if it names a real place, a real time, and a real action with a number that can be checked. A case with no place, no time, and no checkable number does not count. Do not score a transfer on a case that does not count.
+A concrete case counts as a case only if it names a real place, a real time, and a real action with a number that can be checked. A case with no place, no time, and no checkable number does not count. Do not score a transfer on a case that does not count. Canonical definition: skills/local-handover/router/router-rules.md.
 
 - New case: the case, in plain words, with its place, time, and action.
 - Prediction: what the carried-over fix will do, with a number where one exists.
@@ -115,7 +115,7 @@ The next step receives this record and nothing else as its starting point. Do no
 
 Set the limit before the work starts. The maximum is 3 source cases per run. The maximum is 4 new cases checked per run. Do not use more than 3 sources. Do not check more than 4 new cases.
 
-Stop when you reach either limit. Then hand on the best transfer you found, or stop if none survived Step 5. Do not keep splitting one source case into smaller cases to get around the limit. Do not spend more time mapping than the decision is worth.
+Stop when you reach either limit. Then hand on the best transfer you found, or stop if none survived Step 5. See skills/local-handover/router/router-rules.md for the no-splitting and time rules.
 
 If the budget runs out in the middle of Step 5, mark the unchecked cases as unchecked. Reduce the scope to what you did check. Do not hand on a transfer with no score.
 

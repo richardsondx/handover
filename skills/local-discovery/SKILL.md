@@ -52,10 +52,10 @@ If you have no model, state one first. If you have no observations, gather some 
 
 ## Guard: light check or full use
 
-Pick one before you start. Judge by impact plus reversibility. Do not judge by reversibility alone. A step can be easy to reverse and still cost time, money, or trust.
+Pick one before you start. Judge by impact plus reversibility, never by reversibility alone. Full framework: skills/local-handover/router/router-rules.md.
 
-- Light check. Use this for a routine problem with low impact and easy reversal. Run Step 1, Step 2, and Step 3 only, then run one engine and stop, or stop if no engine fits.
-- Full use. Use this for a new problem, a costly move, a claim that shapes the next step, or any problem with high impact or that is hard to reverse. Run all steps.
+- Light check. Routine problem, low impact, easy reversal. Run Step 1, Step 2, and Step 3 only, then run one engine and stop, or stop if no engine fits.
+- Full use. New problem, costly move, claim that shapes the next step, or high impact or hard to reverse. Run all steps.
 
 Ask these three questions to pick.
 
@@ -63,7 +63,7 @@ Ask these three questions to pick.
 - Could the current model be wrong in a way that costs time, money, or trust?
 - Would a new finding change what I do next?
 
-If no decision follows, answer directly. If the problem is low impact and easy to reverse, use the light check. If the problem is high impact or hard to reverse, use full use.
+If no decision follows, answer directly.
 
 ## Steps in order
 
@@ -128,7 +128,7 @@ A handoff missing any field is not complete.
 
 Set the limit before you start. The maximum is 3 engines per pass and 2 passes per problem. Stop when you reach the limit. Then write the invention from what you have, or stop if no finding survived.
 
-Stop early if no engine fits the problem. Stop early if every engine returns a null result. Stop early if the invention test cannot be stated. Do not keep adding engines to get around the limit. Do not spend more time on the problem than the decision is worth.
+Stop early if no engine fits the problem. Stop early if every engine returns a null result. Stop early if the invention test cannot be stated. See skills/local-handover/router/router-rules.md for the no-splitting and time rules.
 
 If the budget runs out in the middle of a pass, mark the unrun engines as unrun. Reduce the scope to what you did run. Do not claim an unrun engine as done.
 

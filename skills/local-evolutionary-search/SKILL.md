@@ -17,10 +17,10 @@ This skill receives a working design, stated in one or two sentences. It also re
 
 ## Guard: light check or full use
 
-Pick one before you start. Judge by impact plus reversibility. Do not judge by reversibility alone. A step can be easy to reverse and still cost time, money, or trust.
+Pick one before you start. Judge by impact plus reversibility, never by reversibility alone. Full framework: skills/local-handover/router/router-rules.md.
 
-- Light check. Use this for a routine step with low impact and easy reversal. Do Steps 1 to 3 only, then state the best change found and stop.
-- Full use. Use this for a new plan, a costly move, or a claim that shapes the next step. Use it for any step with high impact or that is hard to reverse. Run all steps.
+- Light check. Routine step, low impact, easy reversal. Do Steps 1 to 3 only, then state the best change found and stop.
+- Full use. New plan, costly move, claim that shapes the next step, or high impact or hard to reverse. Run all steps.
 
 Ask these three questions to pick.
 
@@ -28,7 +28,7 @@ Ask these three questions to pick.
 - Could a wrong change cost time, money, or trust?
 - Would a different change alter what I do next?
 
-If no decision follows, answer directly. If the step is low impact and easy to reverse, use the light check. If the step is high impact or hard to reverse, use the full use.
+If no decision follows, answer directly.
 
 ## Steps in order
 
@@ -113,7 +113,7 @@ The next step receives this record and nothing else as its starting point. Do no
 
 Set the limit before the work starts. The maximum is 5 rounds per run. The maximum is 4 changes tested per round. Do not run more than 5 rounds. Do not test more than 4 changes in one round.
 
-Stop when you reach either limit. Stop also when a full round keeps no change. Then hand on the best design you found. Do not keep trying new changes after a round with no kept change. Do not spend more time improving than the gain is worth.
+Stop when you reach either limit. Stop also when a full round keeps no change. Then hand on the best design you found. Do not keep trying new changes after a round with no kept change. See skills/local-handover/router/router-rules.md for the time rule.
 
 If the budget runs out in the middle of a round, mark the untested changes as untested. Reduce the scope to what you did test. Do not hand on a design with untested changes in it.
 

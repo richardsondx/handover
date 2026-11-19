@@ -17,10 +17,10 @@ This skill receives an unexpected observation, stated in one or two sentences. I
 
 ## Guard: light check or full use
 
-Pick one before you start. Judge by impact plus reversibility. Do not judge by reversibility alone. A step can be easy to reverse and still cost time, money, or trust.
+Pick one before you start. Judge by impact plus reversibility, never by reversibility alone. Full framework: skills/local-handover/router/router-rules.md.
 
-- Light check. Use this for a routine step with low impact and easy reversal. Do Steps 1 to 3 only, then state the judgement and stop.
-- Full use. Use this for a new plan, a costly move, or a claim that shapes the next step. Use it for any step with high impact or that is hard to reverse. Run all steps.
+- Light check. Routine step, low impact, easy reversal. Do Steps 1 to 3 only, then state the judgement and stop.
+- Full use. New plan, costly move, claim that shapes the next step, or high impact or hard to reverse. Run all steps.
 
 Ask these three questions to pick.
 
@@ -28,7 +28,7 @@ Ask these three questions to pick.
 - Could a wrong follow up cost time, money, or trust?
 - Would a different reading change what I do next?
 
-If no decision follows, answer directly. If the step is low impact and easy to reverse, use the light check. If the step is high impact or hard to reverse, use the full use.
+If no decision follows, answer directly.
 
 ## Steps in order
 
@@ -110,7 +110,7 @@ The next step receives this record and nothing else as its starting point. Do no
 
 Set the limit before the work starts. The maximum is 3 observations followed per run. The maximum is 3 small tests per observation. Do not follow more than 3 observations. Do not run more than 3 small tests on one observation.
 
-Stop when you reach either limit. Then hand on the best finding you confirmed, or stop if none survived Step 4. Do not keep splitting one observation into smaller observations to get around the limit. Do not spend more time following surprises than the work is worth.
+Stop when you reach either limit. Then hand on the best finding you confirmed, or stop if none survived Step 4. See skills/local-handover/router/router-rules.md for the no-splitting and time rules.
 
 If the budget runs out in the middle of Step 3, mark the unrun tests as unrun. Reduce the scope to what you did run. Do not hand on a finding with no test result.
 
