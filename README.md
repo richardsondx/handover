@@ -52,11 +52,11 @@ That one block is the whole setup. Handover does the rest: it translates, it ask
 
 | Agent | Install step | Then |
 | --- | --- | --- |
-| Muse | Copy `skills/local-handover/` into your Muse custom skills folder, so it is discoverable as `local_handover` | Paste the setup prompt above in a Muse chat |
-| Codex | Copy `skills/local-handover/` into your Codex skills folder, as `handover`, with `SKILL.md` at its root | Paste the setup prompt above in Codex |
-| Claude Code | Copy `skills/local-handover/` into your Claude Code skills folder, as `handover`, with `SKILL.md` at its root | Paste the setup prompt above in Claude Code |
+| Muse | Copy `skills/local-handover/` into your Muse custom skills folder, keeping the folder name `local-handover` | Paste the setup prompt above in a Muse chat |
+| Codex | Copy `skills/local-handover/` into your Codex skills folder, keeping the folder name `local-handover`, with `SKILL.md` at its root | Invoke it as `$local-handover`, then paste the setup prompt above in Codex |
+| Claude Code | Copy `skills/local-handover/` into your Claude Code skills folder, keeping the folder name `local-handover`, with `SKILL.md` at its root | Invoke it as `/local-handover`, then paste the setup prompt above in Claude Code |
 
-If an agent's skill folder layout differs in your version, put `SKILL.md` where that agent loads skills from, and keep the folder name `handover` so the setup prompt still matches. The Discovery skills install the same way, one folder per skill under `skills/`.
+If an agent's skill folder layout differs in your version, put `SKILL.md` where that agent loads skills from, and keep the folder name `local-handover` so the name in the frontmatter still matches the folder. The Discovery skills install the same way, one folder per skill under `skills/`.
 
 ### 3. Approve, then let it run
 
@@ -287,7 +287,7 @@ Version 1, built from architecture draft v0.6, approved Nov 4, 2026.
 - For other fields, v7 may translate a prompt and produce an approval package, but execution is not operational until a kit for that field passes its own real task proof. A generated kit is not coverage.
 - V7 is not operational for unattended runs, live data operation, three level fan out, or automatic learning changes. Those are deferred until the pilot passes its proof tests.
 - Proof tests, before any claim of operational use: simulated gated action and injection tests pass in every case, every known bad artifact in the test set is rejected, one supervised real run completes with a clean decision trail and budget audit, a comprehension test passes, and a real generated skill loads through the actual Muse loader.
-- The loader test has not run. No Muse skill loader command exists in the environment where the proofs ran, so no skill has passed a load through the actual loader yet.
+- The loader test has not run as a real load. A static loader check now exists, `sh scripts/check-loader.sh`, and it passes on all 18 skills: frontmatter parses, each name matches its folder and follows the Agent Skills spec, each description is present, and the required sections are present. No Muse skill loader command exists in the environment where the proofs ran, so no skill has passed a load through the actual loader yet.
 - The wiring proof routed 2 of the 17 Discovery skills through the live skill text. The wire is proven for the Research phase engines, not for the Proof, Search, or Stuck phases.
 - Handover does not merge, publish, post, send, pay, delete, deploy, or contact anyone unless that exact action, destination, payload or payload template, limit, and condition is listed in the approved Stage 2 manifest. An unlisted or changed action needs a new approval.
 

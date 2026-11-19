@@ -60,7 +60,7 @@ Run the First Principles ladder before a unit acts, whenever the unit's plan may
 ## Kit disclosure
 
 - Name the kit at three points, every run, no exceptions: in the Stage 1 package, at the start of execution, and in the final report. If no kit was created or reused, say so in one line at each point. Never run silently on a kit.
-- Each mention gives: kit name, created or reused, proof status (proven, draft, or proof failed), and workspace path. Example: "Reusing Research brief kit, proven, kits/research-brief/". A kit with no path is not a kit, it is a claim.
+- Each mention gives: kit name, created or reused, proof status (proven, draft, or proof failed), and workspace path. Example: "Reusing Research brief kit, proven, <workspace path of the kit>". A kit with no path is not a kit, it is a claim.
 - Kits live in the project workspace, not in the skill folder. The skill folder holds only this skill and the index. The index is FIELD-KITS.md in the skill folder. It lists one bullet per kit, with name, field, proof status, and workspace path. Record a kit in the index the moment it is created or reused, before the run moves on.
 - Stage 1 must state Case A (existing proven kit, name it with version digest and path) or Case B (kit to be generated, name it, with a separate budget line for generation and proof). There is no third case, and no run starts without naming one.
 - Final report must name the kits it used or created, before the gaps section, one bullet per kit, as defined in Step 4. A report with no kit line is incomplete, and the judge must flag it.

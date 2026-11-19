@@ -12,7 +12,7 @@ Simple list for the list field kits command. One bullet per kit. No entry here m
 
 ## Example entries
 
-These two entries show the format only. They are examples, not a claim of coverage.
+These two entries show the format only. They are examples, not a claim of coverage. No folder path is shown here, because no kit folder exists in this repo yet. Do not read a path into these lines.
 
-- Research brief kit: research briefs and evidence synthesis, draft, kits/research-brief/
-- Handover persistent loop kit: fix loop for a run, classify failure, distinct approach ladder, loop budget, fresh verifier each cycle, draft, kits/handover-persistent-loop/
+- Research brief kit: research briefs and evidence synthesis, draft, no path yet
+- Handover persistent loop kit: fix loop for a run, classify failure, distinct approach ladder, loop budget, fresh verifier each cycle, draft, no path yet
