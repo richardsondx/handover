@@ -79,7 +79,7 @@ Detail: references/execution.md. [Advisory until Stage 2 harness ships]
 
 ## Commit, check CLI, brief
 
-Detail: references/brief-template.md.
+Detail: references/brief-template.md. [Advisory until Stage 2 harness ships]
 - Commit is the finish line for each unit: verify first, on the real artifact, with the unit check. Then commit that unit alone. One commit holds one unit. Conventional Commits: `type(scope): subject`. A commit is local only. [Advisory until Stage 2 harness ships]
 - Every field kit ships an executable check CLI for its field: launch, doctor, drive, evidence, cleanup. A CLI must prove itself end to end once before the kit counts as proven. [Advisory until Stage 2 harness ships]
 - Every spawn carries a full brief. Brief fields: GOAL, SCOPE, CONTEXT, ACCEPTANCE, VERIFY, TIMEBOX, FORBIDDEN, REPORT, STANDING. [Advisory until Stage 2 harness ships]
@@ -122,7 +122,7 @@ Detail: references/chat-presentation.md. Governs what the user sees in chat. Cha
 
 ## Step 3. Execute, narrow supervised
 
-Detail: references/execution.md.
+Detail: references/execution.md. [Advisory until Stage 2 harness ships]
 - Coordinator owns the plan, execution record, and every spawn. [Advisory until Stage 2 harness ships]
 - Separation of powers: author is never verifier. Judge runs in a fresh context. [Harness-enforced: fresh-context spawn]
 - Decision trail: one append-only log, one line per decision, with pointer to evidence, never a paragraph. [Advisory until Stage 2 harness ships]
@@ -136,7 +136,7 @@ Detail: references/execution.md.
 
 ## Step 4. Verify, before any claim of done
 
-Detail: references/verification.md.
+Detail: references/verification.md. [Advisory until Stage 2 harness ships]
 - Deterministic checks first where available. Test verification with known bad artifacts. Default is every known bad case in the test set must be rejected. [Advisory until Stage 2 harness ships]
 - Proof run after edits. After any edit to the skill, run one real task with the new text. A skill with no proof run after its last edit is a draft. [Advisory until Stage 2 harness ships]
 - Dead-end report, short by default: what stopped, actual status, spent and remaining budget, what was tried, what would unblock it, and options, each flagged as needing reapproval or not. [Advisory until Stage 2 harness ships]
@@ -146,7 +146,7 @@ Detail: references/verification.md.
 
 ## Step 5. Field kit generator, inspect, generate, prove, maintain
 
-Detail: references/field-kit-spec.md.
+Detail: references/field-kit-spec.md. [Advisory until Stage 2 harness ships]
 1. Inspect: read the task, available materials, domain standards, tools, and environment. Identify artifact, recipient, failure modes, permitted actions, and independently checkable evidence. [Advisory until Stage 2 harness ships]
 2. Generate: create a project-local kit with router, task playbooks, domain principles, role definitions, verification and cleanup routines, and capability map. Every kit needs a lever, not just prose: an executable check CLI for the field. [Advisory until Stage 2 harness ships]
 3. Prove: run the kit on one real, authorized task. Check the resulting artifact independently against the agreed predicate, using the check CLI. If work cannot pass within the loop budget, hand over a dead-end report, not a claim that the kit works. [Advisory until Stage 2 harness ships]

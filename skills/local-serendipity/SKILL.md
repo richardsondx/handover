@@ -96,7 +96,7 @@ List the other explanations for the observation. For each one, state whether the
 
 Reject at least 1 coincidence before you move on. A coincidence looks meaningful at first glance but has no link to the work. Name the coincidence, state why it is a coincidence, and drop it. If you cannot name one, look again at what else happened at the same time.
 
-A finding that still has a live rival explanation is not settled. Name the rival, and state what test would settle it. Do not hide the rival from the record. The test that would settle the rival is a proposal for the next unit or human gate, not an instruction to run it.
+A finding that still has a live rival explanation is not settled. Name the rival, and state what test would settle it. Do not hide the rival from the record. The test that would settle the rival is a proposal for the next unit or human gate, not an instruction to run it. It must not run unless it is read-only, or listed exactly in the Stage 2 manifest, with action, destination, payload or template, limit, and condition.
 
 ### Step 6: Hand the finding on
 

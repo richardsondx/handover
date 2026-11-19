@@ -2,6 +2,8 @@
 
 Full v7 text for what the user sees in chat. The core (SKILL.md) states each rule in short form with its tag. This file is part of the skill. It never relaxes a core rule.
 
+Where this text describes harness behavior in the present tense (the harness decides whether a choice is inside the envelope), that behavior is advisory until the Stage 2 harness ships. The core Tags section governs: no rule that needs the Stage 2 harness carries the Harness-enforced tag.
+
 This section governs what the user sees in chat. It changes words and order only. It does not change the plan, the checks, the budget, or the verdict on substance. No material term moves behind a link. If a term cannot fit on the first screen, it goes on a second short screen before approval, never behind See full spec.
 
 ## How Handover talks to you, full text
