@@ -64,6 +64,11 @@ Do not follow an observation that fails all 3 checks. A one off event with no li
 
 Name a small test that checks the observation. A small test runs in one session, costs little, and gives a clear result. State what the test will do. State what result would confirm the observation, and what result would break it.
 
+**Authority split for this test.**
+
+- (a) Authorized execution. Run the test only when it is read-only, or when the action is listed exactly in the Stage 2 manifest, with action, destination, payload or template, limit, and condition. A read-only check reads, observes, or measures. It does not change, publish, send, pay, delete, or deploy anything.
+- (b) Test specification or proposal. When the test needs an action outside the manifest, do not run it. Write the test as a runnable predicate: the test, the result that would confirm with its number, and the result that would break it with its number. Then write a manifest action proposal for the next unit or human gate: the exact action, destination, payload or template, limit, and condition, so the next approval can list it. Hand the specification and the proposal to the next unit or human gate with the record, marked untested. Do not record a result for a test that did not run.
+
 - Test: what the test does, in one or two sentences.
 - Confirms: the result that would confirm the observation, with a number where one exists.
 - Breaks: the result that would break the observation, with a number where one exists.
@@ -91,7 +96,7 @@ List the other explanations for the observation. For each one, state whether the
 
 Reject at least 1 coincidence before you move on. A coincidence looks meaningful at first glance but has no link to the work. Name the coincidence, state why it is a coincidence, and drop it. If you cannot name one, look again at what else happened at the same time.
 
-A finding that still has a live rival explanation is not settled. Name the rival, and state what test would settle it. Do not hide the rival from the record.
+A finding that still has a live rival explanation is not settled. Name the rival, and state what test would settle it. Do not hide the rival from the record. The test that would settle the rival is a proposal for the next unit or human gate, not an instruction to run it.
 
 ### Step 6: Hand the finding on
 

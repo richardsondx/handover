@@ -61,6 +61,11 @@ A change that alters two parts at once does not count. Split it into two changes
 
 Test each change from Step 2, one at a time. Run the design with the change in place. Check the measure. Keep a change only if the measure improves. Drop a change if the measure stays the same or gets worse.
 
+**Authority split for this test.**
+
+- (a) Authorized execution. Run the test only when it is read-only, or when the action is listed exactly in the Stage 2 manifest, with action, destination, payload or template, limit, and condition. A read-only check reads, observes, or measures. It does not change, publish, send, pay, delete, or deploy anything.
+- (b) Test specification or proposal. When the test needs an action outside the manifest, do not run it. Write the test as a runnable predicate: the change, the measure with its number, the value that would count as kept, and the value that would count as dropped. Then write a manifest action proposal for the next unit or human gate: the exact action, destination, payload or template, limit, and condition, so the next approval can list it. Hand the specification and the proposal to the next unit or human gate with the record, marked untested. In the record, write the Result as not run. Do not keep or drop a change on a test that did not run.
+
 Round protocol: sequential hill-climbing. Each change is tested on top of the latest kept design, so each result already includes every change kept before it in the same round. A kept change stays in for the next test. A dropped change is taken out before the next test. The end value of a round is the value after the last test in that round.
 
 - Change: the change tested.
@@ -86,6 +91,11 @@ Run at least 2 rounds before you stop. One round cannot show whether the gains h
 ### Step 5: Watch for a change that helps once but blocks later gains
 
 Check each kept change again after later rounds. A change can help in its own round and still block later improvement. Name such a change in one sentence. Drop it if a later round shows it blocks a bigger gain.
+
+**Authority split for this test.**
+
+- (a) Authorized execution. Test the design without the change only when the test is read-only, or when the action is listed exactly in the Stage 2 manifest, with action, destination, payload or template, limit, and condition. A read-only check reads, observes, or measures. It does not change, publish, send, pay, delete, or deploy anything.
+- (b) Test specification or proposal. When the test needs an action outside the manifest, do not run it. Write the test as a runnable predicate: the change, the measure with its number, the value without the change that would count as dropping it, and the value that would count as keeping it. Then write a manifest action proposal for the next unit or human gate: the exact action, destination, payload or template, limit, and condition, so the next approval can list it. Hand the specification and the proposal to the next unit or human gate with the record, marked untested. In the record, write the Decision as untested, not kept or dropped. Do not drop a change until the test runs and the measure is checked.
 
 - Change: the change, in one sentence.
 - Early gain: the improvement it gave in its own round, with its number.

@@ -83,6 +83,11 @@ Set a weak contrary line aside only with a stated reason. Never drop a contrary 
 
 Name a new concrete case you did not use in Steps 1 to 4. State what the converged answer predicts in that case. Then check the prediction against what happens.
 
+**Authority split for this test.**
+
+- (a) Authorized execution. Run the test only when it is read-only, or when the action is listed exactly in the Stage 2 manifest, with action, destination, payload or template, limit, and condition. A read-only check reads, observes, or measures. It does not change, publish, send, pay, delete, or deploy anything.
+- (b) Test specification or proposal. When the test needs an action outside the manifest, do not run it. Write the test as a runnable predicate: the case, the prediction with its number, the observation that would count as a pass, and the observation that would count as a fail. Then write a manifest action proposal for the next unit or human gate: the exact action, destination, payload or template, limit, and condition, so the next approval can list it. Hand the specification and the proposal to the next unit or human gate with the record, marked untested. In the record, write the Observation as not run. An untested test has no score. Do not report a fit for a test that did not run.
+
 A concrete case counts only if it names a real place, a real time, and a real action. The action needs a number that can be checked. A case with no place, no time, and no checkable number does not count. Do not score an answer on a case that does not count. Canonical definition: skills/local-handover/router/router-rules.md.
 
 - New case: the case, in plain words, with its place, time, and action.
