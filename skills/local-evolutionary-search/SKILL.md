@@ -1,5 +1,5 @@
 ---
-name: evolutionary-search
+name: local-evolutionary-search
 description: Start from a working design, make small changes, keep changes that improve it, drop changes that do not, repeat rounds, and stop when no change improves it.
 ---
 
@@ -60,6 +60,8 @@ A change that alters two parts at once does not count. Split it into two changes
 ### Step 3: Test each change and keep or drop it
 
 Test each change from Step 2, one at a time. Run the design with the change in place. Check the measure. Keep a change only if the measure improves. Drop a change if the measure stays the same or gets worse.
+
+Round protocol: sequential hill-climbing. Each change is tested on top of the latest kept design, so each result already includes every change kept before it in the same round. A kept change stays in for the next test. A dropped change is taken out before the next test. The end value of a round is the value after the last test in that round.
 
 - Change: the change tested.
 - Result: the new value of the measure, with its number.
@@ -131,32 +133,32 @@ Do not use this skill when a full round keeps no change and you keep going anywa
 
 Working design: a courier drives one route each morning, with 12 stops in fixed order. Measure: total driving time, in minutes. Starting value: 74 minutes, measured from the driver log for the last 5 mornings. Goal: under 60 minutes.
 
-Round 1 changes, one at a time. Change 1: move stop 7 to just after stop 3. Expectation: saves 4 minutes. Change 2: start 15 minutes earlier, at 7:45. Expectation: saves 3 minutes. Change 3: skip the toll road and take the river road. Expectation: saves 2 minutes. Change 4: load the van in stop order the night before. Expectation: saves 5 minutes.
+Round 1 changes, one at a time, tested in order on top of the latest kept design. Change 1: move stop 7 to just after stop 3. Expectation: saves 4 minutes. Change 2: start 15 minutes earlier, at 7:45. Expectation: saves 3 minutes. Change 3: skip the toll road and take the river road. Expectation: saves 2 minutes. Change 4: load the van in stop order the night before. Expectation: saves 5 minutes.
 
-Round 1 results. Change 1: 70 minutes, kept, saved 4 minutes. Change 2: 71 minutes, kept, saved 3 minutes. Change 3: 76 minutes, dropped, cost 2 minutes. Change 4: 66 minutes, kept, saved 5 minutes. End of round 1: 66 minutes, down from 74 minutes.
+Round 1 results. Change 1: 70 minutes, kept, saved 4 minutes, from 74 minutes. Change 2: 67 minutes, kept, saved 3 minutes, from 70 minutes. Change 3: 69 minutes, dropped, cost 2 minutes, from 67 minutes, back to 67 minutes. Change 4: 62 minutes, kept, saved 5 minutes, from 67 minutes. End of round 1: 62 minutes, down from 74 minutes, a saving of 12 minutes.
 
 Round 2 changes. Change 1: move stop 11 to just after stop 9. Expectation: saves 3 minutes. Change 2: start 15 minutes earlier still, at 7:30. Expectation: saves 2 minutes. Change 3: swap stops 5 and 6. Expectation: saves 1 minute.
 
-Round 2 results. Change 1: 63 minutes, kept, saved 3 minutes. Change 2: 63 minutes, dropped, saved 0 minutes. Change 3: 62 minutes, kept, saved 1 minute. End of round 2: 62 minutes.
+Round 2 results. Change 1: 59 minutes, kept, saved 3 minutes, from 62 minutes. Change 2: 59 minutes, dropped, saved 0 minutes, from 59 minutes. Change 3: 58 minutes, kept, saved 1 minute, from 59 minutes. End of round 2: 58 minutes.
 
 Round 3 changes. Change 1: move stop 2 to the end of the route. Expectation: saves 2 minutes. Change 2: take the toll road for the last 3 stops only. Expectation: saves 1 minute.
 
-Round 3 results. Change 1: 64 minutes, dropped, cost 2 minutes. Change 2: 61 minutes, kept, saved 1 minute. End of round 3: 61 minutes.
+Round 3 results. Change 1: 60 minutes, dropped, cost 2 minutes, from 58 minutes, back to 58 minutes. Change 2: 57 minutes, kept, saved 1 minute, from 58 minutes. End of round 3: 57 minutes.
 
-The blocking change: starting at 7:45 helped once, saving 3 minutes in round 1. In round 2, starting at 7:30 saved 0 minutes. The early start helped once because the roads were clear. But it blocked later gains. The driver then waited at stop 1, which opens at 8:00. The design without the 7:45 start, tested in round 2, still ran 63 minutes. So the early start was kept, but the still earlier start was dropped.
+The blocking change: the 7:45 start helped once, saving 3 minutes in round 1, from 70 minutes to 67 minutes. But it blocks a bigger gain. Change B: visit stop 1 second instead of first, because stop 1 opens at 8:00 and the early van waits there. Change B saves 4 minutes, but only if the van starts at 8:00, not at 7:45. Keeping the 7:45 start prevents adopting change B. Test both together: drop the 7:45 start and add change B. Dropping the early start alone costs 3 minutes, from 57 minutes to 60 minutes. Adding change B then saves 4 minutes, from 60 minutes to 56 minutes. Dropping A plus adding B is a net win: 56 minutes beats 57 minutes by 1 minute. So the 7:45 start is dropped and change B is kept. End value after this swap: 56 minutes.
 
-Round 4: no new change improved the time. Change 1: reorder stops 4 and 5, 61 minutes, dropped. Change 2: load the van in reverse stop order, 62 minutes, dropped. A full round kept no change, so the search stops.
+Round 4: no new change improved the time. Change 1: reorder stops 4 and 5, 56 minutes, dropped. Change 2: load the van in reverse stop order, 57 minutes, dropped. A full round kept no change, so the search stops.
 
-Final design: 12 stops in the new order. The van loads in stop order. The start is 7:45. The toll road serves the last 3 stops only. Final value: 61 minutes. Improvement: 13 minutes, from 74 minutes to 61 minutes. The goal of under 60 minutes was not met, and the record says so.
+Final design: 12 stops in the new order, with stop 1 visited second. The van loads in stop order. The start is 8:00. The toll road serves the last 3 stops only. Final value: 56 minutes. Improvement: 18 minutes, from 74 minutes to 56 minutes. The goal of under 60 minutes was met.
 
 Handoff record:
 
 - Design: one morning route with 12 stops in fixed order, starting value 74 minutes.
 - Measure: total driving time, in minutes.
 - Rounds: 4 rounds run, round 1 kept 3 changes, round 2 kept 2 changes, round 3 kept 1 change, round 4 kept 0 changes.
-- Final design: new stop order, van loaded in stop order, start at 7:45, toll road for the last 3 stops.
-- Improvement: 13 minutes, from 74 minutes to 61 minutes.
-- Dropped: the river road, the 7:30 start, moving stop 2 to the end, reordering stops 4 and 5, reverse loading.
+- Final design: new stop order with stop 1 second, van loaded in stop order, start at 8:00, toll road for the last 3 stops.
+- Improvement: 18 minutes, from 74 minutes to 56 minutes.
+- Dropped: the river road, the 7:30 start, moving stop 2 to the end, reordering stops 4 and 5, reverse loading, and the 7:45 start, dropped in Step 5 because it blocked change B.
 
 ## Commands
 

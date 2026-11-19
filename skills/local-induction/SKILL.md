@@ -1,5 +1,5 @@
 ---
-name: induction
+name: local-induction
 description: Infer a general rule from observed cases, name its scope, name what would break it, and reject rules that overreach the cases.
 ---
 
@@ -30,13 +30,13 @@ Ask these three questions to pick.
 
 If no decision follows, answer directly. If the step is low impact and easy to reverse, use the light check. If the step is high impact or hard to reverse, use the full use.
 
-## How to use the steps
+## Steps in order
 
 Work the steps in order. Write each result down before you move on. Do not skip Step 1. Without cases, a rule is a guess, and a guess is not a rule.
 
 Collect cases before you state a rule. Do not state the rule first and then pick cases that fit it. That order hides the cases that break the rule.
 
-## Step 1: Collect observed cases
+### Step 1: Collect observed cases
 
 List each case in plain words. Each case needs a source, a number, or a concrete test. Record all three where you have them.
 
@@ -47,7 +47,7 @@ List each case in plain words. Each case needs a source, a number, or a concrete
 
 Collect at least 3 cases before you state a rule. Fewer than 3 cases cannot support a general rule. If you have fewer than 3 cases, stop and gather more cases first.
 
-## Step 2: State a candidate rule
+### Step 2: State a candidate rule
 
 Write the rule in one sentence, in plain words. The rule must say what happens, and under what conditions it happens. A rule with no condition is too wide. A rule that only repeats one case is too narrow.
 
@@ -57,7 +57,7 @@ Write the rule in one sentence, in plain words. The rule must say what happens, 
 
 Write the rule before you check it. Do not change the rule after you see the new cases in Step 5. If the new cases break the rule, mark the rule broken. Then state a new rule, and count it against the stop rule limit.
 
-## Step 3: Name the scope of the rule
+### Step 3: Name the scope of the rule
 
 Write the scope in plain words. The scope names where the rule applies, and where it does not apply. Name the cases it covers. Name the cases it does not cover.
 
@@ -67,7 +67,7 @@ Write the scope in plain words. The scope names where the rule applies, and wher
 
 If the scope is wider than the cases you collected, narrow it. A rule cannot cover cases you have not seen. State that limit in the record.
 
-## Step 4: Name what would break the rule
+### Step 4: Name what would break the rule
 
 Write one breaker for the rule. A breaker is a concrete case that would show the rule is wrong. Name the case, the source that would show it, and the number it would need.
 
@@ -77,7 +77,7 @@ Write one breaker for the rule. A breaker is a concrete case that would show the
 
 If you cannot name a breaker, the rule cannot be tested. Mark it untestable and drop it. Do not keep an untestable rule.
 
-## Step 5: Check the rule against new cases
+### Step 5: Check the rule against new cases
 
 Find new cases you did not use in Step 1. Check each new case against the rule. Record whether each case fits the rule or breaks it.
 
@@ -90,7 +90,7 @@ Score the rule as fits out of total new cases checked. Write the score as a coun
 
 One break does not always kill a rule. Check whether the break sits inside the scope from Step 3. If the break sits outside the scope, the rule stands, and the scope stands. If the break sits inside the scope, the rule is broken. Mark it broken and stop, or narrow the scope and test again.
 
-## Step 6: Hand the rule on
+### Step 6: Hand the rule on
 
 Hand on the rule only if it survived Step 5. The handoff record must hold all six fields below. A handoff missing any field is not complete.
 
@@ -123,7 +123,7 @@ Do not use this skill when a new case inside the scope breaks the rule. Do not k
 
 ## Worked example: the shop that sells out of bread by 10:00
 
-Cases come from the shop sales log for the last four weeks. The shop stocks 40 loaves of white bread each day. On the last 4 Saturdays, all 40 loaves sold by 9:40, 9:50, 9:35, and 9:55. On weekdays, the same 40 loaves lasted until 14:00 or later. Source: the shop sales log, dates and times as listed.
+Cases come from two sources, so the rule does not rest on one record alone. Source 1: the shop sales log for the last four weeks. The shop stocks 40 loaves of white bread each day. On the last 4 Saturdays, all 40 loaves sold by 9:40, 9:50, 9:35, and 9:55. On weekdays, the same 40 loaves lasted until 14:00 or later. Source 2: the baker tray count, the end-of-day count of loaves left on the tray. It shows 0 loaves left on all 4 Saturdays, and 12 or more loaves left on weekdays. The two sources agree: the bread ran out early on Saturdays and not on weekdays.
 
 Candidate rule: On Saturdays, this shop sells all 40 loaves of white bread before 10:00.
 
@@ -141,7 +141,7 @@ Handoff record:
 - Scope: covers Saturdays at this shop, white bread only, with 40 loaves in stock.
 - Does not cover: weekdays, other bread types, or other shops.
 - Breaker: a Saturday when loaves of white bread remain unsold after 10:00.
-- Cases: 4 Saturdays, all 40 loaves sold by 9:40, 9:50, 9:35, and 9:55.
+- Cases: 4 Saturdays, all 40 loaves sold by 9:40, 9:50, 9:35, and 9:55, from the shop sales log, with the baker tray count agreeing at 0 loaves left on all 4 Saturdays.
 - New cases: 2 Saturdays, sold out at 9:45 and 9:52, both fit the rule.
 - Score: 2 fits out of 2 new cases checked.
 

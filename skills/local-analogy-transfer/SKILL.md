@@ -1,5 +1,5 @@
 ---
-name: analogy-transfer
+name: local-analogy-transfer
 description: Map a shared structure from a source case to a target case, state what carries over and what does not, and reject surface-similar sources with a different structure.
 ---
 
@@ -103,7 +103,7 @@ If the new case breaks the transfer, mark the transfer broken. Go back to Step 2
 Hand on the transfer only if it survived Step 5. The handoff record must hold all six fields below. A handoff missing any field is not complete.
 
 - Target: the target problem from Step 1, with its goal and block.
-- Source case: the source case from Step 2, with where it came from and its result.
+- Source cases: the source cases from Step 2, each with where it came from and its result. The record names every source case used, not only the first one.
 - Shared structure: the shared links from Step 3, each marked holds or does not hold.
 - Carries over: the list from Step 4, what carries over and what does not.
 - New case: the new case from Step 5, with its prediction, observation, and result.
@@ -148,9 +148,9 @@ New concrete case: the next Saturday, the shop books 12 repairs ahead by phone o
 Handoff record:
 
 - Target: cut the Saturday morning wait at the bike shop from 40 minutes to under 20 minutes.
-- Source case: the bakery on Main Street, orders taken the night before, wait fell from 25 minutes to 5 minutes.
+- Source cases: the bakery on Main Street, orders taken the night before, wait fell from 25 minutes to 5 minutes; and the clinic, 15 minute slots, wait fell from 30 minutes to 10 minutes.
 - Shared structure: bookable ahead, holds. Fixed time slots, holds. Same staff all day, does not hold.
-- Carries over: booking ahead and fixed time slots. Does not carry over: the clinic staffing pattern.
+- Carries over: booking ahead, from the bakery; fixed time slots, from the clinic. Does not carry over: the clinic staffing pattern, because the shop staffing differs on Saturdays.
 - New case: 12 repairs booked ahead in 30 minute slots, average wait 15 minutes, fits the transfer.
 - Score: 1 fit out of 1 new case checked.
 

@@ -1,5 +1,5 @@
 ---
-name: consilience
+name: local-consilience
 description: Gather independent lines of evidence, state what each line says, name where they converge, weigh any contrary line, and state the answer the convergence supports.
 ---
 
@@ -137,23 +137,23 @@ Line 2: the foot count. Source: the door counter, October Saturdays. Number: ave
 
 Line 3: the street works notice. Source: the city notice posted on the shop door, dated October 2. Number: the road outside the shop closed to cars for 4 Saturdays in October.
 
-Line 4: the weather log. Source: the city weather record for October Saturdays. Number: 3 of the 4 Saturdays were dry and mild, so the weather was not the cause.
+Line 4: the delivery log. Source: the delivery app log for the same area, October Saturdays. Number: average Saturday delivery orders 55, down from 90 in September, a fall of 35 orders, even though delivery bikes used the bike lane and bypassed the car closure.
 
-What each line says. Line 1 says sales fell by 440 dollars on Saturdays. Its limit: it shows the fall, not the cause. Line 2 says fewer visitors came, down by 80 per Saturday. Its limit: it shows the count, not why they stayed away. Line 3 says the road closed to cars for 4 Saturdays. Its limit: it shows the closure, not how many drivers stayed away. Line 4 says the weather was fine on 3 of 4 Saturdays. Its limit: it rules out weather, but it does not name the cause.
+What each line says. Line 1 says sales fell by 440 dollars on Saturdays. Its limit: it shows the fall, not the cause. Line 2 says fewer visitors came, down by 80 per Saturday. Its limit: it shows the count, not why they stayed away. Line 3 says the road closed to cars for 4 Saturdays. Its limit: it shows the closure, not how many drivers stayed away. Line 4 says delivery orders also fell, by 35 per Saturday, even though delivery bikes bypassed the car closure. Its limit: it shows a fall the closure alone does not explain, because the bikes did not use the closed road.
 
 Convergence: 3 of 4 lines support the answer that the road closure cut Saturday sales. The point of agreement: the falls in sales and visitors both started on October 3. That was the first Saturday of the closure. Both stayed low for all 4 Saturdays.
 
-Contrary line: Line 4 points the other way, because fine weather should have raised sales. Its weight is weak, because fine weather cannot bring cars down a closed road. Decision: set aside, with the reason that the closure blocks the cars the weather would have brought.
+Contrary line: Line 4 points the other way, because delivery orders fell even though delivery bikes bypassed the car closure, so the closure alone cannot explain that fall. Its weight is weak, because only one line points the other way, it covers delivery orders only, and the bikes still had to cross the closed junction to reach the shop, so the closure still touched them. Decision: set aside, with the reason that the delivery fall is small and the bikes still crossed the closed junction, while lines 1 to 3 tie the main fall to the closure.
 
 New concrete case: the next Saturday, November 7, the road reopens. The case names a real place, the corner shop. It names a real time, Saturday November 7. It names a real action with checkable numbers: Saturday sales and visitor count. Prediction: sales rise back above 1,500 dollars and visitors rise above 260. Observation: sales 1,580 dollars, visitors 275. Result: fits the answer. Score: 1 fit out of 1 new case checked.
 
 Handoff record:
 
 - Question: why did Saturday sales at the corner shop fall in October?
-- Lines: till log, foot count, street works notice, weather log, each with its source and number.
-- What each line says: sales down 440 dollars, visitors down 80, road closed 4 Saturdays, weather fine on 3 of 4 Saturdays.
+- Lines: till log, foot count, street works notice, delivery log, each with its source and number.
+- What each line says: sales down 440 dollars, visitors down 80, road closed 4 Saturdays, delivery orders down 35 even though delivery bikes bypassed the car closure.
 - Convergence: the road closure cut Saturday sales, supported by 3 of 4 lines.
-- Contrary line: the weather log, weak, set aside because fine weather cannot bring cars down a closed road.
+- Contrary line: the delivery log, weak, set aside because the delivery fall is small and the bikes still crossed the closed junction.
 - Score: 1 fit out of 1 new case checked.
 
 ## Commands

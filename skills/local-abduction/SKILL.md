@@ -1,5 +1,5 @@
 ---
-name: abduction
+name: local-abduction
 description: Take a ranked anomaly and invent testable explanations for it, rank them by fit times testability times simplicity, and hand the best ones on with predictions and a killer test each.
 ---
 
@@ -32,13 +32,13 @@ Ask these three questions to pick.
 
 If no decision follows, answer directly. If the step is low impact and easy to reverse, use the light check. If the step is high impact or hard to reverse, use the full generation.
 
-## How to use the steps
+## Steps in order
 
 Work the steps in order. Write each result down before you move on. Do not skip Step 1. Without a restated anomaly, explanations drift toward the model you already hold, and the observation gets forgotten.
 
 Judge fit against the observation, not against the model. An explanation that saves the model but ignores what was actually observed is a bad explanation, however neat it sounds.
 
-## Step 1: Restate the anomaly and what would make it unsurprising
+### Step 1: Restate the anomaly and what would make it unsurprising
 
 Write the anomaly in plain words, in two or three sentences: what the model predicted, what was observed, and the size of the gap. Then write one sentence that names what would make the observation unsurprising. That sentence is the target. Every explanation in Step 2 must answer it.
 
@@ -50,7 +50,7 @@ Write the anomaly in plain words, in two or three sentences: what the model pred
 
 If you cannot write the unsurprising sentence, you do not yet understand the anomaly. Go back to the handoff record before you generate explanations.
 
-## Step 2: Generate at least 3 distinct explanations from different families
+### Step 2: Generate at least 3 distinct explanations from different families
 
 Generate at least 3 explanations, and make them distinct. Distinct means they point at different causes, not the same cause in different words. Draw them from different families, so you do not generate three versions of one idea.
 
@@ -64,7 +64,7 @@ The five families:
 
 Write each explanation in one or two sentences, in plain words. Name the family for each one. Do not rank yet. Do not argue for a favourite yet. Generating and ranking at the same time makes you keep the explanations you already like and drop the rest.
 
-## Step 3: For each explanation, list its load-bearing claims and the source that would settle each
+### Step 3: For each explanation, list its load-bearing claims and the source that would settle each
 
 For each explanation, list the claims it rests on. Mark each claim as load-bearing or not load-bearing. A claim is load-bearing if the explanation fails when the claim is false.
 
@@ -78,7 +78,7 @@ At least one load-bearing claim per explanation must name a source that would se
 
 Do not invent a source. A source you cannot name is untestable, not settled.
 
-## Step 4: For each explanation, derive at least 1 prediction that follows if it is true
+### Step 4: For each explanation, derive at least 1 prediction that follows if it is true
 
 For each explanation, derive at least 1 prediction that follows if the explanation is true. A prediction names something you would expect to observe, under what conditions, and by how much where a number exists. The prediction must be new: it must say something beyond the observation that started the hunt. An explanation that only repeats the anomaly predicts nothing. The condition must name a concrete case: a specific input, a specific place, a specific time, or a specific record. A prediction whose condition names no concrete case is vague. A vague prediction does not count as a prediction.
 
@@ -91,7 +91,7 @@ Rule: an explanation with no prediction is marked story, not explanation, and dr
 
 A prediction that only the favourite explanation makes is worth more than a prediction every explanation makes. Note which predictions separate the explanations from each other. The next step tests those first.
 
-## Step 5: Rank explanations by fit times testability times simplicity
+### Step 5: Rank explanations by fit times testability times simplicity
 
 For each surviving explanation, score three things on a scale of 1 to 5.
 
@@ -103,7 +103,7 @@ Score each explanation as fit times testability times simplicity. The highest pr
 
 Record the three scores and the product for each explanation. Do not rank by feeling. Show the numbers.
 
-## Step 6: Hand the top explanations on
+### Step 6: Hand the top explanations on
 
 Hand on the top-ranked explanations, up to 3. The handoff record must hold all seven fields below for each explanation handed on. A handoff missing any field is not complete.
 
@@ -163,7 +163,9 @@ Ranked handoff:
 
 - Rank 1, wrong timetable. Predictions: the bus leaves Main Street about 20 minutes late on Fridays and takes the usual 20 minutes to the station. Killer test: compare the driver roster with the posted timetable for next Friday. If they match, this explanation dies.
 - Rank 2, Friday market. Predictions: the bus is slow only on the Main Street stretch on Fridays, and on time on a Friday with no market. Killer test: time the bus along Main Street on the next Friday, and check the market permit. If the bus is on time through Main Street, this explanation dies.
-- Rank 3, school traffic. Predictions: the delay appears only near the station, and vanishes on a Friday when school is out. Killer test: time the bus near the station on the next Friday, and check the school calendar. If the station approach is clear while the bus is still late, this explanation dies.
+- Rank 3, Friday road works. Predictions: the bus is slow on Main Street on Fridays, and the delay ends when the road works end. Killer test: read the city road-works schedule for Main Street, and time the bus past the works on the next Friday. If no works are scheduled, this explanation dies.
+
+School traffic scores the same product as road works, 48, so the tie-break decides it. Road works has fit 4 and school traffic has fit 3, so road works ranks third and school traffic ranks fourth. Only the top 3 are handed on, so school traffic is not handed on.
 
 ## Commands
 
