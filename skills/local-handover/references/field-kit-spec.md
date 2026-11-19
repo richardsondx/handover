@@ -1,0 +1,19 @@
+# Field kit spec
+
+Full v7 text for field kit generation. The core (SKILL.md) states each rule in short form with its tag. This file is part of the skill. It never relaxes a core rule.
+
+## Inspect, generate, prove, maintain
+
+1. Inspect: read the task, available materials, domain standards, tools, and environment. Identify artifact, recipient, failure modes, permitted actions, and independently checkable evidence. Ask the user only for unresolved human decisions from Step 1.
+2. Generate: create a project-local kit with router, task playbooks, domain principles, role definitions, verification and cleanup routines, and capability map. Every kit needs a lever, not just prose: a tool or API the agent can actually drive, plus a map of the domain it operates on. The lever is an executable check CLI for the field, with launch, doctor, drive, evidence, and cleanup commands. Name the CLI path and its commands here. Remap roles to Muse models and tools that actually exist, never to Cursor model slugs or paths. Each kit names its end-to-end check for the field: exact steps a human user would take on the real artifact, and what passing looks like.
+3. Prove: run the kit on one real, authorized task. Check the resulting artifact independently against the agreed predicate, using the check CLI. A failed check starts a fix cycle under the persistent loop, with a distinct approach and a fresh verifier each cycle, up to the loop budget. If work cannot pass within the loop budget, hand over a dead-end report with what was tried and what would unblock it, not a claim that the kit works. One passing task does not establish coverage of a field.
+4. Maintain: record decisions and failures, correct a recurring mistake class at the highest effective level, and revalidate after meaningful changes to kit, sources, tools, or artifact. When a kit is generated or reused, record it in the field kit index, one bullet per kit with name, field in a few words, version digest, proof status (proven, draft, or proof failed), and kit folder path or repo URL if published. Index is a simple list file named FIELD-KITS.md kept in the folder with this skill, not a claim that every field is covered. The list field kits command reads this index.
+
+- Minimum viable kit, before any claim of operational: one router, a few genuinely distinct playbooks for the field, concise principles, coordinator, generator, verifier, and judge roles, evidence and verdict templates, stuck and resume ladder, cleanup, capability map, and check CLI. Add dozens of workflows only as distinct, tested task patterns justify them, not as generated inventory.
+- Research capability map, pilot: connect question types, such as comparison, landscape review, or fact check, to search routes, source requirements, synthesis methods, checks, and known limits. Evidence for a research brief is accessible source records or permitted snapshots, search queries and dates, inclusion and exclusion decisions, claim-to-source links, and checks for source quality, recency, contradictions, and retractions where relevant.
+
+## Kit disclosure, full text
+
+- Name the kit at three points, every run, no exceptions: in the Stage 1 package, at the start of execution, and in the final report. If no kit was created or reused, say so in one line at each point. Never run silently on a kit.
+- Each mention gives: kit name, created or reused, proof status (proven, draft, or proof failed), and workspace path. Example: "Reusing Research brief kit, proven, <workspace path of the kit>". A kit with no path is not a kit, it is a claim.
+- Kits live in the project workspace, not in the skill folder. The skill folder holds only this skill and the index. The index is FIELD-KITS.md in the skill folder. It lists one bullet per kit, with name, field, proof status, and workspace path. Record a kit in the index the moment it is created or reused, before the run moves on.
