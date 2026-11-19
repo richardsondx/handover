@@ -1,5 +1,5 @@
 ---
-name: deduction
+name: local-deduction
 description: Start from stated premises, derive what must follow, show each step in the chain, and name any fallacy that breaks the chain.
 ---
 
@@ -30,13 +30,13 @@ Ask these three questions to pick.
 
 If no decision follows, answer directly. If the step is low impact and easy to reverse, use the light check. If the step is high impact or hard to reverse, use the full use.
 
-## How to use the steps
+## Steps in order
 
 Work the steps in order. Write each result down before you move on. Do not skip Step 1. Without stated premises, a conclusion is a guess, and a guess is not a deduction.
 
 Each chain step must follow from earlier steps only. A step that brings in a new claim is not a deduction step. Write that new claim down as a new premise, and mark it assumed or sourced, before you use it.
 
-## Step 1: List the premises
+### Step 1: List the premises
 
 Write each premise in one sentence, in plain words. Each premise needs a source, a number, or a concrete test, or it must be marked assumed.
 
@@ -46,7 +46,7 @@ Write each premise in one sentence, in plain words. Each premise needs a source,
 
 If a premise is assumed, say so in the record. An assumed premise does not make the chain wrong. It makes the conclusion rest on that assumption. Name every assumed premise in Step 6.
 
-## Step 2: Check each premise
+### Step 2: Check each premise
 
 For each premise, mark it as sourced or assumed. A sourced premise names its source from Step 1. An assumed premise names no source.
 
@@ -55,7 +55,7 @@ For each premise, mark it as sourced or assumed. A sourced premise names its sou
 
 Do not mark a premise sourced when its source is only your own words. Your own words are not a source. A premise with no named source stays assumed, even if it sounds right.
 
-## Step 3: Build the chain step by step
+### Step 3: Build the chain step by step
 
 Build the chain one step at a time. Number each step. Each step uses only premises from Step 1, or earlier chain steps. Each step states what follows, in one sentence.
 
@@ -65,7 +65,7 @@ Build the chain one step at a time. Number each step. Each step uses only premis
 
 If a step does not follow from what it uses, mark it broken. The chain stops at the broken step. Do not carry a broken step forward into the conclusion.
 
-## Step 4: Check the chain for fallacies by name
+### Step 4: Check the chain for fallacies by name
 
 Check each chain step against the five named fallacies below. Name the fallacy when a step matches one. A step that matches a named fallacy is broken, and the chain stops there.
 
@@ -77,7 +77,7 @@ Check each chain step against the five named fallacies below. Name the fallacy w
 
 Record the check for each step, with the result. A step with no fallacy found is marked clear. A step with a fallacy found is marked broken, with the fallacy named.
 
-## Step 5: State the conclusion and its limits
+### Step 5: State the conclusion and its limits
 
 Write the conclusion in one sentence, in plain words. The conclusion follows only if every chain step holds and every premise holds. Then write its limits in plain words.
 
@@ -87,7 +87,7 @@ Write the conclusion in one sentence, in plain words. The conclusion follows onl
 
 A conclusion built on an assumed premise is conditional. Say so. Do not present a conditional conclusion as certain.
 
-## Step 6: Hand the chain on
+### Step 6: Hand the chain on
 
 Hand on the chain only if no step is broken. The handoff record must hold all six fields below. A handoff missing any field is not complete.
 

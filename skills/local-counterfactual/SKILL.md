@@ -1,5 +1,5 @@
 ---
-name: counterfactual
+name: local-counterfactual
 description: State what would have happened if a key factor differed, name the causal link, reject non-causal factors, and state what evidence would settle the link.
 ---
 

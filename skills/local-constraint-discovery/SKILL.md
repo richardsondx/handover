@@ -1,5 +1,5 @@
 ---
-name: constraint-discovery
+name: local-constraint-discovery
 description: List every constraint, check each candidate against each constraint, reject violators by name, and pick the solution that satisfies all constraints.
 ---
 

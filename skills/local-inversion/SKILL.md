@@ -1,5 +1,5 @@
 ---
-name: inversion
+name: local-inversion
 description: State the inverted question, list what would guarantee failure, and derive workable steps from the inversion.
 ---
 

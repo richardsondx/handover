@@ -1,5 +1,5 @@
 ---
-name: thought-experiments
+name: local-thought-experiments
 description: Test a claim by building an imagined scenario, derive what the scenario shows, and state what it does to the claim.
 ---
 
@@ -30,13 +30,13 @@ Ask these three questions to pick.
 
 If no decision follows, answer directly. If the step is low impact and easy to reverse, use the light check. If the step is high impact or hard to reverse, use the full use.
 
-## How to use the steps
+## Steps in order
 
 Work the steps in order. Write each result down before you move on. Do not skip Step 1. Without a stated claim, a scenario proves nothing, and any result can be read to fit any claim.
 
 Run the scenario from its own rules, not from the claim. A step that assumes the claim is true proves nothing. Each step must follow from the scenario setting and the earlier steps only.
 
-## Step 1: State the claim and its scope
+### Step 1: State the claim and its scope
 
 Write the claim in one sentence, in plain words. Then write its scope in plain words. The scope names where the claim applies, and where it does not apply.
 
@@ -46,7 +46,7 @@ Write the claim in one sentence, in plain words. Then write its scope in plain w
 
 If the claim is vague, rewrite it until it names one clear result. A vague claim cannot be tested by a scenario. A scenario built on a vague claim shows nothing.
 
-## Step 2: Build one scenario
+### Step 2: Build one scenario
 
 Build one scenario that bears on the claim. Name the setting, the actors, and the rules that hold in the scenario. The scenario must be concrete: a named place, a named time, and named actors.
 
@@ -57,7 +57,7 @@ Build one scenario that bears on the claim. Name the setting, the actors, and th
 
 Do not build a scenario that assumes the claim is true. The scenario must be able to show the claim is wrong. If no scenario could show it wrong, the claim cannot be tested this way. Say so and stop.
 
-## Step 3: Run the scenario step by step
+### Step 3: Run the scenario step by step
 
 Run the scenario one step at a time. Number each step. Each step follows from the scenario rules in Step 2, or from earlier steps. Each step states what happens, in one sentence.
 
@@ -67,7 +67,7 @@ Run the scenario one step at a time. Number each step. Each step follows from th
 
 If a step does not follow from the scenario rules, mark it broken. The run stops at the broken step. Do not carry a broken step forward into Step 4.
 
-## Step 4: Derive what the scenario shows
+### Step 4: Derive what the scenario shows
 
 Write what the scenario shows, in one or two sentences, in plain words. Name the result. Name why it follows from the steps in Step 3. Do not add a fact the scenario did not contain.
 
@@ -77,7 +77,7 @@ Write what the scenario shows, in one or two sentences, in plain words. Name the
 
 A scenario shows only what its rules and steps contain. It does not show what would happen under different rules. Say what it leaves open.
 
-## Step 5: State what the result does to the claim
+### Step 5: State what the result does to the claim
 
 Pick exactly one verdict for the claim, from the four below. Give one line of reason for the verdict.
 
@@ -88,7 +88,7 @@ Pick exactly one verdict for the claim, from the four below. Give one line of re
 
 Record the verdict and the reason in one line each. Do not pick two verdicts. Do not soften a kill into a weaken. A kill is a kill.
 
-## Step 6: Hand the verdict on
+### Step 6: Hand the verdict on
 
 Hand on the verdict only if no step in Step 3 is broken. The handoff record must hold all six fields below. A handoff missing any field is not complete.
 

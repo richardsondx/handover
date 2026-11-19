@@ -1,5 +1,5 @@
 ---
-name: possibility-space
+name: local-possibility-space
 description: List the full space of options, prune it by constraint, rank what remains, pick the best with reasons, and name what was rejected and why.
 ---
 

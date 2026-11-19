@@ -1,5 +1,5 @@
 ---
-name: serendipity
+name: local-serendipity
 description: Notice an unexpected observation, judge whether it is worth following, follow it with a small test, keep what the test confirms, and reject coincidences.
 ---
 
