@@ -1,11 +1,1 @@
-{
-  "units": [
-    {
-      "name": "unit-name",
-      "output": "path/to/output-file-or-folder",
-      "owner": "agent-name",
-      "check": "how this unit is checked",
-      "passes": false
-    }
-  ]
-}
+{"budgetLedger":{"costCapUsd":2.0,"remainingUsd":2.0,"reservations":[{"amountUsd":0.3,"id":"reserve-verification","purpose":"verification and dead-end report","refundedUsd":0}],"spentUsd":0,"unit":"USD","verificationReservePct":15,"verificationReserveUsd":0.3,"workBudgetUsd":1.7},"cheapUnits":[{"checkCommand":"the single VERIFY command for this unit","unit":"unit-name","whyCheap":"small, low risk, reversible, checkable with one command"}],"date":"2026-11-19","failureThresholdN":3,"kit":{"case":"B","name":"template-kit","path":"path/to/kit","proofStatus":"draft","versionDigest":"template-digest"},"limits":{"costCapUsd":2.0,"depthMax":2,"fixCyclesMax":5,"spawnMax":7},"manifestVersion":"template-v7","notes":"Template only. Replace every placeholder value before use. Passes starts false for every unit. Cheap units and router call log entries are declared here before the run, never added after the fact to skip a check.","oneWayDoors":[{"action":"action name","condition":"condition","destination":"destination","limit":"limit","payloadOrTemplate":"payload or template"}],"predicateVersion":"template-predicate-v7","prohibitedActions":["publish","send","pay","delete","deploy"],"routerCallLog":[{"saw":"what the coordinator saw (template placeholder)","skill":"Anomaly Hunting","trigger":"What you see breaks what you expected","why":"why this skill, for this case (template placeholder)"}],"runId":"template-run-v7","stage1Version":"template-stage1-v7","tools":[{"risk":"low","targets":["path/to/run/folder"],"tool":"local file reads"},{"risk":"medium","targets":["path/to/run/folder"],"tool":"writes in the run folder only"}],"units":[{"check":"how this unit is checked","name":"unit-name","output":"path/to/output-file-or-folder","owner":"agent-name","passes":false}]}
