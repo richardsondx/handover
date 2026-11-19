@@ -1,5 +1,5 @@
 ---
-name: discovery
+name: local-discovery
 description: Route a discovery problem to the right engines in order, run them, and turn the result into an invention.
 ---
 
@@ -109,6 +109,20 @@ End with an Invention step. State what new thing the discovery makes possible. N
 State what test would prove it. Name the check, the number it must hit, and the result that would prove the invention wrong. An invention with no test is a wish, not a result.
 
 Record the invention, the test, and the limits of what you know. Name at least one limit. If the invention needs a check you cannot run yet, say so.
+
+## Handoff
+
+Hand the discovery on only if it survived the steps above. The handoff record holds these fields, matching the router contract.
+
+- Route: the phase, the engines in order, and the reason for each engine.
+- Finding from each engine run: what each engine found.
+- Source or number behind each finding: the record or number for each finding.
+- Next question each finding raises: one question per finding.
+- Invention: the invention from Step 5, in plain words, with who would use it.
+- Invention test: the check from Step 5, with the number it must hit and the result that would prove the invention wrong.
+- Limits: what is still unknown, at least one limit named.
+
+A handoff missing any field is not complete.
 
 ## Stop rule
 

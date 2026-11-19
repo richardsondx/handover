@@ -1,5 +1,5 @@
 ---
-name: anomaly-hunting
+name: local-anomaly-hunting
 description: Find where reality disagrees with your current model, rank the mismatches by surprise times importance times checkability, and hand the best one on with a full record.
 ---
 
@@ -12,6 +12,10 @@ This skill finds where reality disagrees with your current model. You state what
 An anomaly is a mismatch between a stated prediction and an observed result, backed by a source, a number, or a concrete test. A surprise you cannot check is not an anomaly yet. It is a question.
 
 A claim passes only on a source, a number, or a concrete test. Reasoning alone is not a check. Reasoning finds a mismatch. It does not prove one.
+
+## Input
+
+This skill receives the stated model and its predictions, plus the observations to test against them, each with its source. If no model is stated, stop and state one first. If no observation carries a source, drop it from the list. Do not hunt for an anomaly with no model and no sourced observation.
 
 ## Guard: light check or full hunt
 
@@ -28,13 +32,13 @@ Ask these three questions to pick.
 
 If no decision follows, answer directly. If the step is low impact and easy to reverse, use the light check. If the step is high impact or hard to reverse, use the full hunt.
 
-## How to use the steps
+## Steps in order
 
 Work the steps in order. Write each result down before you move on. Do not skip Step 1. Without a stated model, every observation looks like an anomaly, and none of them is.
 
 Rank by surprise times importance times checkability, not by ease. An easy mismatch that changes nothing is not the best anomaly. A hard mismatch that would change the plan, and that you can test, beats it. This matters most when the current model already works well. When the model is right most of the time, the easy mismatches are usually noise, and the valuable ones are the rare, important, testable ones.
 
-## Step 1: State the current model and its predictions
+### Step 1: State the current model and its predictions
 
 Write the model in plain words, in one or two sentences. Then list its predictions. Each prediction must name what you expect to observe, under what conditions, and by how much where a number exists.
 
@@ -45,7 +49,7 @@ Write the model in plain words, in one or two sentences. Then list its predictio
 
 If you cannot state a prediction, you cannot hunt for an anomaly. Go back and state the model first.
 
-## Step 2: Collect observations
+### Step 2: Collect observations
 
 Gather what was actually observed. Each observation needs a source, a number, or a concrete test. Record all three where you have them.
 
@@ -58,7 +62,7 @@ Collect observations before you score them. Do not score as you collect. Scoring
 
 Keep observations that agree with the model too. A list with only mismatches is a cherry-picked list, and it will mislead the ranking in Step 5.
 
-## Step 3: Score each mismatch for surprise, importance, and checkability
+### Step 3: Score each mismatch for surprise, importance, and checkability
 
 For each pursued mismatch, score three things on a scale of 1 to 5. If candidates exceed the cap, use the selection rule in the stop rule first to pick the 3 to pursue.
 
@@ -72,7 +76,7 @@ Record the three scores and the product for each mismatch. Do not rank by feelin
 
 A mismatch with checkability 1 cannot be handed on as the top anomaly. It stays a question, with its scores recorded, until a test exists.
 
-## Step 4: Separate noise from signal
+### Step 4: Separate noise from signal
 
 Before you rank, test each mismatch against four named traps. A mismatch that falls into a trap is noise until a new check clears it. Name the trap in the record. Do not drop a mismatch silently.
 
@@ -83,13 +87,13 @@ Before you rank, test each mismatch against four named traps. A mismatch that fa
 
 If a mismatch survives all four traps, it is signal. If it fails one trap, mark it as noise, name the trap, and keep it in the record. Do not delete it. A later observation may revive it.
 
-## Step 5: Rank anomalies
+### Step 5: Rank anomalies
 
 Order the surviving mismatches by their score from Step 3, highest product first. Break ties by importance first, then by checkability. Write the ranked list down, with the three scores and the product for each entry.
 
 Do not pursue every mismatch. The stop rule in the next section sets the limit. Rank first, then pursue in rank order.
 
-## Step 6: Hand the top anomaly on
+### Step 6: Hand the top anomaly on
 
 Hand on the top-ranked anomaly only. The handoff record must hold all seven fields below. A handoff missing any field is not complete.
 

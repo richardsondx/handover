@@ -1,5 +1,5 @@
 ---
-name: first-principles-questions
+name: local-first-principles-questions
 description: Use this skill when you must decide before you act and the plan may rest on a wrong claim. Use it for a new plan, a costly move, or a claim that shapes the next step. A one-off fact question gets a direct answer. A routine task with low impact and easy reversal gets a light check.
 ---
 
@@ -10,6 +10,10 @@ Revision note, 2026-11-12: added a source support rule in Step 3 and a ceiling r
 ## What this skill does
 
 This skill makes you question your own plan before you act. You ask yourself hard questions. You test each claim. You rebuild the answer from what is true. You do not tutor a user. You check your own work.
+
+## Input
+
+This skill receives a decision to make, stated in one sentence, with the action that follows it. It also receives the claims the plan rests on, each with its source or marked as assumed, plus the domain conditions each claim depends on. If there is no decision, answer directly instead. If the claims have no source and no test, mark them assumed before the ladder starts.
 
 ## Credit
 
@@ -41,7 +45,7 @@ Use analogy to generate ideas. Then test each idea from base facts. Do not treat
 
 A floor is not a final price. A material cost floor leaves out build cost, yield, safety, and margin. State what your floor leaves out.
 
-## The question ladder
+## Steps in order
 
 ### Step 1: Name the decision
 
@@ -162,6 +166,19 @@ Then decide. Act, change the plan, or stop. Write the record with this template.
 The user answer leads with the decision and the biggest open risk. Keep the user answer short. Show the full record only on request or on "save state". Do not show the full record by default.
 
 After "just tell me", list any load bearing claims left unchecked. Put that list in the user answer. Do not hide it in the record alone.
+
+## Handoff
+
+Hand the decision record on only if the ladder ran under Steps 1 to 6. The handoff record holds these fields, matching the router contract.
+
+- Decision: the decision from Step 6, in one sentence.
+- Claim: each claim with its status, source, and one line of evidence.
+- True facts used: one line each, from Step 5.
+- Biggest open risk: one sentence.
+- What would change my mind: one sentence.
+- Open questions: one line each.
+
+A handoff missing any field is not complete.
 
 ## Stop rule
 

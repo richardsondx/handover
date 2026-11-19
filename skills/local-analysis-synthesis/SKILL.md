@@ -1,5 +1,5 @@
 ---
-name: analysis-synthesis
+name: local-analysis-synthesis
 description: Break a whole into its parts, show how the parts produce the whole behavior, and rebuild the account of the whole from the parts.
 ---
 
@@ -30,13 +30,13 @@ Ask these three questions to pick.
 
 If no decision follows, answer directly. If the step is low impact and easy to reverse, use the light check. If the step is high impact or hard to reverse, use the full use.
 
-## How to use the steps
+## Steps in order
 
 Work the steps in order. Write each result down before you move on. Do not skip Step 1. Without the observed behavior, the parts explain nothing, and the rebuild has no target.
 
 Split the whole before you rebuild it. Do not write the rebuilt account first and then pick parts that fit it. That order hides the parts that do the real work.
 
-## Step 1: Name the whole and its observed behavior
+### Step 1: Name the whole and its observed behavior
 
 Write the whole in one sentence, in plain words. Then write its observed behavior in one or two sentences, with a source and a number where one exists.
 
@@ -47,7 +47,7 @@ Write the whole in one sentence, in plain words. Then write its observed behavio
 
 If you cannot state the behavior, you cannot split the whole. Go back and observe the whole first.
 
-## Step 2: List the parts
+### Step 2: List the parts
 
 List each part of the whole, in plain words. Each part needs a name and one line that says what it does.
 
@@ -57,7 +57,7 @@ List each part of the whole, in plain words. Each part needs a name and one line
 
 List only parts you can name and place in the whole. A part you cannot place is a guess. Mark it as a guessed part and keep it out of the rebuild in Step 5.
 
-## Step 3: Show what each part does alone
+### Step 3: Show what each part does alone
 
 For each part from Step 2, write what it does on its own. Name the source or the test that shows it, where one exists. If no source or test exists, mark the part untested.
 
@@ -67,7 +67,7 @@ For each part from Step 2, write what it does on its own. Name the source or the
 
 Do not claim a part does a job it has not been shown to do. An untested part stays untested in the record. It does not enter the rebuild as a proven part.
 
-## Step 4: Show how the parts work together
+### Step 4: Show how the parts work together
 
 Name each link between parts. A link says how one part acts on another part, or how two parts act together. Each link needs a source or a test, where one exists.
 
@@ -76,7 +76,7 @@ Name each link between parts. A link says how one part acts on another part, or 
 
 Do not invent a link to make the rebuild work. A link with no source or test stays untested. The rebuild in Step 5 must say which links are untested.
 
-## Step 5: Rebuild the account of the whole from the parts
+### Step 5: Rebuild the account of the whole from the parts
 
 Write the rebuilt account in plain words, in two or three sentences. It must use only the parts from Step 2 and the links from Step 4. It must explain the observed behavior from Step 1. It must say which parts are untested and which links are untested.
 
@@ -87,7 +87,7 @@ Write the rebuilt account in plain words, in two or three sentences. It must use
 
 If the rebuilt account cannot explain the behavior, say so. Do not add a new part to close the gap. Go back to Step 2, list the missing part, and run the steps again.
 
-## Step 6: Test the rebuilt account against a new case
+### Step 6: Test the rebuilt account against a new case
 
 Name a new case you did not use in Step 1. Predict what the whole will do in that case, from the rebuilt account. Then check the prediction against what happens.
 
@@ -99,6 +99,20 @@ Name a new case you did not use in Step 1. Predict what the whole will do in tha
 Score the rebuild as fits out of total new cases checked. Write the score as a count, for example 1 fit out of 1 case. A rebuild with no new case checked has no score. Do not hand on a rebuild with no score.
 
 If the new case breaks the rebuilt account, mark the rebuild broken. Go back to Step 2 and find the part or link that failed, or stop.
+
+## Handoff
+
+Hand the rebuilt account on only if it survived Step 6. The handoff record holds these fields, matching the router contract.
+
+- Whole: the whole from Step 1, with its observed behavior.
+- Parts: each part from Step 2, with what it does.
+- Links: each link from Step 4, with what passes between the parts.
+- Rebuilt account: the account from Step 5, in plain words.
+- Untested parts and links: each part or link still untested.
+- New case: the new case from Step 6, with its prediction, observation, and result.
+- Score: fits out of total new cases checked.
+
+A handoff missing any field is not complete.
 
 ## Stop rule
 

@@ -1,8 +1,10 @@
 # Router Rules
 
 This file sets the rules for the router.
-The router adds to Handover.
-It never edits the Handover skill text.
+The router is a required step inside the Handover skill.
+It reads the registry and the rules in this file, then routes a case.
+It does not change the Handover skill text on its own.
+A change to the Handover skill text needs its own approval.
 A Handover coordinator reads the registry, routes a case, and records each call.
 
 ## Call line
@@ -37,11 +39,6 @@ Do not carry a guessed cause forward as a fact.
 - The highest product ranks first, and a low score on any one factor pulls the entry down even if the other two scores are high.
 - Anomaly Hunting breaks a tie by importance first, then by checkability.
 - Abduction breaks a tie by fit first, then by testability, then by simplicity, then by the explanation generated first.
-
-### Discovery handoff
-
-- A Discovery handoff holds the route chosen and why: the phase, the engines in order, and the reason for each engine.
-- It also holds the finding from each engine run, the source or number behind each finding, and the next question each finding raises.
 
 ### Anomaly Hunting
 
