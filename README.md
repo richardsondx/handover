@@ -6,14 +6,15 @@
 
 > Turn a rough prompt into a full plan and orchestration, ask only the early questions needed to set the plan, approve once up front, then run with full autonomy inside the approved envelope.
 
-[![Handover v7](https://img.shields.io/badge/Handover-v7-blue)](https://github.com/richardsondx/handover)
+[![Handover v8](https://img.shields.io/badge/Handover-v8-blue)](https://github.com/richardsondx/handover)
 [![Skill: Muse](https://img.shields.io/badge/Skill-Muse-green)](skills/local-handover/SKILL.md)
 [![Discovery: 17 skills proven](https://img.shields.io/badge/Discovery-17%20skills%20proven-orange)](#discovery-skills)
 [![Status: Supervised only](https://img.shields.io/badge/Status-Supervised%20only-yellow)](docs/verification-gap.md)
+[![Core: v8 draft](https://img.shields.io/badge/Core-v8%20draft-red)](skills/local-handover/SKILL.md)
 
 **English** · Translations welcome, see [Contributing](CONTRIBUTING.md). English is the source file; translated files will be linked here once they are added and checked.
 
-**Website · Guides:** the skill is now at v7. This README is the guide for v7. Read the guides on the Handover site: [Visual guide](https://handover.nshipyard.com/guide) and [Field kit and graph](https://handover.nshipyard.com/field-kit). The skill is in `skills/local-handover/`, the Discovery skills are in [Discovery skills](#discovery-skills), the architecture is in `docs/architecture-draft-v0.6.md`, and the open gaps are in `docs/verification-gap.md`.
+**Website · Guides:** the skill core is now at v8, a lean core of about 20 KB plus reference files loaded on demand. This README is the guide for v8. The v8 core on main is a draft until it passes its proof run; v7 remains the last proven live skill. Read the guides on the Handover site: [Visual guide](https://handover.nshipyard.com/guide) and [Field kit and graph](https://handover.nshipyard.com/field-kit). The skill is in `skills/local-handover/`, the Discovery skills are in [Discovery skills](#discovery-skills), the architecture is in `docs/architecture-draft-v0.6.md`, and the open gaps are in `docs/verification-gap.md`.
 
 ## Contents
 
@@ -124,7 +125,7 @@ Most agent workflows start with a codebase, a task already scoped, and a finish 
 - **It reuses a proven kit before it builds one.** At Stage 1, Handover must declare Case A, an existing proven kit, named with its version digest, or Case B, a kit to be generated, with a separate budget for generation and proof and the first real task declared as the proof run. A generated kit that was never executed is a draft, not a deliverable, and a second real task proof needs separate approval and funding.
 - **It works in fields, not just in code.** Each field gets a field kit: a router, task playbooks, domain principles, role definitions, verification and cleanup routines, and a capability map. Every kit needs a lever, a tool or API the agent can actually drive, plus a map of the domain, not just prose. A field is not claimed as covered because a kit was generated; it is covered only after that kit passes its own real task proof.
 - **It orders work as a graph you can see.** Units, links, splits, and joins are listed in the approval package before anything runs, and the per-unit list shows what is done and what is left.
-- **It routes discovery work to the right engine.** The Discovery router reads a registry of 17 skills, picks the skill whose trigger matches what the coordinator sees, and writes one call line before each skill call: what it saw, which trigger fired, and why this skill. Each skill returns a handoff in its own format. The router passed its proof in run 3. The v7 skill text calls the router as a required step. The coordinator must read the registry before routing. It must pick a skill only when that skill's trigger fires. It must write one call line before each Discovery skill call. It must record each handoff in that skill's own format. See Discovery skills below for the numbers.
+- **It routes discovery work to the right engine.** The Discovery router reads a registry of 17 skills, picks the skill whose trigger matches what the coordinator sees, and writes one call line before each skill call: what it saw, which trigger fired, and why this skill. Each skill returns a handoff in its own format. The router passed its proof in run 3, and sealed wiring proofs now cover all five phases: Anomaly Hunting and Abduction (Research), Falsification (Proof), Inversion (Stuck), and Constraint-Based Discovery (Search), plus a negative routing test and a Stage 2 envelope test where Serendipity parks an out-of-scope surprise instead of running it. The v8 skill text calls the router as a required step. The coordinator must read the registry before routing. It must pick a skill only when that skill's trigger fires. It must write one call line before each Discovery skill call. It must record each handoff in that skill's own format. See Discovery skills below for the numbers.
 
 ## What you get
 
@@ -209,9 +210,13 @@ The registry holds one row per skill, with trigger, inputs, outputs, when not to
 
 The router files are `skills/local-handover/router/router-registry.md` and `skills/local-handover/router/router-rules-v02.md`. The registry defines the four traps and the 1 to 5 score scale in the rules file.
 
-The v7 skill text calls the router as a required step. The coordinator must read the registry before it routes a case. It must pick a skill only when that skill's registry trigger fires. It must write one call line before each Discovery skill call. It must record each handoff in that skill's own format. The wiring run passed on Nov 15, 2026. Judge verdict PASS. Run stage2-router-wire-2026-11-15-01. All 5 predicate items pass. The proof task routed Anomaly Hunting and Abduction with 2 call lines and 7 of 7 handoff fields each.
+The v8 skill text calls the router as a required step. The coordinator must read the registry before it routes a case. It must pick a skill only when that skill's registry trigger fires. It must write one call line before each Discovery skill call. It must record each handoff in that skill's own format. The wiring run passed on Nov 15, 2026. Judge verdict PASS. Run stage2-router-wire-2026-11-15-01. All 5 predicate items pass. The proof task routed Anomaly Hunting and Abduction with 2 call lines and 7 of 7 handoff fields each.
 
 Two limits stay open. First, the router proof covers two test situations, not live use of all 17 skills. Second, the loader check stated in Status and limits below. The wiring proof routed 2 of the 17 skills through the live skill text. The wire is proven for the Research phase engines, not for the Proof, Search, or Stuck phases.
+
+Sealed wiring proofs added Nov 19, 2026 cover the other three phases: Falsification (Proof), Inversion (Stuck), and Constraint-Based Discovery (Search), in `skills/local-handover/examples/router-proofs-p3/`. The same folder holds two more sealed tests: a negative routing test, where the coordinator calls no engine when no trigger fires, and a Stage 2 envelope test, where Serendipity parks an out-of-scope surprise instead of executing it. Every call line and handoff in the proofs passes the validator, `sh scripts/check-handover.sh`.
+
+One limit stays open after those proofs. The proofs are sealed tests, not live use of all 17 skills. Five skills are wired through the live skill text across all five phases; the other twelve have their own skill proofs but no router wiring proof yet.
 
 ## Example run
 
@@ -253,13 +258,18 @@ It tries the next route, changes the method, or makes an operational retry that 
 - `README.md`: this file.
 - `CONTRIBUTING.md`: how to propose a change, a field kit, or a translation.
 - `SECURITY.md`: how to report a security issue, and what Handover will and will not do with secrets.
-- `skills/local-handover/SKILL.md`: the v7 skill.
+- `skills/local-handover/SKILL.md`: the v8 lean core, about 20 KB, plus reference files loaded on demand in `skills/local-handover/references/`: readability, brief template, field kit spec, approval package, chat presentation, execution, hard rules, and verification. The v8 core is a draft until it passes its proof run.
 - `skills/local-handover/skill.yaml`: skill metadata.
-- `skills/local-handover/units-template.json`: the per-unit list template from v4, one entry per unit with the passes field starting as failing.
-- `skills/local-handover/handover-schema.json`: JSON Schema for the field kit and the graph, Draft 2020-12. The diagram page is drawn from data that validates against it.
+- `skills/local-handover/units-template.json`: the per-unit list template, v7, one entry per unit with the passes field starting as failing.
+- `skills/local-handover/handover-schema.json`: JSON Schema for the field kit and the graph, v7, Draft 2020-12, now with budget ledger, tool risk ratings, failure threshold, cheap-unit collapse, router call log, and the Stage 2 manifest schema. The diagram page is drawn from data that validates against it.
+- `skills/local-handover/stage2-manifest-schema.json`: JSON Schema for the Stage 2 execution manifest.
+- `scripts/check-frontmatter.sh`: checks frontmatter and headings on all 18 skills.
+- `scripts/check-loader.sh`: static loader check on all 18 skills, frontmatter parses, name matches folder, description and required sections present.
+- `scripts/check-handover.sh`: validates Stage 2 manifests and Discovery router call lines plus handoff records against the v7 schemas.
 - `skills/local-handover/FIELD-KITS.md`: the field kit index, one bullet per kit with proof status and path.
 - `skills/local-handover/router/router-registry.md`: the Discovery router registry, one row per skill with trigger, inputs, outputs, when not to use, and phase.
 - `skills/local-handover/router/router-rules-v02.md`: the Discovery router rules, call line rule, handoff contract, phase map, four traps, and 1 to 5 score scale.
+- `skills/local-handover/examples/router-proofs-p3/`: sealed wiring proofs added Nov 19, 2026, for Falsification, Inversion, and Constraint-Based Discovery, plus the negative routing test and the Serendipity envelope test, with call lines, handoffs, manifest, and verification replay.
 - `skills/local-*/SKILL.md`: the 17 Discovery skills, one folder per skill, listed in the table in [Discovery skills](#discovery-skills).
 - `docs/handover-v4-ikea-instructions.html`: IKEA-style visual guide to v4, parts list, assembly steps, loop and graph diagrams, and troubleshooting.
 - `docs/field-kit-and-graph-diagram.html`: interactive diagram of the field kit and the graph, with the full schema, a working per-unit list, and a diagram-to-schema-path map.
@@ -273,7 +283,9 @@ It tries the next route, changes the method, or makes an operational retry that 
 
 ## Status and limits, stated plainly
 
-Version 7, Nov 16, 2026, is the live skill. It changes only how Stage 1 and Stage 2 appear in chat. Stage 1 shows the card first, in short bullets, near 120 words on the first screen, with a second short screen allowed when a material term needs room. Stage 2 shows only what changed since Stage 1. Chat uses plain words, and the file keeps the full terms and the full checks. Approve, Reject, and See full spec live in chat only. No safety rule changed. The change came from an Opus UX review on Nov 16, 2026: Opus 5.5 returned no text on the long prompt, Opus 4.5 gave the full review, cost about $0.10. Proof is presentation only so far: the Verbatim cards rewritten in v7 run 80 words on Stage 1 screen 1, 115 words on screen 2, and 91 words on Stage 2. Full proof needs the next real Handover run under v7.
+Version 8, Nov 19, 2026, is on main as a draft. It refactors the skill into a lean core of 20,079 bytes plus 8 reference files loaded on demand, upgrades the schemas to v7, adds the Stage 2 manifest schema and the `check-handover.sh` validator, tags every runtime rule harness enforced or advisory only, pulls shared Discovery boilerplate into the router rules, and splits Step 5 in the 7 engines that need a live test into authorized execution or test proposal. Its proof run is still open, so v8 is a draft, not a proven skill, and v7 remains the last proven live skill.
+
+Version 7, Nov 16, 2026, was the live skill until Nov 19, 2026. It changes only how Stage 1 and Stage 2 appear in chat. Stage 1 shows the card first, in short bullets, near 120 words on the first screen, with a second short screen allowed when a material term needs room. Stage 2 shows only what changed since Stage 1. Chat uses plain words, and the file keeps the full terms and the full checks. Approve, Reject, and See full spec live in chat only. No safety rule changed. The change came from an Opus UX review on Nov 16, 2026: Opus 5.5 returned no text on the long prompt, Opus 4.5 gave the full review, cost about $0.10. Proof is presentation only so far: the Verbatim cards rewritten in v7 run 80 words on Stage 1 screen 1, 115 words on screen 2, and 91 words on Stage 2. Full proof needs the next real Handover run under v7.
 
 Version 6, Nov 15, 2026, was the live skill until Nov 16, 2026. It wires the Discovery router into the skill text as a required step, on top of v5. The coordinator must read the registry before routing. It must pick a skill only when its trigger fires. It must write one call line before each Discovery skill call. It must record each handoff in that skill's own format. Judge verdict PASS. Run stage2-router-wire-2026-11-15-01. All 5 predicate items pass. The proof task routed Anomaly Hunting and Abduction with 2 call lines and complete handoffs. V6 keeps the First Principles ladder from v5. It keeps the $2 hard cap per run. It runs supervised only. It allows up to 5 fix cycles per run as standard.
 
@@ -288,7 +300,7 @@ Version 1, built from architecture draft v0.6, approved Nov 4, 2026.
 - V7 is not operational for unattended runs, live data operation, three level fan out, or automatic learning changes. Those are deferred until the pilot passes its proof tests.
 - Proof tests, before any claim of operational use: simulated gated action and injection tests pass in every case, every known bad artifact in the test set is rejected, one supervised real run completes with a clean decision trail and budget audit, a comprehension test passes, and a real generated skill loads through the actual Muse loader.
 - The loader test has not run as a real load. A static loader check now exists, `sh scripts/check-loader.sh`, and it passes on all 18 skills: frontmatter parses, each name matches its folder and follows the Agent Skills spec, each description is present, and the required sections are present. No Muse skill loader command exists in the environment where the proofs ran, so no skill has passed a load through the actual loader yet.
-- The wiring proof routed 2 of the 17 Discovery skills through the live skill text. The wire is proven for the Research phase engines, not for the Proof, Search, or Stuck phases.
+- The wiring proof now covers 5 of the 17 Discovery skills across all five phases: Anomaly Hunting and Abduction (Research, Nov 15), Falsification (Proof), Inversion (Stuck), and Constraint-Based Discovery (Search), all Nov 19, plus a negative routing test and a Serendipity envelope test. The other twelve skills have their own skill proofs but no router wiring proof yet, and the proofs are sealed tests, not live use.
 - Handover does not merge, publish, post, send, pay, delete, deploy, or contact anyone unless that exact action, destination, payload or payload template, limit, and condition is listed in the approved Stage 2 manifest. An unlisted or changed action needs a new approval.
 
 ## Contributing
