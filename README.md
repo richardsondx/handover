@@ -122,10 +122,10 @@ Fleet runs at depth max 1, in batches of 20 to 50 small PRs, with scripted check
 
 Proof status: the first Fleet proof run, Nov 20, 2026, did 0 of 20 PRs and paused. Fleet is not proven, and it is not live until a proof run passes.
 
-The interesting number is agents, not PRs. A 50 PR batch uses 50 author agents, 1 per PR, plus 10 verifiers at a 20 percent fail or sample rate, plus 5 judges at 1 per 10 PRs, for 65 agents in total. A 20 PR batch uses 22 to 32 agents. The Handover record so far is 14 agents in one run. The Neon plan, cited only, would use 200 agents for the same 50 PRs, 4 per PR. Fleet runs serial, depth max 1, so 65 is the total used, not 65 at once.
+The interesting number is agents, not PRs. A 50 PR batch uses 50 author agents, 1 per PR, plus 10 verifiers at a 20 percent fail or sample rate, plus 5 judges at 1 per 10 PRs, for 65 agents in total. A 20 PR batch uses 22 to 32 agents. The Handover record so far is 14 agents in one run. Fleet runs serial, depth max 1, so 65 is the total used, not 65 at once.
 
 <p align="center">
-  <img src="docs/images/fleet-flow.svg" alt="Fleet agent count: 50 PR batch uses 65 agents at 20 percent fail or sample, versus 200 in the Neon plan and 14 in the Handover record" width="800">
+  <img src="docs/images/fleet-flow.svg" alt="Fleet agent count: 50 PR batch uses 65 agents at 20 percent fail or sample, versus 14 in the Handover record" width="800">
 </p>
 
 ```mermaid

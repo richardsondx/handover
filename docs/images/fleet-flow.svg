@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="920" viewBox="0 0 1000 920" role="img" aria-label="Fleet agent count: 50 PR batch uses 65 agents at 20 percent fail or sample, versus 200 in the Neon plan and 14 in the Handover record">
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="920" viewBox="0 0 1000 920" role="img" aria-label="Fleet agent count: 50 PR batch uses 65 agents at 20 percent fail or sample, versus 14 in the Handover record">
   <rect width="1000" height="920" fill="#111118"/>
   <text x="500" y="52" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="bold" fill="#ffffff">Fleet: how many agents?</text>
   <text x="500" y="88" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#b9b3ff">The count is the story, not the PR count. Draft, not proven.</text>
@@ -42,9 +42,9 @@
   <text x="280" y="670" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#c9c9d6">65 is about 4 to 5 times that.</text>
 
   <rect x="520" y="586" width="400" height="96" rx="12" fill="#1e1e2a" stroke="#8a8a9a" stroke-width="2"/>
-  <text x="720" y="620" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#ffffff">Neon plan: 200 agents</text>
-  <text x="720" y="648" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#c9c9d6">4 agents per PR, verifier and judge</text>
-  <text x="720" y="670" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#c9c9d6">on every PR. Cited only, not checked.</text>
+  <text x="720" y="620" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#ffffff">Proof status: not proven</text>
+  <text x="720" y="648" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#c9c9d6">First proof run did 0 of 20 PRs.</text>
+  <text x="720" y="670" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#c9c9d6">Paused Nov 20, 2026.</text>
 
   <text x="500" y="716" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="bold" fill="#ffffff">Auto merge gate: allowlist + green CI + unanimous pass.</text>
   <text x="500" y="744" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#c9c9d6">Missing one item blocks the merge.</text>
