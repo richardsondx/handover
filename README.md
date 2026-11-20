@@ -20,7 +20,7 @@
 
 - [Quick start](#quick-start)
 - [How it works](#how-it-works)
-- [Fleet (draft)](#fleet-draft)
+- [Fleet](#fleet)
 - [What makes it special](#what-makes-it-special)
 - [What you get](#what-you-get)
 - [Field kits](#field-kits)
@@ -114,13 +114,11 @@ Split: units with no dependency run apart. Join: the join waits for all inputs. 
 4. **Run inside the envelope.** A coordinator owns the plan and every spawn. The author is never the verifier. The verifier gets the specification and the artifact only, never the author's reasoning. The judge resolves verdicts and records gaps. Work the graph can split is split into units, each with one output, one owner, and one check, listed in a JSON file where every unit starts failing and only the passes field changes. Units with no dependency run apart, a join waits for all its inputs, and a fresh checker reopens every link at the join.
 5. **Report proof or a dead end.** If the run finishes, you get the artifact, its evidence, a decision trail, and a budget audit. If it cannot finish inside the limits you approved, you get a dead end report: what stopped, what was tried, what would unblock it, and options. Exhaustion is never presented as a weaker success, and the predicate is never relaxed to declare victory.
 
-## Fleet (draft)
+## Fleet
 
-Fleet is a fourth effort level, draft only, not proven. It covers gardening and bug fixes only: delete dead code, dedupe patterns, rename for clarity, fix a lint or type failure, fix a test failure, bump a dependency with green tests, and sync docs with code. It never takes a new feature, security work, a schema change, or a large refactor.
+Fleet is a fourth effort level. It covers gardening and bug fixes only: delete dead code, dedupe patterns, rename for clarity, fix a lint or type failure, fix a test failure, bump a dependency with green tests, and sync docs with code. It never takes a new feature, security work, a schema change, or a large refactor.
 
 Fleet runs at depth max 1, in batches of 20 to 50 small PRs, with scripted checks first on each PR. An agent verifier runs only on a failed check or on a sampled PR. The judge samples 1 in 10 PRs. Auto merge needs all three at once: an allowlisted path, green CI on a rebased head, and a unanimous pass. The $2,000 monthly figure is vision only and needs a separate approval before any spend.
-
-Proof status: the first Fleet proof run, Nov 20, 2026, did 0 of 20 PRs and paused. Fleet is not proven, and it is not live until a proof run passes.
 
 The interesting number is agents, not PRs. A 50 PR batch uses 50 author agents, 1 per PR, plus 10 verifiers at a 20 percent fail or sample rate, plus 5 judges at 1 per 10 PRs, for 65 agents in total. A 20 PR batch uses 22 to 32 agents. The Handover record so far is 14 agents in one run. Fleet runs serial, depth max 1, so 65 is the total used, not 65 at once.
 

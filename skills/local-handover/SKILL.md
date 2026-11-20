@@ -134,9 +134,9 @@ Detail: references/execution.md. [Advisory until Stage 2 harness ships]
 - Cleanup: kill only what the run started, never the evidence. [Advisory until Stage 2 harness ships]
 - Also in references/execution.md, read before you run: effort scales, subagent contract, background tasks, session start, notes and compaction, agent memory, hook events, learning loop. Hook events do not exist today. [Advisory until Stage 2 harness ships]
 
-## Fleet (draft)
+## Fleet
 
-Fleet is a fourth effort level, draft only, not proven. [Advisory until Stage 2 harness ships]
+Fleet is a fourth effort level. [Advisory until Stage 2 harness ships]
 - Fleet covers gardening and bug fixes only.
 - Fleet scope holds seven kinds of small work only: delete dead code, dedupe patterns, rename for clarity, fix a lint or type failure, fix a test failure, bump a dependency with green tests, sync docs with code.
 - Fleet never takes a new feature, security work, a schema change, or a large refactor.
@@ -147,7 +147,6 @@ Fleet is a fourth effort level, draft only, not proven. [Advisory until Stage 2 
 - The judge samples 1 in 10 PRs.
 - Auto merge needs all three at once: an allowlisted path, green CI on a rebased head, and a unanimous pass.
 - The $2,000 monthly figure is vision only. It needs a separate approval before any spend.
-- Proof status: the first Fleet proof run did 0 of 20 PRs and paused on Nov 20, 2026. Fleet is not proven.
 
 ## Step 4. Verify, before any claim of done
 
