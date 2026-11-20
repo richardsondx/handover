@@ -122,6 +122,22 @@ Fleet runs at depth max 1, in batches of 20 to 50 small PRs, with scripted check
 
 Proof status: the first Fleet proof run, Nov 20, 2026, did 0 of 20 PRs and paused. Fleet is not proven, and it is not live until a proof run passes.
 
+<p align="center">
+  <img src="docs/images/fleet-flow.svg" alt="Fleet flow: batch of 20 to 50 small PRs, scripted checks first, agent verifier on failure or sample, judge samples 1 in 10, auto merge gate" width="800">
+</p>
+
+```mermaid
+flowchart TB
+    A[Batch: 20 to 50 small PRs<br>Depth max 1] --> B[Scripted checks first<br>Lint, type, tests]
+    B --> C{Pass or fail?}
+    C -- Fail --> D[Agent verifier<br>Only on failure or sample]
+    C -- Pass --> E[Judge sample<br>1 in 10 PRs]
+    D --> F[Auto merge gate]
+    E --> F
+    F --> G[Merge<br>Allowlist + green CI + unanimous]
+    F -- Missing one item --> H[Hold]
+```
+
 ## What makes it special
 
 Most agent workflows start with a codebase, a task already scoped, and a finish line someone else defined. Handover starts earlier, with a rough sentence, and it is built for work where the human cannot be the checker in the middle. That is the difference, in nine parts:

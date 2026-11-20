@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="780" viewBox="0 0 1000 780" role="img" aria-label="Fleet flow: batch of small PRs, scripted checks first, agent verifier on failure or sample, judge samples 1 in 10, auto merge gate">
+  <rect width="1000" height="780" fill="#111118"/>
+  <text x="500" y="52" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="bold" fill="#ffffff">Fleet</text>
+  <text x="500" y="88" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#b9b3ff">Gardening and bug fixes only. Draft, not proven.</text>
+
+  <rect x="250" y="110" width="500" height="64" rx="12" fill="#6c5ce7"/>
+  <text x="500" y="138" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#ffffff">Batch: 20 to 50 small PRs</text>
+  <text x="500" y="164" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#e6e2ff">Depth max 1. One run, one batch.</text>
+
+  <line x1="500" y1="174" x2="500" y2="200" stroke="#6c5ce7" stroke-width="3"/>
+  <polygon points="500,212 490,198 510,198" fill="#6c5ce7"/>
+
+  <rect x="200" y="212" width="600" height="76" rx="12" fill="#1e1e2a" stroke="#6c5ce7" stroke-width="2"/>
+  <text x="500" y="242" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#ffffff">1. Scripted checks first</text>
+  <text x="500" y="270" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#c9c9d6">Lint, type, and tests. No agent runs before this.</text>
+
+  <line x1="500" y1="288" x2="500" y2="314" stroke="#6c5ce7" stroke-width="3"/>
+  <polygon points="500,326 490,312 510,312" fill="#6c5ce7"/>
+
+  <rect x="200" y="326" width="600" height="76" rx="12" fill="#1e1e2a" stroke="#6c5ce7" stroke-width="2"/>
+  <text x="500" y="356" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#ffffff">2. Pass or fail?</text>
+  <text x="500" y="384" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#c9c9d6">Fail goes to an agent verifier. Pass goes to the judge sample.</text>
+
+  <line x1="280" y1="402" x2="280" y2="428" stroke="#e74c3c" stroke-width="3"/>
+  <polygon points="280,440 270,426 290,426" fill="#e74c3c"/>
+  <line x1="720" y1="402" x2="720" y2="428" stroke="#2ecc71" stroke-width="3"/>
+  <polygon points="720,440 710,426 730,426" fill="#2ecc71"/>
+
+  <rect x="80" y="440" width="400" height="76" rx="12" fill="#1e1e2a" stroke="#e74c3c" stroke-width="2"/>
+  <text x="280" y="470" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#ffffff">Fail: agent verifier</text>
+  <text x="280" y="498" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#c9c9d6">Runs only on failure or sample.</text>
+
+  <rect x="520" y="440" width="400" height="76" rx="12" fill="#1e1e2a" stroke="#2ecc71" stroke-width="2"/>
+  <text x="720" y="470" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#ffffff">Pass: judge sample</text>
+  <text x="720" y="498" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#c9c9d6">Judge samples 1 in 10 PRs.</text>
+
+  <line x1="500" y1="516" x2="500" y2="542" stroke="#6c5ce7" stroke-width="3"/>
+  <polygon points="500,554 490,540 510,540" fill="#6c5ce7"/>
+
+  <rect x="150" y="554" width="700" height="96" rx="12" fill="#6c5ce7"/>
+  <text x="500" y="588" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#ffffff">3. Auto merge gate: all three at once</text>
+  <text x="500" y="618" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#ffffff">Allowlisted path + green CI on a rebased head</text>
+  <text x="500" y="642" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#ffffff">+ unanimous pass</text>
+
+  <line x1="500" y1="650" x2="500" y2="676" stroke="#6c5ce7" stroke-width="3"/>
+  <polygon points="500,688 490,674 510,674" fill="#6c5ce7"/>
+
+  <rect x="250" y="688" width="500" height="48" rx="12" fill="#2ecc71"/>
+  <text x="500" y="719" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#ffffff">Merge. Missing one item blocks it.</text>
+
+  <text x="500" y="768" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#8a8a9a">Never: new features, security work, schema changes, large refactors.</text>
+</svg>
