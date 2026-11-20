@@ -122,20 +122,21 @@ Fleet runs at depth max 1, in batches of 20 to 50 small PRs, with scripted check
 
 Proof status: the first Fleet proof run, Nov 20, 2026, did 0 of 20 PRs and paused. Fleet is not proven, and it is not live until a proof run passes.
 
+The interesting number is agents, not PRs. A 50 PR batch uses 50 author agents, 1 per PR, plus 10 verifiers at a 20 percent fail or sample rate, plus 5 judges at 1 per 10 PRs, for 65 agents in total. A 20 PR batch uses 22 to 32 agents. The Handover record so far is 14 agents in one run. The Neon plan, cited only, would use 200 agents for the same 50 PRs, 4 per PR. Fleet runs serial, depth max 1, so 65 is the total used, not 65 at once.
+
 <p align="center">
-  <img src="docs/images/fleet-flow.svg" alt="Fleet flow: batch of 20 to 50 small PRs, scripted checks first, agent verifier on failure or sample, judge samples 1 in 10, auto merge gate" width="800">
+  <img src="docs/images/fleet-flow.svg" alt="Fleet agent count: 50 PR batch uses 65 agents at 20 percent fail or sample, versus 200 in the Neon plan and 14 in the Handover record" width="800">
 </p>
 
 ```mermaid
 flowchart TB
-    A[Batch: 20 to 50 small PRs<br>Depth max 1] --> B[Scripted checks first<br>Lint, type, tests]
-    B --> C{Pass or fail?}
-    C -- Fail --> D[Agent verifier<br>Only on failure or sample]
-    C -- Pass --> E[Judge sample<br>1 in 10 PRs]
-    D --> F[Auto merge gate]
-    E --> F
-    F --> G[Merge<br>Allowlist + green CI + unanimous]
-    F -- Missing one item --> H[Hold]
+    A[Batch: 50 small PRs<br>50 author agents, 1 per PR] --> B[Scripted checks first<br>0 agents, lint, type, tests]
+    B --> C[Fail or sample: +10 verifier agents<br>1 per failed or sampled PR]
+    B --> D[Judge sample: +5 judge agents<br>1 per 10 PRs]
+    C --> E[Total: 65 agents per 50 PR batch<br>Serial, depth max 1]
+    D --> E
+    E --> F[Auto merge gate<br>Allowlist + green CI + unanimous]
+    F --> G[Merge, or hold if one item is missing]
 ```
 
 ## What makes it special
