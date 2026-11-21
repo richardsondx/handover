@@ -1,11 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="920" viewBox="0 0 1000 920" role="img" aria-label="Fleet agent count: 50 PR batch uses 65 agents at 20 percent fail or sample, versus 14 in the Handover record">
-  <rect width="1000" height="920" fill="#111118"/>
-  <text x="500" y="52" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="bold" fill="#ffffff">Fleet: how many agents?</text>
-  <text x="500" y="88" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#b9b3ff">The count is the story, not the PR count.</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="880" viewBox="0 0 1000 880" role="img" aria-label="Fleet workflow: batch of small PRs, scripted checks first, verifier on fail or sample, judge sample, auto merge gate, merge or hold">
+  <rect width="1000" height="880" fill="#111118"/>
+  <text x="500" y="52" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="bold" fill="#ffffff">Fleet workflow</text>
+  <text x="500" y="88" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#b9b3ff">One batch, from PRs to merge.</text>
 
   <rect x="200" y="110" width="600" height="76" rx="12" fill="#6c5ce7"/>
-  <text x="500" y="140" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#ffffff">Batch: 50 small PRs</text>
-  <text x="500" y="168" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#e6e2ff">50 author agents. 1 per PR. Depth max 1, serial.</text>
+  <text x="500" y="140" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#ffffff">Batch: 20 to 50 small PRs</text>
+  <text x="500" y="168" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#e6e2ff">1 author agent per PR. Depth max 1, serial. Pilot batch is 5.</text>
 
   <line x1="500" y1="186" x2="500" y2="212" stroke="#6c5ce7" stroke-width="3"/>
   <polygon points="500,224 490,210 510,210" fill="#6c5ce7"/>
@@ -18,36 +18,28 @@
   <polygon points="500,338 490,324 510,324" fill="#6c5ce7"/>
 
   <rect x="80" y="338" width="400" height="76" rx="12" fill="#1e1e2a" stroke="#e74c3c" stroke-width="2"/>
-  <text x="280" y="368" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#ffffff">Fail or sample: +10 agents</text>
+  <text x="280" y="368" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#ffffff">Fail or sample: verifier</text>
   <text x="280" y="396" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#c9c9d6">1 verifier per failed or sampled PR.</text>
 
   <rect x="520" y="338" width="400" height="76" rx="12" fill="#1e1e2a" stroke="#2ecc71" stroke-width="2"/>
-  <text x="720" y="368" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#ffffff">Judge sample: +5 agents</text>
-  <text x="720" y="396" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#c9c9d6">1 judge per 10 PRs, not per PR.</text>
+  <text x="720" y="368" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#ffffff">Judge sample: optional</text>
+  <text x="720" y="396" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#c9c9d6">1 judge per 10 PRs, free model, or off.</text>
 
   <line x1="500" y1="414" x2="500" y2="440" stroke="#6c5ce7" stroke-width="3"/>
   <polygon points="500,452 490,438 510,438" fill="#6c5ce7"/>
 
-  <rect x="150" y="452" width="700" height="96" rx="12" fill="#6c5ce7"/>
-  <text x="500" y="486" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="bold" fill="#ffffff">Total: 65 agents per 50 PR batch</text>
-  <text x="500" y="516" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#ffffff">50 authors + 10 verifiers + 5 judges, at 20% fail or sample.</text>
-  <text x="500" y="540" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#e6e2ff">Serial, not at once. Total used, not simultaneous.</text>
+  <rect x="200" y="452" width="600" height="76" rx="12" fill="#1e1e2a" stroke="#6c5ce7" stroke-width="2"/>
+  <text x="500" y="482" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#ffffff">Auto merge gate</text>
+  <text x="500" y="510" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#c9c9d6">Allowlist + green CI + unanimous pass.</text>
 
-  <line x1="500" y1="548" x2="500" y2="574" stroke="#6c5ce7" stroke-width="3"/>
-  <polygon points="500,586 490,572 510,572" fill="#6c5ce7"/>
+  <line x1="500" y1="528" x2="500" y2="554" stroke="#6c5ce7" stroke-width="3"/>
+  <polygon points="500,566 490,552 510,552" fill="#6c5ce7"/>
 
-  <rect x="80" y="586" width="400" height="96" rx="12" fill="#1e1e2a" stroke="#8a8a9a" stroke-width="2"/>
-  <text x="280" y="620" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#ffffff">Handover record: 14 agents</text>
-  <text x="280" y="648" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#c9c9d6">Most used in one run so far.</text>
-  <text x="280" y="670" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#c9c9d6">65 is about 4 to 5 times that.</text>
+  <rect x="200" y="566" width="600" height="76" rx="12" fill="#6c5ce7"/>
+  <text x="500" y="596" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#ffffff">Merge, or hold</text>
+  <text x="500" y="624" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#e6e2ff">Missing one gate item blocks the merge.</text>
 
-  <rect x="520" y="586" width="400" height="96" rx="12" fill="#1e1e2a" stroke="#8a8a9a" stroke-width="2"/>
-  <text x="720" y="620" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#ffffff">Batch of 20 PRs: 22 to 32 agents</text>
-  <text x="720" y="648" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#c9c9d6">20 authors, plus verifiers on fail</text>
-  <text x="720" y="670" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#c9c9d6">or sample, plus 2 judges.</text>
-
-  <text x="500" y="716" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="bold" fill="#ffffff">Auto merge gate: allowlist + green CI + unanimous pass.</text>
-  <text x="500" y="744" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#c9c9d6">Missing one item blocks the merge.</text>
-  <text x="500" y="776" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#8a8a9a">Never: new features, security work, schema changes, large refactors.</text>
-  <text x="500" y="804" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#8a8a9a">Batch of 20 PRs uses 22 to 32 agents.</text>
+  <text x="500" y="686" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#c9c9d6">A 50 PR batch uses up to 65 agents total, serial, not at once.</text>
+  <text x="500" y="714" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#c9c9d6">A 20 PR batch uses 22 to 32. Pilot batch is 5 PRs.</text>
+  <text x="500" y="748" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#8a8a9a">Never: new features, security work, schema changes, large refactors.</text>
 </svg>

@@ -122,21 +122,20 @@ Fleet runs at depth max 1, in batches of 20 to 50 small PRs, with scripted check
 
 Fleet passed its first proof run on Nov 20, 2026: 5 PRs on Handover itself, 15 of 15 scripted checks pass, judge PASS on 5 of 5 predicate items. The kit is draft, pending a second proof run for full coverage, per the skill rule that one passing task does not establish coverage of a field.
 
-The interesting number is agents, not PRs. A 50 PR batch uses 50 author agents, 1 per PR, plus 10 verifiers at a 20 percent fail or sample rate, plus 5 judges at 1 per 10 PRs, for 65 agents in total. A 20 PR batch uses 22 to 32 agents. The Handover record so far is 14 agents in one run. Fleet runs serial, depth max 1, so 65 is the total used, not 65 at once.
+How a batch runs: one author agent per PR prepares the change, then scripted checks run first on each PR, lint, type, and tests, with no agent. A verifier checks only a PR that failed a check or was sampled. A judge samples 1 in 10 PRs, optional, on a free model or off. Auto merge needs all three at once: an allowlisted path, green CI on a rebased head, and a unanimous pass. Missing one item blocks the merge. Batch size is 20 to 50 PRs for a full run. Pilot batch is 5 PRs. A 50 PR batch uses up to 65 agents total, serial, not at once. A 20 PR batch uses 22 to 32. The Handover record so far is 14 agents in one run.
 
 <p align="center">
-  <img src="docs/images/fleet-flow.svg" alt="Fleet agent count: 50 PR batch uses 65 agents at 20 percent fail or sample, versus 14 in the Handover record" width="800">
+  <img src="docs/images/fleet-flow.svg" alt="Fleet workflow: batch of 20 to 50 small PRs, scripted checks first, verifier on fail or sample, judge sample, auto merge gate, merge or hold" width="800">
 </p>
 
 ```mermaid
 flowchart TB
-    A[Batch: 50 small PRs<br>50 author agents, 1 per PR] --> B[Scripted checks first<br>0 agents, lint, type, tests]
-    B --> C[Fail or sample: +10 verifier agents<br>1 per failed or sampled PR]
-    B --> D[Judge sample: +5 judge agents<br>1 per 10 PRs]
-    C --> E[Total: 65 agents per 50 PR batch<br>Serial, depth max 1]
+    A[Batch: 20 to 50 small PRs<br>1 author agent per PR, pilot is 5] --> B[Scripted checks first<br>0 agents, lint, type, tests]
+    B --> C[Fail or sample: verifier<br>1 per failed or sampled PR]
+    B --> D[Judge sample: optional<br>1 per 10 PRs, free model or off]
+    C --> E[Auto merge gate<br>Allowlist + green CI + unanimous]
     D --> E
-    E --> F[Auto merge gate<br>Allowlist + green CI + unanimous]
-    F --> G[Merge, or hold if one item is missing]
+    E --> F[Merge, or hold if one item is missing]
 ```
 
 ## What makes it special
