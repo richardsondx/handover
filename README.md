@@ -118,7 +118,9 @@ Split: units with no dependency run apart. Join: the join waits for all inputs. 
 
 Fleet is a fourth effort level. It covers gardening and bug fixes only: delete dead code, dedupe patterns, rename for clarity, fix a lint or type failure, fix a test failure, bump a dependency with green tests, and sync docs with code. It never takes a new feature, security work, a schema change, or a large refactor.
 
-Fleet runs at depth max 1, in batches of 20 to 50 small PRs, with scripted checks first on each PR. An agent verifier runs only on a failed check or on a sampled PR. The judge samples 1 in 10 PRs. Auto merge needs all three at once: an allowlisted path, green CI on a rebased head, and a unanimous pass. The $2,000 monthly figure is vision only and needs a separate approval before any spend.
+Fleet runs at depth max 1, in batches of 20 to 50 small PRs, with scripted checks first on each PR. An agent verifier runs only on a failed check or on a sampled PR. The judge samples 1 in 10 PRs. The judge is optional: Stage 1 lets you turn it off, or run it on a free OpenRouter model instead of a paid model. Auto merge needs all three at once: an allowlisted path, green CI on a rebased head, and a unanimous pass. The $2,000 monthly figure is vision only and needs a separate approval before any spend.
+
+Fleet passed its first proof run on Nov 20, 2026: 5 PRs on Handover itself, 15 of 15 scripted checks pass, judge PASS on 5 of 5 predicate items. The kit is draft, pending a second proof run for full coverage, per the skill rule that one passing task does not establish coverage of a field.
 
 The interesting number is agents, not PRs. A 50 PR batch uses 50 author agents, 1 per PR, plus 10 verifiers at a 20 percent fail or sample rate, plus 5 judges at 1 per 10 PRs, for 65 agents in total. A 20 PR batch uses 22 to 32 agents. The Handover record so far is 14 agents in one run. Fleet runs serial, depth max 1, so 65 is the total used, not 65 at once.
 
@@ -267,6 +269,9 @@ Handover itself charges nothing. There is no fee per run and no subscription.
 The $2 is a cap, not a price. Each run states its budget in the manifest before work starts. The cap covers the whole run: the plan, the work, and the checks.
 A separate verifier checks the work. A separate judge rules in a fresh context. Both are paid from the same $2. At least 15 percent is held back for checking before work starts, so checking is never cut to save money.
 A run that needs no paid calls costs $0. The demo pilot uses $0 paid tools and no paid model calls outside your agent's own run. The router proof run cost $0 of its cap. Larger envelopes need approval case by case. A limit is labelled advisory when the platform cannot hard block further calls at that limit.
+
+**How do I run it at zero cost?**
+Set the cost cap to $0 in Stage 1. Use only free models for every agent: the coordinator, the authors, the verifier, and the judge all run on OpenRouter free tier models. Run scripted checks only. No paid model calls, no paid tools. The judge is optional: turn it off for $0, or run it on a free OpenRouter model. The final report Cost and envelope section lists only costs that apply to the task. A cost type that does not apply is omitted, not listed as did not run.
 
 **Can it run overnight or unattended?**
 Not in v7. Unattended operation needs a demonstrated scheduler or parent re-invocation path, with duplicate run detection and failure reporting, including resume after a restart. Those proof tests are listed in [Status and limits](#status-and-limits).
