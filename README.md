@@ -232,11 +232,11 @@ The registry holds one row per skill, with trigger, inputs, outputs, when not to
 | Evolutionary Search | Search | Small changes, kept or dropped by test, can find a better form |
 | Serendipity + Prepared Mind | Search | A chance find meets a mind ready to see its use |
 
-The router files are `skills/local-handover/router/router-registry.md` and `skills/local-handover/router/router-rules-v02.md`. The registry defines the four traps and the 1 to 5 score scale in the rules file.
+The router files are `skills/local-handover/router/router-registry.md` and `skills/local-handover/router/router-rules-v02.md`. The rules file defines the four traps and the 1 to 5 score scale.
 
 The v8 skill text calls the router as a required step. The coordinator must read the registry before it routes a case. It must pick a skill only when that skill's registry trigger fires. It must write one call line before each Discovery skill call. It must record each handoff in that skill's own format. The wiring run passed on Nov 15, 2026. Judge verdict PASS. Run stage2-router-wire-2026-11-15-01. All 5 predicate items pass. The proof task routed Anomaly Hunting and Abduction with 2 call lines and 7 of 7 handoff fields each.
 
-Two limits stay open. First, the router proof covers two test situations, not live use of all 17 skills. Second, the loader check stated in Status and limits below. The wiring proof routed 2 of the 17 skills through the live skill text. The wire is proven for the Research phase engines, not for the Proof, Search, or Stuck phases.
+Two limits stay open. First, the router proofs are sealed tests, not live use of all 17 skills. Second, the loader check stated in Status and limits below. The wiring proofs routed 5 of the 17 skills through the live skill text, across all five phases.
 
 Sealed wiring proofs added Nov 19, 2026 cover the other three phases: Falsification (Proof), Inversion (Stuck), and Constraint-Based Discovery (Search), in `skills/local-handover/examples/router-proofs-p3/`. The same folder holds two more sealed tests: a negative routing test, where the coordinator calls no engine when no trigger fires, and a Stage 2 envelope test, where Serendipity parks an out-of-scope surprise instead of executing it. Every call line and handoff in the proofs passes the validator, `sh scripts/check-handover.sh`.
 
