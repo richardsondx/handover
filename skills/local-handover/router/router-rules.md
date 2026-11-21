@@ -25,8 +25,7 @@ First Principles Questions states the same standard in its own words: a claim pa
 
 ## Score scale
 
-- Each score factor runs on a scale of 1 to 5, where 1 means lowest and 5 means highest.
-- Product rule: the product of the factors ranks the entries, highest first. A low score on any one factor pulls the entry down even if the other scores are high. Anomaly Hunting scores surprise, importance, and checkability. Abduction scores fit, testability, and simplicity. Tie-breaks and factor meanings live in router-rules-v02.md and in those two engines.
+- Score scale and product rule live in router-rules-v02.md.
 - Fits count: the other engines score a new case as fits or does not fit, and report fits out of total new cases checked. That count is the score. It is not a 1 to 5 product.
 
 ## Stop-rule shape
