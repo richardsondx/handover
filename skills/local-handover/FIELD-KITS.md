@@ -16,3 +16,4 @@ These two entries show the format only. They are examples, not a claim of covera
 
 - Research brief kit: research briefs and evidence synthesis, draft, no path yet
 - Handover persistent loop kit: fix loop for a run, classify failure, distinct approach ladder, loop budget, fresh verifier each cycle, draft, no path yet
+- Fleet gardening and bug fix kit: gardening and bug fixes on a local repo, draft, workspace/handover/handover-fleet-effort-2026-11-20/kit/
