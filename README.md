@@ -118,11 +118,11 @@ Split: units with no dependency run apart. Join: the join waits for all inputs. 
 
 Fleet is a fourth effort level. It covers gardening and bug fixes only: delete dead code, dedupe patterns, rename for clarity, fix a lint or type failure, fix a test failure, bump a dependency with green tests, and sync docs with code. It never takes a new feature, security work, a schema change, or a large refactor.
 
-Fleet runs at depth max 1, in batches of 20 to 50 small PRs, with scripted checks first on each PR. An agent verifier runs only on a failed check or on a sampled PR. The judge samples 1 in 10 PRs. The judge is optional: Stage 1 lets you turn it off, or run it on a free OpenRouter model instead of a paid model. Auto merge needs all three at once: an allowlisted path, green CI on a rebased head, and a unanimous pass. The $2,000 monthly figure is vision only and needs a separate approval before any spend.
+Fleet runs at depth max 1, in batches of 20 to 50 small PRs, with scripted checks first on each PR. Each author works in its own git worktree, one worktree per PR branch, so authors run in parallel. An agent verifier runs only on a failed check or on a sampled PR. The judge samples 1 in 10 PRs. The judge is optional: Stage 1 lets you turn it off, or run it on a free OpenRouter model instead of a paid model. Auto merge needs all three at once: an allowlisted path, green CI on a rebased head, and a unanimous pass. The $2,000 monthly figure is vision only and needs a separate approval before any spend.
 
 Fleet passed its first proof run on Nov 20, 2026: 5 PRs on Handover itself, 15 of 15 scripted checks pass, judge PASS on 5 of 5 predicate items. The kit is draft, pending a second proof run for full coverage, per the skill rule that one passing task does not establish coverage of a field.
 
-How a batch runs: one author agent per PR prepares the change, then scripted checks run first on each PR, lint, type, and tests, with no agent. A verifier checks only a PR that failed a check or was sampled. A judge samples 1 in 10 PRs, optional, on a free model or off. Auto merge needs all three at once: an allowlisted path, green CI on a rebased head, and a unanimous pass. Missing one item blocks the merge. Batch size is 20 to 50 PRs for a full run. Pilot batch is 5 PRs. A 50 PR batch uses up to 65 agents total, serial, not at once. A 20 PR batch uses 22 to 32. The Handover record so far is 14 agents in one run.
+How a batch runs: one author agent per PR prepares the change, then scripted checks run first on each PR, lint, type, and tests, with no agent. A verifier checks only a PR that failed a check or was sampled. A judge samples 1 in 10 PRs, optional, on a free model or off. Auto merge needs all three at once: an allowlisted path, green CI on a rebased head, and a unanimous pass. Missing one item blocks the merge. Batch size is 20 to 50 PRs for a full run. Pilot batch is 5 PRs. A 50 PR batch uses up to 65 agents total, in parallel, each in its own worktree. A 20 PR batch uses 22 to 32. The Handover record so far is 14 agents in one run.
 
 <p align="center">
   <img src="docs/images/fleet-flow.svg" alt="Fleet workflow: batch of 20 to 50 small PRs, scripted checks first, verifier on fail or sample, judge sample, auto merge gate, merge or hold" width="800">
@@ -130,7 +130,7 @@ How a batch runs: one author agent per PR prepares the change, then scripted che
 
 ```mermaid
 flowchart TB
-    A[Batch: 20 to 50 small PRs<br>1 author agent per PR, pilot is 5] --> B[Scripted checks first<br>0 agents, lint, type, tests]
+    A[Batch: 20 to 50 small PRs<br>1 author agent per PR, each in its own worktree, pilot is 5] --> B[Scripted checks first<br>0 agents, lint, type, tests]
     B --> C[Fail or sample: verifier<br>1 per failed or sampled PR]
     B --> D[Judge sample: optional<br>1 per 10 PRs, free model or off]
     C --> E[Auto merge gate<br>Allowlist + green CI + unanimous]
@@ -296,7 +296,7 @@ It tries the next route, changes the method, or makes an operational retry that 
 - `scripts/check-handover.sh`: validates Stage 2 manifests and Discovery router call lines plus handoff records against the v7 schemas.
 - `skills/local-handover/FIELD-KITS.md`: the field kit index, one bullet per kit with proof status and path.
 - `skills/local-handover/router/router-registry.md`: the Discovery router registry, one row per skill with trigger, inputs, outputs, when not to use, and phase.
-- `skills/local-handover/router/router-rules-v02.md`: the Discovery router rules, call line rule, handoff contract, phase map, four traps, and 1 to 5 score scale.
+- `skills/local-handover/router/router-rules-v02.md`: the Discovery router rules, call line rule, handoff contract, phase map, and four traps.
 - `skills/local-handover/examples/router-proofs-p3/`: sealed wiring proofs added Nov 19, 2026, for Falsification, Inversion, and Constraint-Based Discovery, plus the negative routing test and the Serendipity envelope test, with call lines, handoffs, manifest, and verification replay.
 - `skills/local-*/SKILL.md`: the 17 Discovery skills, one folder per skill, listed in the table in [Discovery skills](#discovery-skills).
 - `docs/field-kit-and-graph-diagram.html`: interactive diagram of the field kit and the graph, with the full schema, a working per-unit list, and a diagram-to-schema-path map.
