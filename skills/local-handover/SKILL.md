@@ -145,6 +145,7 @@ Fleet is a fourth effort level. [Advisory until Stage 2 harness ships]
 - Fleet depth max is 1.
 - One Fleet run holds 20 to 50 small PRs.
 - Fleet runs scripted checks first on each PR, for lint, type, and tests.
+- Each Fleet PR author works in its own git worktree, one worktree per PR branch, so authors run in parallel. The coordinator creates worktrees before spawning authors and removes them after the PR is done or held. Serial is the fallback when worktrees cannot be used.
 - An agent verifier runs only on a failed check or on a sampled PR.
 - The judge samples 1 in 10 PRs. The judge is optional: Stage 1 lets the user turn it off, or run it on a free OpenRouter model instead of a paid model.
 - Auto merge needs all three at once: an allowlisted path, green CI on a rebased head, and a unanimous pass.
