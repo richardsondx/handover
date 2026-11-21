@@ -295,7 +295,6 @@ It tries the next route, changes the method, or makes an operational retry that 
 - `skills/local-handover/router/router-rules-v02.md`: the Discovery router rules, call line rule, handoff contract, phase map, four traps, and 1 to 5 score scale.
 - `skills/local-handover/examples/router-proofs-p3/`: sealed wiring proofs added Nov 19, 2026, for Falsification, Inversion, and Constraint-Based Discovery, plus the negative routing test and the Serendipity envelope test, with call lines, handoffs, manifest, and verification replay.
 - `skills/local-*/SKILL.md`: the 17 Discovery skills, one folder per skill, listed in the table in [Discovery skills](#discovery-skills).
-- `docs/handover-v4-ikea-instructions.html`: IKEA-style visual guide to v4, parts list, assembly steps, loop and graph diagrams, and troubleshooting.
 - `docs/field-kit-and-graph-diagram.html`: interactive diagram of the field kit and the graph, with the full schema, a working per-unit list, and a diagram-to-schema-path map.
 - `docs/architecture-draft-v0.6.md`: full v1 architecture, reviewed twice by Opus and Terra, with two stage approval, harness enforced gates, budget ledger, resume protocol, verification coverage, and options first user experience.
 - `docs/verification-gap.md`: what is still unproven, and the tests that close each gap.
@@ -315,7 +314,7 @@ Version 6, Nov 15, 2026, was the live skill until Nov 16, 2026. It wires the Dis
 
 Version 5, Nov 10, 2026, was the live skill until Nov 15, 2026. It states a $2 hard cap per run, supervised only, and up to 5 fix cycles per run as standard. It keeps the v4 graph, kit, and approval rules.
 
-Version 4, approved Nov 5, 2026, adds the benchmark changes: per-unit list, session start routine, end-to-end check, effort scaling, subagent contract, notes and compaction, risk ratings and failure threshold, rubric evaluator, resume and hook rules, and the handoff pattern. The IKEA-style guide explains it visually: [docs/handover-v4-ikea-instructions.html](docs/handover-v4-ikea-instructions.html).
+Version 4, approved Nov 5, 2026, adds the benchmark changes: per-unit list, session start routine, end-to-end check, effort scaling, subagent contract, notes and compaction, risk ratings and failure threshold, rubric evaluator, resume and hook rules, and the handoff pattern.
 
 Version 1, built from architecture draft v0.6, approved Nov 4, 2026.
 
