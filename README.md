@@ -14,12 +14,13 @@
 
 **English** · Translations welcome, see [Contributing](CONTRIBUTING.md). English is the source file; translated files will be linked here once they are added and checked.
 
-**Website · Guides:** the skill core is now at v8, a lean core of about 20 KB plus reference files loaded on demand. This README is the guide for v8. The v8 core on main is a draft until it passes its proof run; v7 remains the last proven live skill. Read the guides on the Handover site: [Visual guide](https://handover.nshipyard.com/guide) and [Field kit and graph](https://handover.nshipyard.com/field-kit). The skill is in `skills/local-handover/`, the Discovery skills are in [Discovery skills](#discovery-skills), the architecture is in `docs/architecture-draft-v0.6.md`, and the open gaps are in `docs/verification-gap.md`.
+**Website · Guides:** the skill core is now at v8, a lean core of about 20 KB plus reference files loaded on demand. This README is the guide for v8. The v8 core on main is a draft until it passes its proof run; v7 remains the last proven live skill. Read the guides on the Handover site: [Visual guide](https://handover.nshipyard.com/guide) and [Field kit and graph](https://handover.nshipyard.com/field-kit). The skill is in `skills/local-handover/`, the Discovery skills are in [Discovery skills](#discovery-skills), and the open gaps are in `docs/verification-gap.md`.
 
 ## Contents
 
 - [Quick start](#quick-start)
 - [How it works](#how-it-works)
+- [Fleet](#fleet)
 - [What makes it special](#what-makes-it-special)
 - [What you get](#what-you-get)
 - [Field kits](#field-kits)
@@ -112,6 +113,30 @@ Split: units with no dependency run apart. Join: the join waits for all inputs. 
 3. **Approve in two stages.** Stage 1 approves the intent package. Stage 2 approves the versioned execution manifest: kit and playbook versions, tool and target allowlist with a risk rating per tool, the failure threshold, finish predicate, limits, and budget ledger. The manifest is what is authorized to run, not the prose alone. In chat, the card comes first. Stage 1 fits near 120 words on the first screen, with a second short screen allowed when a material term needs room. Stage 2 shows the diff only. No material term hides behind See full spec. Chat uses plain words, such as proof of done, run plan, limits, proven kit, and new kit to build first. The file keeps the full terms and the full checks.
 4. **Run inside the envelope.** A coordinator owns the plan and every spawn. The author is never the verifier. The verifier gets the specification and the artifact only, never the author's reasoning. The judge resolves verdicts and records gaps. Work the graph can split is split into units, each with one output, one owner, and one check, listed in a JSON file where every unit starts failing and only the passes field changes. Units with no dependency run apart, a join waits for all its inputs, and a fresh checker reopens every link at the join.
 5. **Report proof or a dead end.** If the run finishes, you get the artifact, its evidence, a decision trail, and a budget audit. If it cannot finish inside the limits you approved, you get a dead end report: what stopped, what was tried, what would unblock it, and options. Exhaustion is never presented as a weaker success, and the predicate is never relaxed to declare victory.
+
+## Fleet
+
+Fleet is a fourth effort level. It covers gardening and bug fixes only: delete dead code, dedupe patterns, rename for clarity, fix a lint or type failure, fix a test failure, bump a dependency with green tests, and sync docs with code. It never takes a new feature, security work, a schema change, or a large refactor.
+
+Fleet runs at depth max 1, in batches of 20 to 50 small PRs, with scripted checks first on each PR. An agent verifier runs only on a failed check or on a sampled PR. The judge samples 1 in 10 PRs. The judge is optional: Stage 1 lets you turn it off, or run it on a free OpenRouter model instead of a paid model. Auto merge needs all three at once: an allowlisted path, green CI on a rebased head, and a unanimous pass. The $2,000 monthly figure is vision only and needs a separate approval before any spend.
+
+Fleet passed its first proof run on Nov 20, 2026: 5 PRs on Handover itself, 15 of 15 scripted checks pass, judge PASS on 5 of 5 predicate items. The kit is draft, pending a second proof run for full coverage, per the skill rule that one passing task does not establish coverage of a field.
+
+How a batch runs: one author agent per PR prepares the change, then scripted checks run first on each PR, lint, type, and tests, with no agent. A verifier checks only a PR that failed a check or was sampled. A judge samples 1 in 10 PRs, optional, on a free model or off. Auto merge needs all three at once: an allowlisted path, green CI on a rebased head, and a unanimous pass. Missing one item blocks the merge. Batch size is 20 to 50 PRs for a full run. Pilot batch is 5 PRs. A 50 PR batch uses up to 65 agents total, serial, not at once. A 20 PR batch uses 22 to 32. The Handover record so far is 14 agents in one run.
+
+<p align="center">
+  <img src="docs/images/fleet-flow.svg" alt="Fleet workflow: batch of 20 to 50 small PRs, scripted checks first, verifier on fail or sample, judge sample, auto merge gate, merge or hold" width="800">
+</p>
+
+```mermaid
+flowchart TB
+    A[Batch: 20 to 50 small PRs<br>1 author agent per PR, pilot is 5] --> B[Scripted checks first<br>0 agents, lint, type, tests]
+    B --> C[Fail or sample: verifier<br>1 per failed or sampled PR]
+    B --> D[Judge sample: optional<br>1 per 10 PRs, free model or off]
+    C --> E[Auto merge gate<br>Allowlist + green CI + unanimous]
+    D --> E
+    E --> F[Merge, or hold if one item is missing]
+```
 
 ## What makes it special
 
@@ -208,11 +233,11 @@ The registry holds one row per skill, with trigger, inputs, outputs, when not to
 | Evolutionary Search | Search | Small changes, kept or dropped by test, can find a better form |
 | Serendipity + Prepared Mind | Search | A chance find meets a mind ready to see its use |
 
-The router files are `skills/local-handover/router/router-registry.md` and `skills/local-handover/router/router-rules-v02.md`. The registry defines the four traps and the 1 to 5 score scale in the rules file.
+The router files are `skills/local-handover/router/router-registry.md` and `skills/local-handover/router/router-rules-v02.md`. The rules file defines the four traps and the 1 to 5 score scale.
 
 The v8 skill text calls the router as a required step. The coordinator must read the registry before it routes a case. It must pick a skill only when that skill's registry trigger fires. It must write one call line before each Discovery skill call. It must record each handoff in that skill's own format. The wiring run passed on Nov 15, 2026. Judge verdict PASS. Run stage2-router-wire-2026-11-15-01. All 5 predicate items pass. The proof task routed Anomaly Hunting and Abduction with 2 call lines and 7 of 7 handoff fields each.
 
-Two limits stay open. First, the router proof covers two test situations, not live use of all 17 skills. Second, the loader check stated in Status and limits below. The wiring proof routed 2 of the 17 skills through the live skill text. The wire is proven for the Research phase engines, not for the Proof, Search, or Stuck phases.
+Two limits stay open. First, the router proofs are sealed tests, not live use of all 17 skills. Second, the loader check stated in Status and limits below. The wiring proofs routed 5 of the 17 skills through the live skill text, across all five phases.
 
 Sealed wiring proofs added Nov 19, 2026 cover the other three phases: Falsification (Proof), Inversion (Stuck), and Constraint-Based Discovery (Search), in `skills/local-handover/examples/router-proofs-p3/`. The same folder holds two more sealed tests: a negative routing test, where the coordinator calls no engine when no trigger fires, and a Stage 2 envelope test, where Serendipity parks an out-of-scope surprise instead of executing it. Every call line and handoff in the proofs passes the validator, `sh scripts/check-handover.sh`.
 
@@ -244,6 +269,9 @@ The $2 is a cap, not a price. Each run states its budget in the manifest before 
 A separate verifier checks the work. A separate judge rules in a fresh context. Both are paid from the same $2. At least 15 percent is held back for checking before work starts, so checking is never cut to save money.
 A run that needs no paid calls costs $0. The demo pilot uses $0 paid tools and no paid model calls outside your agent's own run. The router proof run cost $0 of its cap. Larger envelopes need approval case by case. A limit is labelled advisory when the platform cannot hard block further calls at that limit.
 
+**How do I run it at zero cost?**
+Set the cost cap to $0 in Stage 1. Use only free models for every agent: the coordinator, the authors, the verifier, and the judge all run on OpenRouter free tier models. Run scripted checks only. No paid model calls, no paid tools. The judge is optional: turn it off for $0, or run it on a free OpenRouter model. The final report Cost and envelope section lists only costs that apply to the task. A cost type that does not apply is omitted, not listed as did not run.
+
 **Can it run overnight or unattended?**
 Not in v7. Unattended operation needs a demonstrated scheduler or parent re-invocation path, with duplicate run detection and failure reporting, including resume after a restart. Those proof tests are listed in [Status and limits](#status-and-limits).
 
@@ -271,9 +299,7 @@ It tries the next route, changes the method, or makes an operational retry that 
 - `skills/local-handover/router/router-rules-v02.md`: the Discovery router rules, call line rule, handoff contract, phase map, four traps, and 1 to 5 score scale.
 - `skills/local-handover/examples/router-proofs-p3/`: sealed wiring proofs added Nov 19, 2026, for Falsification, Inversion, and Constraint-Based Discovery, plus the negative routing test and the Serendipity envelope test, with call lines, handoffs, manifest, and verification replay.
 - `skills/local-*/SKILL.md`: the 17 Discovery skills, one folder per skill, listed in the table in [Discovery skills](#discovery-skills).
-- `docs/handover-v4-ikea-instructions.html`: IKEA-style visual guide to v4, parts list, assembly steps, loop and graph diagrams, and troubleshooting.
 - `docs/field-kit-and-graph-diagram.html`: interactive diagram of the field kit and the graph, with the full schema, a working per-unit list, and a diagram-to-schema-path map.
-- `docs/architecture-draft-v0.6.md`: full v1 architecture, reviewed twice by Opus and Terra, with two stage approval, harness enforced gates, budget ledger, resume protocol, verification coverage, and options first user experience.
 - `docs/verification-gap.md`: what is still unproven, and the tests that close each gap.
 - `docs/browser-study-reconciliation.md`: what the Poteto, m4lkxx, and YouTube sources actually said, with corrections to earlier notes, including that the 50,000 figure was not verified in any of those three sources.
 - `docs/images/handover-logo.png`: the Split Arrow Loop logo lockup, violet on white.
@@ -291,7 +317,7 @@ Version 6, Nov 15, 2026, was the live skill until Nov 16, 2026. It wires the Dis
 
 Version 5, Nov 10, 2026, was the live skill until Nov 15, 2026. It states a $2 hard cap per run, supervised only, and up to 5 fix cycles per run as standard. It keeps the v4 graph, kit, and approval rules.
 
-Version 4, approved Nov 5, 2026, adds the benchmark changes: per-unit list, session start routine, end-to-end check, effort scaling, subagent contract, notes and compaction, risk ratings and failure threshold, rubric evaluator, resume and hook rules, and the handoff pattern. The IKEA-style guide explains it visually: [docs/handover-v4-ikea-instructions.html](docs/handover-v4-ikea-instructions.html).
+Version 4, approved Nov 5, 2026, adds the benchmark changes: per-unit list, session start routine, end-to-end check, effort scaling, subagent contract, notes and compaction, risk ratings and failure threshold, rubric evaluator, resume and hook rules, and the handoff pattern.
 
 Version 1, built from architecture draft v0.6, approved Nov 4, 2026.
 

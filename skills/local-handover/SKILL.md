@@ -24,6 +24,7 @@ This file is the core protocol. Detail lives in references/ and is part of the s
 
 - Close the loop: every gap ends Fixed, Queued, or Accepted, with owner and next step. [Advisory until Stage 2 harness ships]
 - Separation of powers: author is never verifier, verifier is never judge. Verifier gets spec plus artifact plus evidence only. Judge cannot convert a gap into a pass. [Harness-enforced: fresh-context spawn]
+- Judge is optional. Stage 1 lets the user turn the judge off, or run it on a free model via OpenRouter instead of a paid model. When the judge is off, the verifier ruling stands as the verdict. When the judge is on, it runs on a free OpenRouter model, never a paid model. [Advisory until Stage 2 harness ships]
 - Domain match: a cited source verifies a check only if the source's domain matches the unit's domain conditions. Any mismatch means not verified on that citation alone. A claim passes only on a source, a number, or a concrete test on the real artifact. [Advisory until Stage 2 harness ships]
 - No outward action unless listed exactly in the Stage 2 manifest, with action, destination, payload or template, limit, and condition. One-way doors: publish, send, pay, delete, deploy. Unlisted or changed action pauses. [Advisory until Stage 2 harness ships]
 - Predicate amendment needs reapproval and voids old verdicts. [Advisory until Stage 2 harness ships]
@@ -56,6 +57,7 @@ Run the First Principles ladder before a unit acts, whenever the unit's plan may
 Detail and fixed word meanings: references/readability.md. Governs Stage 1, Stage 2, the final report, the judge verdict, and the dead-end report. Changes words only. [Advisory until Stage 2 harness ships]
 - Active voice. Vertical lists. No figurative language. No formulaic, slogan-like language. One Word, One Meaning, with the fixed word meanings in references/readability.md. One thought per sentence, at most 20 words.
 - Fixed order for the final report and the judge verdict: Result, Evidence, Units, Kit, Gaps, Cost and envelope, Next step.
+- Cost and envelope lists only costs that apply to the task. A cost type that does not apply is omitted, not listed as did not run. A non-iOS task omits EAS entirely. A task with no paid calls lists $0 spent and omits paid tool lines.
 - Judge check: the judge flags a readability break in its verdict, names the line and the rule it breaks, and the coordinator rewrites the report before delivery.
 
 ## Loop
@@ -133,6 +135,20 @@ Detail: references/execution.md. [Advisory until Stage 2 harness ships]
 - Pause and resume: stop only at a safe boundary, make work durable, write a resume note usable with no prior context. Resume never re-runs completed tools. If saved history does not match the run exactly, run fails closed with an error instead of guessing. [Advisory until Stage 2 harness ships]
 - Cleanup: kill only what the run started, never the evidence. [Advisory until Stage 2 harness ships]
 - Also in references/execution.md, read before you run: effort scales, subagent contract, background tasks, session start, notes and compaction, agent memory, hook events, learning loop. Hook events do not exist today. [Advisory until Stage 2 harness ships]
+
+## Fleet
+
+Fleet is a fourth effort level. [Advisory until Stage 2 harness ships]
+- Fleet covers gardening and bug fixes only.
+- Fleet scope holds seven kinds of small work only: delete dead code, dedupe patterns, rename for clarity, fix a lint or type failure, fix a test failure, bump a dependency with green tests, sync docs with code.
+- Fleet never takes a new feature, security work, a schema change, or a large refactor.
+- Fleet depth max is 1.
+- One Fleet run holds 20 to 50 small PRs.
+- Fleet runs scripted checks first on each PR, for lint, type, and tests.
+- An agent verifier runs only on a failed check or on a sampled PR.
+- The judge samples 1 in 10 PRs. The judge is optional: Stage 1 lets the user turn it off, or run it on a free OpenRouter model instead of a paid model.
+- Auto merge needs all three at once: an allowlisted path, green CI on a rebased head, and a unanimous pass.
+- The $2,000 monthly figure is vision only. It needs a separate approval before any spend.
 
 ## Step 4. Verify, before any claim of done
 
