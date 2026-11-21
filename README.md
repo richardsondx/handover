@@ -130,7 +130,7 @@ How a batch runs: one author agent per PR prepares the change, then scripted che
 
 ```mermaid
 flowchart TB
-    A[Batch: 20 to 50 small PRs<br>1 author agent per PR, pilot is 5] --> B[Scripted checks first<br>0 agents, lint, type, tests]
+    A[Batch: 20 to 50 small PRs<br>1 author agent per PR, each in its own worktree, pilot is 5] --> B[Scripted checks first<br>0 agents, lint, type, tests]
     B --> C[Fail or sample: verifier<br>1 per failed or sampled PR]
     B --> D[Judge sample: optional<br>1 per 10 PRs, free model or off]
     C --> E[Auto merge gate<br>Allowlist + green CI + unanimous]
