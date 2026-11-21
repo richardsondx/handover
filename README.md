@@ -296,7 +296,7 @@ It tries the next route, changes the method, or makes an operational retry that 
 - `scripts/check-handover.sh`: validates Stage 2 manifests and Discovery router call lines plus handoff records against the v7 schemas.
 - `skills/local-handover/FIELD-KITS.md`: the field kit index, one bullet per kit with proof status and path.
 - `skills/local-handover/router/router-registry.md`: the Discovery router registry, one row per skill with trigger, inputs, outputs, when not to use, and phase.
-- `skills/local-handover/router/router-rules-v02.md`: the Discovery router rules, call line rule, handoff contract, phase map, four traps, and 1 to 5 score scale.
+- `skills/local-handover/router/router-rules-v02.md`: the Discovery router rules, call line rule, handoff contract, phase map, and four traps.
 - `skills/local-handover/examples/router-proofs-p3/`: sealed wiring proofs added Nov 19, 2026, for Falsification, Inversion, and Constraint-Based Discovery, plus the negative routing test and the Serendipity envelope test, with call lines, handoffs, manifest, and verification replay.
 - `skills/local-*/SKILL.md`: the 17 Discovery skills, one folder per skill, listed in the table in [Discovery skills](#discovery-skills).
 - `docs/field-kit-and-graph-diagram.html`: interactive diagram of the field kit and the graph, with the full schema, a working per-unit list, and a diagram-to-schema-path map.
