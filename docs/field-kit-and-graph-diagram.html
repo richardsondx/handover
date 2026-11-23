@@ -201,7 +201,7 @@ table.map code{font-family:"IBM Plex Mono",monospace;font-size:12px}
         <h3>Where this lives in the repo</h3>
         <div class="file-row">
           <span class="tag">THE SCHEMA · UPDATED</span>
-          <div class="path">skills/local-handover/handover-schema.json</div>
+          <div class="path">skills/handover/handover-schema.json</div>
           <p>The machine-readable contract. One file, two definitions: <span class="mono">$defs/fieldKit</span> and <span class="mono">$defs/graph</span> (with <span class="mono">$defs/unit</span>).</p>
         </div>
         <div class="file-row">
@@ -211,7 +211,7 @@ table.map code{font-family:"IBM Plex Mono",monospace;font-size:12px}
         </div>
         <div class="file-row">
           <span class="tag">THE SOURCE OF TRUTH</span>
-          <div class="path">skills/local-handover/SKILL.md</div>
+          <div class="path">skills/handover/SKILL.md</div>
           <p>Handover v4. Step 5 defines the field kit. The Graph section (items 1 to 8) defines the graph. The schema follows the skill, never the other way round.</p>
         </div>
       </div>
@@ -234,7 +234,7 @@ table.map code{font-family:"IBM Plex Mono",monospace;font-size:12px}
       <h2>The root shape <small>One JSON file can hold a field kit, a graph, or both together. That is the whole top level: everything else lives under $defs.</small></h2>
       <div class="glance">
         <div><div class="k">$id</div><div class="v">github.com/richardsondx/handover/…/handover-schema.json</div><p>Canonical location of the schema file in the repo.</p></div>
-        <div><div class="k">title</div><div class="v">"Handover field kit and graph"</div><p>Matches Handover v4, skills/local-handover/SKILL.md.</p></div>
+        <div><div class="k">title</div><div class="v">"Handover field kit and graph"</div><p>Matches Handover v4, skills/handover/SKILL.md.</p></div>
         <div><div class="k">$defs</div><div class="v">fieldKit · graph · unit</div><p>Three definitions. Graph units point back to unit with $ref.</p></div>
       </div>
       <div class="rule"><strong>The one root rule:</strong> <code>anyOf: [ { required: ["fieldKit"] }, { required: ["graph"] } ]</code>, a file with neither a kit nor a graph is not a Handover file. A file with both is the normal case: the kit that runs, and the graph it runs as.</div>
@@ -338,7 +338,7 @@ table.map code{font-family:"IBM Plex Mono",monospace;font-size:12px}
       <div class="progress" aria-hidden="true"><i id="progBar"></i></div>
       <div class="done-banner" id="doneBanner">0 of 4 units pass · Not done. Done means every unit passes.</div>
       <div class="code" id="unitJson"></div>
-      <p class="note" style="margin-top:10px">This is the same shape as <span class="mono">skills/local-handover/units-template.json</span>, extended with <span class="mono">dependsOn</span> from the graph definition. The template in the repo is the minimal starting file; the schema above is the full contract.</p>
+      <p class="note" style="margin-top:10px">This is the same shape as <span class="mono">skills/handover/units-template.json</span>, extended with <span class="mono">dependsOn</span> from the graph definition. The template in the repo is the minimal starting file; the schema above is the full contract.</p>
     </div>
   </section>
 
@@ -346,7 +346,7 @@ table.map code{font-family:"IBM Plex Mono",monospace;font-size:12px}
   <section class="sheet" id="full-schema">
     <div class="sheet-head"><span>The updated schema, in full</span><span>JSON Schema Draft 2020-12</span></div>
     <div class="section-pad">
-      <h2>handover-schema.json <small>This is the complete schema: every definition, requirement, and description from the file held with the skill, pretty-printed for reading. Copy it into the repo at skills/local-handover/handover-schema.json, or download it as a file. The diagrams above are drawn from the definitions in this text.</small></h2>
+      <h2>handover-schema.json <small>This is the complete schema: every definition, requirement, and description from the file held with the skill, pretty-printed for reading. Copy it into the repo at skills/handover/handover-schema.json, or download it as a file. The diagrams above are drawn from the definitions in this text.</small></h2>
       <div class="search-row">
         <input type="search" id="schemaSearch" placeholder="Filter the schema text, try: dependsOn, proofStatus, capabilityMap…" aria-label="Filter schema text">
         <button class="btn blue" id="copyBtn">Copy schema JSON</button>
@@ -401,9 +401,9 @@ table.map code{font-family:"IBM Plex Mono",monospace;font-size:12px}
 <script type="application/json" id="schemaData">
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/richardsondx/handover/blob/main/skills/local-handover/handover-schema.json",
+  "$id": "https://github.com/richardsondx/handover/blob/main/skills/handover/handover-schema.json",
   "title": "Handover field kit and graph",
-  "description": "One file that describes a Handover field kit and the graph that runs with it. Matches Handover v4, skills/local-handover/SKILL.md. The diagram in docs/field-kit-and-graph-diagram.html is drawn from data that validates against this schema.",
+  "description": "One file that describes a Handover field kit and the graph that runs with it. Matches Handover v4, skills/handover/SKILL.md. The diagram in docs/field-kit-and-graph-diagram.html is drawn from data that validates against this schema.",
   "type": "object",
   "anyOf": [
     { "required": ["fieldKit"] },
@@ -731,7 +731,7 @@ document.getElementById('schemaSearch').addEventListener('input', function(){
 
 function copySchema(msgEl){
   function done(ok){
-    msgEl.textContent = ok ? 'Schema copied. Paste it at skills/local-handover/handover-schema.json.' : 'Copy did not work in this view. Use Download instead, or select the schema text below.';
+    msgEl.textContent = ok ? 'Schema copied. Paste it at skills/handover/handover-schema.json.' : 'Copy did not work in this view. Use Download instead, or select the schema text below.';
   }
   if(navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(schemaPretty).then(function(){ done(true); }, function(){ fallback(); });

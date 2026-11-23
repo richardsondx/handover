@@ -37,7 +37,7 @@ SPEC_FIELDS = {"name", "description", "license", "compatibility", "metadata", "a
 NAME_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 RESERVED = ("anthropic", "claude")
 
-# Sections every Discovery skill must have. local-handover is the
+# Sections every Discovery skill must have. handover is the
 # orchestrator skill, not an engine, so it has its own section list.
 REQUIRED = [
     "What this skill does",
@@ -130,7 +130,7 @@ for path in files:
         m = re.match(r"^##\s+(.+?)\s*$", line)
         if m:
             headings.add(m.group(1))
-    required = HANDOVER_REQUIRED if folder == "local-handover" else REQUIRED
+    required = HANDOVER_REQUIRED if folder == "handover" else REQUIRED
     for section in required:
         if section not in headings:
             problems.append("missing required section: ## %s" % section)

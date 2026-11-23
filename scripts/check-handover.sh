@@ -8,7 +8,7 @@
 # so nothing here is a run-time enforcement claim.
 # Checks:
 #   a manifest JSON file validates against
-#     skills/local-handover/stage2-manifest-schema.json
+#     skills/handover/stage2-manifest-schema.json
 #   budget ledger numbers reconcile: reserve percent matches reserve
 #     dollars, work budget plus reserve equals the cap, ledger cap
 #     matches the limits cap
@@ -25,7 +25,7 @@
 #   sh scripts/check-handover.sh
 #     Validates the repo's own good examples: the rendered Nov 15
 #     manifest, units-template.json, and the router fixtures under
-#     skills/local-handover/examples/. The broken examples are NOT
+#     skills/handover/examples/. The broken examples are NOT
 #     checked by the default run; they must fail, so check them with
 #     --manifest or --router-call-lines and expect exit 1.
 #   sh scripts/check-handover.sh --manifest FILE...
@@ -33,8 +33,8 @@
 #   sh scripts/check-handover.sh --router-call-lines FILE --handoff-dir DIR
 #     Validates the call-lines file and the handoff records in DIR.
 # Source for the registry and handoff fields: the repo's own
-# skills/local-handover/router/router-registry.md and
-# skills/local-handover/router/router-rules-v02.md.
+# skills/handover/router/router-registry.md and
+# skills/handover/router/router-rules-v02.md.
 
 set -u
 ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
@@ -242,9 +242,9 @@ def check_router(call_lines_path, handoff_dir, triggers, handoff_fields):
         print("checked %d call line(s) in %s" % (len(blocks), rel))
 
 
-schema_path = os.path.join(root, "skills", "local-handover", "stage2-manifest-schema.json")
-registry_path = os.path.join(root, "skills", "local-handover", "router", "router-registry.md")
-rules_path = os.path.join(root, "skills", "local-handover", "router", "router-rules-v02.md")
+schema_path = os.path.join(root, "skills", "handover", "stage2-manifest-schema.json")
+registry_path = os.path.join(root, "skills", "handover", "router", "router-registry.md")
+rules_path = os.path.join(root, "skills", "handover", "router", "router-rules-v02.md")
 
 try:
     schema = load_json(schema_path)
@@ -288,10 +288,10 @@ while i < len(args):
         i += 1
 
 if not manifests and call_lines is None:
-    examples = os.path.join(root, "skills", "local-handover", "examples")
+    examples = os.path.join(root, "skills", "handover", "examples")
     manifests = [
         os.path.join(examples, "stage2-manifest-router-wire-2026-11-15.json"),
-        os.path.join(root, "skills", "local-handover", "units-template.json"),
+        os.path.join(root, "skills", "handover", "units-template.json"),
     ]
     call_lines = os.path.join(examples, "router-call-lines-router-wire-2026-11-15.md")
     handoff_dir = os.path.join(examples, "handoffs")
@@ -304,11 +304,11 @@ if schema is not None:
             note_fail("manifest file not found: %s" % path)
     # The handover schema carries a compact stage2Manifest def. The good
     # example must validate against that compact form too.
-    handover_schema_path = os.path.join(root, "skills", "local-handover", "handover-schema.json")
+    handover_schema_path = os.path.join(root, "skills", "handover", "handover-schema.json")
     try:
         handover_schema = load_json(handover_schema_path)
         Draft202012Validator.check_schema(handover_schema)
-        example = load_json(os.path.join(root, "skills", "local-handover", "examples",
+        example = load_json(os.path.join(root, "skills", "handover", "examples",
                                          "stage2-manifest-router-wire-2026-11-15.json"))
         errs = list(Draft202012Validator(handover_schema).iter_errors({"stage2Manifest": example}))
         if errs:

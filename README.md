@@ -7,14 +7,14 @@
 > Turn a rough prompt into a full plan and orchestration, ask only the early questions needed to set the plan, approve once up front, then run with full autonomy inside the approved envelope.
 
 [![Handover v8](https://img.shields.io/badge/Handover-v8-blue)](https://github.com/richardsondx/handover)
-[![Skill: Muse](https://img.shields.io/badge/Skill-Muse-green)](skills/local-handover/SKILL.md)
+[![Skill: Muse](https://img.shields.io/badge/Skill-Muse-green)](skills/handover/SKILL.md)
 [![Discovery: 17 skills proven](https://img.shields.io/badge/Discovery-17%20skills%20proven-orange)](#discovery-skills)
 [![Status: Supervised only](https://img.shields.io/badge/Status-Supervised%20only-yellow)](docs/verification-gap.md)
-[![Core: v8 draft](https://img.shields.io/badge/Core-v8%20draft-red)](skills/local-handover/SKILL.md)
+[![Core: v8 draft](https://img.shields.io/badge/Core-v8%20draft-red)](skills/handover/SKILL.md)
 
 **English** · Translations welcome, see [Contributing](CONTRIBUTING.md). English is the source file; translated files will be linked here once they are added and checked.
 
-**Website · Guides:** the skill core is now at v8, a lean core of about 20 KB plus reference files loaded on demand. This README is the guide for v8. The v8 core on main is a draft until it passes its proof run; v7 remains the last proven live skill. Read the guides on the Handover site: [Visual guide](https://handover.nshipyard.com/guide) and [Field kit and graph](https://handover.nshipyard.com/field-kit). The skill is in `skills/local-handover/`, the Discovery skills are in [Discovery skills](#discovery-skills), and the open gaps are in `docs/verification-gap.md`.
+**Website · Guides:** the skill core is now at v8, a lean core of about 20 KB plus reference files loaded on demand. This README is the guide for v8. The v8 core on main is a draft until it passes its proof run; v7 remains the last proven live skill. Read the guides on the Handover site: [Visual guide](https://handover.nshipyard.com/guide) and [Field kit and graph](https://handover.nshipyard.com/field-kit). The skill is in `skills/handover/`, the Discovery skills are in [Discovery skills](#discovery-skills), and the open gaps are in `docs/verification-gap.md`.
 
 ## Contents
 
@@ -41,7 +41,7 @@
 Paste this into Muse, Codex, or Claude Code, after you have installed the skill from the table below. Replace the bracketed line with your own rough prompt.
 
 ```text
-Use the Handover skill in skills/local-handover/SKILL.md.
+Use the Handover skill in skills/handover/SKILL.md.
 
 My rough prompt is: [paste your prompt here]
 
@@ -54,11 +54,11 @@ That one block is the whole setup. Handover does the rest: it translates, it ask
 
 | Agent | Install step | Then |
 | --- | --- | --- |
-| Muse | Copy `skills/local-handover/` into your Muse custom skills folder, keeping the folder name `local-handover` | Paste the setup prompt above in a Muse chat |
-| Codex | Copy `skills/local-handover/` into your Codex skills folder, keeping the folder name `local-handover`, with `SKILL.md` at its root | Invoke it as `$local-handover`, then paste the setup prompt above in Codex |
-| Claude Code | Copy `skills/local-handover/` into your Claude Code skills folder, keeping the folder name `local-handover`, with `SKILL.md` at its root | Invoke it as `/local-handover`, then paste the setup prompt above in Claude Code |
+| Muse | Copy `skills/handover/` into your Muse custom skills folder, keeping the folder name `handover` | Paste the setup prompt above in a Muse chat |
+| Codex | Copy `skills/handover/` into your Codex skills folder, keeping the folder name `handover`, with `SKILL.md` at its root | Invoke it as `$handover`, then paste the setup prompt above in Codex |
+| Claude Code | Copy `skills/handover/` into your Claude Code skills folder, keeping the folder name `handover`, with `SKILL.md` at its root | Invoke it as `/handover`, then paste the setup prompt above in Claude Code |
 
-If an agent's skill folder layout differs in your version, put `SKILL.md` where that agent loads skills from, and keep the folder name `local-handover` so the name in the frontmatter still matches the folder. The Discovery skills install the same way, one folder per skill under `skills/`.
+If an agent's skill folder layout differs in your version, put `SKILL.md` where that agent loads skills from, and keep the folder name `handover` so the name in the frontmatter still matches the folder. The Discovery skills install the same way, one folder per skill under `skills/`.
 
 ### 3. Approve, then let it run
 
@@ -233,13 +233,13 @@ The registry holds one row per skill, with trigger, inputs, outputs, when not to
 | Evolutionary Search | Search | Small changes, kept or dropped by test, can find a better form |
 | Serendipity + Prepared Mind | Search | A chance find meets a mind ready to see its use |
 
-The router files are `skills/local-handover/router/router-registry.md` and `skills/local-handover/router/router-rules-v02.md`. The rules file defines the four traps and the 1 to 5 score scale.
+The router files are `skills/handover/router/router-registry.md` and `skills/handover/router/router-rules-v02.md`. The rules file defines the four traps and the 1 to 5 score scale.
 
 The v8 skill text calls the router as a required step. The coordinator must read the registry before it routes a case. It must pick a skill only when that skill's registry trigger fires. It must write one call line before each Discovery skill call. It must record each handoff in that skill's own format. The wiring run passed on Nov 15, 2026. Judge verdict PASS. Run stage2-router-wire-2026-11-15-01. All 5 predicate items pass. The proof task routed Anomaly Hunting and Abduction with 2 call lines and 7 of 7 handoff fields each.
 
 Two limits stay open. First, the router proofs are sealed tests, not live use of all 17 skills. Second, the loader check stated in Status and limits below. The wiring proofs routed 5 of the 17 skills through the live skill text, across all five phases.
 
-Sealed wiring proofs added Nov 19, 2026 cover the other three phases: Falsification (Proof), Inversion (Stuck), and Constraint-Based Discovery (Search), in `skills/local-handover/examples/router-proofs-p3/`. The same folder holds two more sealed tests: a negative routing test, where the coordinator calls no engine when no trigger fires, and a Stage 2 envelope test, where Serendipity parks an out-of-scope surprise instead of executing it. Every call line and handoff in the proofs passes the validator, `sh scripts/check-handover.sh`.
+Sealed wiring proofs added Nov 19, 2026 cover the other three phases: Falsification (Proof), Inversion (Stuck), and Constraint-Based Discovery (Search), in `skills/handover/examples/router-proofs-p3/`. The same folder holds two more sealed tests: a negative routing test, where the coordinator calls no engine when no trigger fires, and a Stage 2 envelope test, where Serendipity parks an out-of-scope surprise instead of executing it. Every call line and handoff in the proofs passes the validator, `sh scripts/check-handover.sh`.
 
 One limit stays open after those proofs. The proofs are sealed tests, not live use of all 17 skills. Five skills are wired through the live skill text across all five phases; the other twelve have their own skill proofs but no router wiring proof yet.
 
@@ -255,7 +255,7 @@ Handover proposes: a research brief for you, covering single call, single loop, 
 A reusable package for one field: router, playbooks, principles, roles, verification and cleanup routines, and a capability map. See the table above.
 
 **Does Handover suggest an existing field kit instead of generating one each time?**
-Yes. Stage 1 must declare Case A, an existing proven kit by version digest, or Case B, a kit to be generated with a separate proof budget. It does not silently generate a duplicate when a proven kit fits. Limit, stated plainly: v7 has no central searchable library of all past kits, so reuse depends on the kits the translator inspects in the workspace and project, and on the kit named in the Stage 1 package you approve. The index file `skills/local-handover/FIELD-KITS.md` lists one bullet per kit, with proof status and path.
+Yes. Stage 1 must declare Case A, an existing proven kit by version digest, or Case B, a kit to be generated with a separate proof budget. It does not silently generate a duplicate when a proven kit fits. Limit, stated plainly: v7 has no central searchable library of all past kits, so reuse depends on the kits the translator inspects in the workspace and project, and on the kit named in the Stage 1 package you approve. The index file `skills/handover/FIELD-KITS.md` lists one bullet per kit, with proof status and path.
 
 **Do Approve, Reject, and See full spec appear in the doc itself?**
 No. They live in chat only, on the same screen as the card. The doc holds an Approval section only. That section says approve or reject the whole package, with the version. See full spec opens the doc, so it would point to itself inside the doc.
@@ -286,19 +286,19 @@ It tries the next route, changes the method, or makes an operational retry that 
 - `README.md`: this file.
 - `CONTRIBUTING.md`: how to propose a change, a field kit, or a translation.
 - `SECURITY.md`: how to report a security issue, and what Handover will and will not do with secrets.
-- `skills/local-handover/SKILL.md`: the v8 lean core, about 20 KB, plus reference files loaded on demand in `skills/local-handover/references/`: readability, brief template, field kit spec, approval package, chat presentation, execution, hard rules, and verification. The v8 core is a draft until it passes its proof run.
-- `skills/local-handover/skill.yaml`: skill metadata.
-- `skills/local-handover/units-template.json`: the per-unit list template, v7, one entry per unit with the passes field starting as failing.
-- `skills/local-handover/handover-schema.json`: JSON Schema for the field kit and the graph, v7, Draft 2020-12, now with budget ledger, tool risk ratings, failure threshold, cheap-unit collapse, router call log, and the Stage 2 manifest schema. The diagram page is drawn from data that validates against it.
-- `skills/local-handover/stage2-manifest-schema.json`: JSON Schema for the Stage 2 execution manifest.
+- `skills/handover/SKILL.md`: the v8 lean core, about 20 KB, plus reference files loaded on demand in `skills/handover/references/`: readability, brief template, field kit spec, approval package, chat presentation, execution, hard rules, and verification. The v8 core is a draft until it passes its proof run.
+- `skills/handover/skill.yaml`: skill metadata.
+- `skills/handover/units-template.json`: the per-unit list template, v7, one entry per unit with the passes field starting as failing.
+- `skills/handover/handover-schema.json`: JSON Schema for the field kit and the graph, v7, Draft 2020-12, now with budget ledger, tool risk ratings, failure threshold, cheap-unit collapse, router call log, and the Stage 2 manifest schema. The diagram page is drawn from data that validates against it.
+- `skills/handover/stage2-manifest-schema.json`: JSON Schema for the Stage 2 execution manifest.
 - `scripts/check-frontmatter.sh`: checks frontmatter and headings on all 18 skills.
 - `scripts/check-loader.sh`: static loader check on all 18 skills, frontmatter parses, name matches folder, description and required sections present.
 - `scripts/check-handover.sh`: validates Stage 2 manifests and Discovery router call lines plus handoff records against the v7 schemas.
-- `skills/local-handover/FIELD-KITS.md`: the field kit index, one bullet per kit with proof status and path.
-- `skills/local-handover/router/router-registry.md`: the Discovery router registry, one row per skill with trigger, inputs, outputs, when not to use, and phase.
-- `skills/local-handover/router/router-rules-v02.md`: the Discovery router rules, call line rule, handoff contract, phase map, and four traps.
-- `skills/local-handover/examples/router-proofs-p3/`: sealed wiring proofs added Nov 19, 2026, for Falsification, Inversion, and Constraint-Based Discovery, plus the negative routing test and the Serendipity envelope test, with call lines, handoffs, manifest, and verification replay.
-- `skills/local-*/SKILL.md`: the 17 Discovery skills, one folder per skill, listed in the table in [Discovery skills](#discovery-skills).
+- `skills/handover/FIELD-KITS.md`: the field kit index, one bullet per kit with proof status and path.
+- `skills/handover/router/router-registry.md`: the Discovery router registry, one row per skill with trigger, inputs, outputs, when not to use, and phase.
+- `skills/handover/router/router-rules-v02.md`: the Discovery router rules, call line rule, handoff contract, phase map, and four traps.
+- `skills/handover/examples/router-proofs-p3/`: sealed wiring proofs added Nov 19, 2026, for Falsification, Inversion, and Constraint-Based Discovery, plus the negative routing test and the Serendipity envelope test, with call lines, handoffs, manifest, and verification replay.
+- `skills/*/SKILL.md`: the 17 Discovery skills, one folder per skill, listed in the table in [Discovery skills](#discovery-skills).
 - `docs/field-kit-and-graph-diagram.html`: interactive diagram of the field kit and the graph, with the full schema, a working per-unit list, and a diagram-to-schema-path map.
 - `docs/verification-gap.md`: what is still unproven, and the tests that close each gap.
 - `docs/browser-study-reconciliation.md`: what the Poteto, m4lkxx, and YouTube sources actually said, with corrections to earlier notes, including that the 50,000 figure was not verified in any of those three sources.
