@@ -1,0 +1,137 @@
+{
+  "source": "Netlify published site, fetched over public HTTPS",
+  "site_name": "handover-landing",
+  "default_domain": "handover-landing.netlify.app",
+  "custom_domain": "handover.nshipyard.com",
+  "captured_at_utc": "2026-11-28T01:07:08.801340+00:00",
+  "route_count": 3,
+  "file_count": 14,
+  "files": [
+    {
+      "url": "https://handover-landing.netlify.app/",
+      "path": "/",
+      "source_file": "index.html",
+      "http_status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "size": 22802,
+      "sha256": "e2a932551bb6a2e5c8be7e6d2abf285a3d55be0b9498a9c194cfacf6067f25ab"
+    },
+    {
+      "url": "https://handover-landing.netlify.app/guide",
+      "path": "/guide",
+      "source_file": "guide.html",
+      "http_status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "size": 53545,
+      "sha256": "3e6688df9b3cc5230c1036a44a17a1056c84ddd85ccc4294ce05b5cc34c6f8f4"
+    },
+    {
+      "url": "https://handover-landing.netlify.app/field-kit",
+      "path": "/field-kit",
+      "source_file": "field-kit.html",
+      "http_status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "size": 59232,
+      "sha256": "2bcf3886f71237cc1204988674cc0b8e7a0e58da1c73cfd9d908fde20d6c264a"
+    },
+    {
+      "url": "https://handover-landing.netlify.app/styles.css",
+      "path": "/styles.css",
+      "source_file": "styles.css",
+      "http_status": 200,
+      "content_type": "text/css; charset=UTF-8",
+      "size": 16300,
+      "sha256": "5ad6363dcc73745b1fe96097c55d2222dfcbfffaf8ab73f20c5e2e22729e9fc6"
+    },
+    {
+      "url": "https://handover-landing.netlify.app/script.js",
+      "path": "/script.js",
+      "source_file": "script.js",
+      "http_status": 200,
+      "content_type": "application/javascript; charset=UTF-8",
+      "size": 8119,
+      "sha256": "78c083109e7c1c286afd21c03938a72cf6def5dd15018dce3c811b9321a83d8b"
+    },
+    {
+      "url": "https://handover-landing.netlify.app/assets/favicon.png",
+      "path": "/assets/favicon.png",
+      "source_file": "assets/favicon.png",
+      "http_status": 200,
+      "content_type": "image/png",
+      "size": 800135,
+      "sha256": "d417f91191913f74a13537cbc16d568e769833340cc46c914575d4b35fe2bde7"
+    },
+    {
+      "url": "https://handover-landing.netlify.app/assets/handover-icon-dark.png",
+      "path": "/assets/handover-icon-dark.png",
+      "source_file": "assets/handover-icon-dark.png",
+      "http_status": 200,
+      "content_type": "image/png",
+      "size": 800135,
+      "sha256": "d417f91191913f74a13537cbc16d568e769833340cc46c914575d4b35fe2bde7"
+    },
+    {
+      "url": "https://handover-landing.netlify.app/assets/angle-wide.jpg",
+      "path": "/assets/angle-wide.jpg",
+      "source_file": "assets/angle-wide.jpg",
+      "http_status": 200,
+      "content_type": "image/jpeg",
+      "size": 277212,
+      "sha256": "741b064dae06ab68dc575ae63bb2e2a254b09cd8ee615d0c4f69d3fcd0f3dc5c"
+    },
+    {
+      "url": "https://handover-landing.netlify.app/assets/angle-low.jpg",
+      "path": "/assets/angle-low.jpg",
+      "source_file": "assets/angle-low.jpg",
+      "http_status": 200,
+      "content_type": "image/jpeg",
+      "size": 351389,
+      "sha256": "31e3ec308bf2b0f80a96122e638c13bb5ba687c1037869520a79338cbec6d688"
+    },
+    {
+      "url": "https://handover-landing.netlify.app/assets/angle-scroll.jpg",
+      "path": "/assets/angle-scroll.jpg",
+      "source_file": "assets/angle-scroll.jpg",
+      "http_status": 200,
+      "content_type": "image/jpeg",
+      "size": 239643,
+      "sha256": "8d17cf281400a4772eced25694c467402bb9205b147f74b6723155e7d4973da6"
+    },
+    {
+      "url": "https://handover-landing.netlify.app/assets/angle-profile.jpg",
+      "path": "/assets/angle-profile.jpg",
+      "source_file": "assets/angle-profile.jpg",
+      "http_status": 200,
+      "content_type": "image/jpeg",
+      "size": 266564,
+      "sha256": "264d219d4deb024e0b7ac3ed61da8ab8e44b9ab76d864189285309de2a74c59b"
+    },
+    {
+      "url": "https://handover-landing.netlify.app/assets/gate.jpg",
+      "path": "/assets/gate.jpg",
+      "source_file": "assets/gate.jpg",
+      "http_status": 200,
+      "content_type": "image/jpeg",
+      "size": 196429,
+      "sha256": "7144930c155dbe2db39406f9dca0975c0c64ead470cdfe8d1cca147845b69231"
+    },
+    {
+      "url": "https://handover-landing.netlify.app/assets/handover-hero.png",
+      "path": "/assets/handover-hero.png",
+      "source_file": "assets/handover-hero.png",
+      "http_status": 200,
+      "content_type": "image/png",
+      "size": 1188598,
+      "sha256": "f6ba391cb62d0af42fd442f16a6f0d1bf88d5c9cba7fda23c35ee7269ad32bd6"
+    },
+    {
+      "url": "https://handover-landing.netlify.app/assets/hero-hermes.jpg",
+      "path": "/assets/hero-hermes.jpg",
+      "source_file": "assets/hero-hermes.jpg",
+      "http_status": 200,
+      "content_type": "image/jpeg",
+      "size": 186449,
+      "sha256": "e73afbdb882774ec376048be8291e949dca1d5b0e68f8ca52c9fcce2d921b282"
+    }
+  ]
+}
