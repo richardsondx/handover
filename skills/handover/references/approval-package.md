@@ -14,7 +14,7 @@ Manifest shape: skills/handover/stage2-manifest-schema.json. Validate it with sc
 
 1. Intent and audience: desired outcome, recipient, intended use.
 2. Deliverable: exact artifact, format, location, supporting materials.
-3. Finish predicate: independently observable checks on that artifact, fixed at approval, including verification coverage. For a research brief, state population, selection method, coverage result, permissible claim, what counts as inaccessible evidence, and pass, fail, and inconclusive rules.
+3. Finish predicate: independently observable checks on that artifact, fixed at approval, including verification coverage. For a research brief, state population, selection method, coverage result, permissible claim, what counts as inaccessible evidence, and pass, fail, and inconclusive rules. The finish predicate includes substance: the answer must add more than a restatement of the question, and a generic restatement counts as predicate unmet.
 4. Constraints and assumptions: what must not change, domain boundaries, assumptions the agent may act on.
 5. Authority envelope: autonomous scope, methods, time and cost, explicit one-way door gates, prohibited actions, tool and target allowlist.
 6. Plan and routing: selected playbook and field kit, or kit to be generated, stages, ownership, dependencies, justified parallel work, depth and spawn limits.
@@ -38,6 +38,6 @@ Cover five inputs as a checklist, not five questions every time. Infer or propos
 1. Outcome: what decision or deliverable this should serve, and for whom.
 2. Proof on the real artifact: what observable result would make you accept it. End to end on the real artifact, the way a human user would use it, not only a unit check or a page fetch. Propose a concrete check for approval, and name the check the field kit uses.
 3. What must not change: constraints and existing assets that are non-negotiable.
-4. One-way doors: outward actions listed exactly in the Stage 2 manifest, with action, destination, payload or template, limit, and condition.
+4. One-way doors: outward actions listed exactly in the Stage 2 manifest, with action, destination, payload or template, limit, and condition. An outward action to submit runs only when formal_check == pass AND substance_review == pass.
 5. Stop condition: attempt, time, or cost limit, plus a dead-end report if the finish predicate is still unmet. Exhaustion is a dead end, never a weaker success claim. A plateau is not completion. Predicate is never relaxed to declare victory.
 - A question is human-only when it is about preference, authority, risk acceptance, a non-negotiable constraint, or a tradeoff with no authorized rule. Settle everything else by reading, inspecting, or experimenting, and record result and source. If investigation exposes a new consequential choice outside the envelope, pause instead of inventing consent.

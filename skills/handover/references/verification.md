@@ -15,11 +15,21 @@ Full v7 text for Step 4 verification rules and proof limits. The core (SKILL.md)
   - The states are verified locally, submitted, accepted by the platform, and merged.
   - Each state is separate, and no report claims a higher state than the one observed.
   - A local pass never counts as a submission, an acceptance, or a merge.
+- Early substance check (C3). [Advisory until Stage 2 harness ships]
+  - Check the answer's substance early, before the full check step runs, not only at the end.
+  - If the early check shows the answer only restates the question, treat that as predicate unmet, like a failed test.
+  - Pivot via the stuck ladder, with no mid-run pause.
+  - Do not reject an answer only because it is computational or lengthy.
+  - A baseline witness is an exception only when Stage 1 explicitly approved it.
+  - Once the work passes its check, an independent reviewer must assess both the check result and the answer's substance, before any claim of a solution or any outward action.
+  - If the reviewer flags the answer as questionable, do not claim completion and do not submit on your own.
+  - Report the concern, and let the human decide whether to pivot, stop, or submit with an explicit caveat.
 - Field rules: math formalization. [Advisory until Stage 2 harness ships]
   - F1, three separate checks. Check 1 verifies the formal statement and the proof. Check 2 reviews the answer on its own, apart from the proof. Check 2 asks whether the answer actually answers the question. Check 2 rejects an answer that only restates the question. Check 3 reports proof verification, submission, platform acceptance, and merge as separate states.
   - F2, brief review when the answer is clear. If the problem defines an acceptable answer clearly, the extra review is brief. The brief review confirms that the answer meets that definition. The brief review then reports proof status and submission status separately. The brief review does not repeat the full substance review.
   - F3, uncertainty when the answer is unclear. If the answer definition is unclear, the checker states that uncertainty in the report. The checker does not treat a deterministic pass as sufficient in that case. The report names what is unclear and what would settle it.
   - F4, finite formula judgment. The checker does not reject a finite formula only because it is computational or lengthy. The checker explains the judgment in plain words. The checker states the limits of that judgment.
+  - F5, early substance check for math. Run the substance check on a candidate answer before the lake build step. If the check fails, pivot via the stuck ladder and do not run the lake build to prove a tautology. The substance check needs a concrete witness and a concrete gap.
 - Advisory limit. These rules stay advisory until the Stage 2 harness ships. Prose alone does not enforce a rule. The harness must enforce the manifest before the rules count as enforced.
 - Proof run after edits. After any edit to the skill, run one real task with the new text. Record the proof in a proof report. The proof report names the task, the artifact, and the result. A skill with no proof run after its last edit is a draft, not a proven skill.
 - Domain mismatch test set. The verifier tests domain match with a test set. The test set holds cases where the source domain differs from the unit domain. Each case must fail on that citation alone. The manifest records the test set path. The CSRT case is case one: a face-tracking study does not verify a badge check on a zooming map.
