@@ -20,3 +20,4 @@ These two entries show the format only. They are examples, not a claim of covera
 ## Kits
 
 - Fleet gardening and bug fix kit: gardening and bug fixes on a local repo, draft, workspace/handover/handover-fleet-effort-2026-11-20/kit/
+- Lean math formalization kit: Lean 4 formal statement and proof checks, draft, workspace/handover/handover-anti-vacuity-2026-11-27/kit/
